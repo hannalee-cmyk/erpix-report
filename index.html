@@ -21,10 +21,18 @@
   .brand{font-size:13px;color:var(--accent-dark);font-weight:700;letter-spacing:.08em;margin-bottom:16px;}
   .hero h1{font-size:38px;font-weight:700;margin:0 0 10px;}
   .hero .lead{font-size:16px;color:var(--ink-sub);max-width:640px;line-height:1.6;}
+  .hero-summary{margin-top:20px;background:var(--accent-light);border-radius:12px;padding:18px 22px;font-size:16px;font-weight:700;color:var(--accent-darker);line-height:1.6;max-width:640px;}
 
   .eyebrow{font-size:12.5px;color:var(--accent-dark);font-weight:700;letter-spacing:.04em;margin-bottom:12px;}
   h2.section-title{font-size:24px;font-weight:700;margin:0 0 6px;}
   .section-sub{font-size:14px;color:var(--ink-sub);margin:0 0 28px;max-width:720px;line-height:1.6;}
+
+  .brief-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .brief-card{border:1px solid var(--line);border-radius:14px;padding:18px 18px;background:var(--card);}
+  .brief-card.current{border-color:var(--accent);background:var(--accent-light);}
+  .brief-label{font-size:12px;font-weight:700;color:var(--accent-dark);margin-bottom:10px;}
+  .brief-value{font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.45;}
+  .brief-card.current .brief-label,.brief-card.current .brief-value{color:var(--accent-darker);}
 
   table.compare{width:100%;border-collapse:collapse;font-size:13.5px;}
   table.compare th{text-align:left;padding:11px 14px;background:var(--ink);color:#fff;font-weight:700;font-size:12.5px;}
@@ -58,7 +66,9 @@
   .scope-list li.dot::before{content:"○ ";color:var(--ink-mute);}
   .scope-list li.done::before{content:"● ";color:var(--accent);}
 
-  .demo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .flow-wrap{display:flex;align-items:stretch;gap:0;}
+  .flow-wrap .demo-card{flex:1;}
+  .flow-arrow{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:34px;color:var(--ink-mute);font-size:20px;}
   .demo-card{display:block;border:1px solid var(--line);border-radius:16px;padding:26px;background:var(--card);text-decoration:none;color:inherit;transition:border-color .15s, transform .15s;}
   .demo-card:hover{border-color:var(--accent);transform:translateY(-2px);}
   .demo-num{font-size:12px;font-weight:700;color:var(--accent-dark);margin-bottom:14px;}
@@ -68,15 +78,14 @@
 
   .flow-caption{text-align:center;font-size:13px;color:var(--ink-sub);margin-top:14px;}
 
-  table.progress{width:100%;border-collapse:collapse;font-size:13.5px;}
-  table.progress th{text-align:left;padding:11px 14px;border-bottom:2px solid var(--ink);font-size:12.5px;color:var(--ink-mute);font-weight:700;}
-  table.progress td{padding:14px;border-bottom:1px solid var(--line);vertical-align:top;}
-  table.progress td.mod{font-weight:700;color:var(--ink);width:170px;}
-  .badge{display:inline-block;font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:20px;white-space:nowrap;}
-  .badge.done{background:var(--accent-light);color:var(--accent-darker);}
-  .badge.progress{background:#FDF3E4;color:var(--amber-dark);}
-  .badge.plan{background:#F1EFE8;color:var(--ink-sub);}
-  td.note{color:var(--ink-sub);font-size:12.5px;}
+  .progress-row{margin-bottom:22px;}
+  .progress-row:last-child{margin-bottom:0;}
+  .progress-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+  .progress-name{font-size:14.5px;font-weight:700;color:var(--ink);}
+  .progress-pct{font-size:14.5px;font-weight:700;color:var(--accent-dark);}
+  .progress-track{width:100%;height:10px;background:var(--line);border-radius:6px;overflow:hidden;}
+  .progress-fill{height:100%;background:var(--accent);border-radius:6px;}
+  .progress-note{font-size:12px;color:var(--ink-sub);margin-top:7px;}
 
   .roadmap-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
   .rm-col{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--card);}
@@ -102,9 +111,15 @@
   .rm-foot{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--ink-sub);}
   .rm-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-sub);}
 
+  .stepper{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin-bottom:24px;}
+  .step{border:1px solid var(--line);border-radius:20px;padding:8px 16px;font-size:12.5px;font-weight:700;color:var(--ink-sub);background:var(--card);white-space:nowrap;}
+  .step.done{color:var(--accent-darker);border-color:var(--accent);background:var(--accent-light);}
+  .step.current{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .step-arrow{color:var(--ink-mute);padding:0 10px;font-size:14px;}
+
   .ask-list{list-style:none;padding:0;margin:0;}
   .ask-list li{padding:15px 18px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;font-size:14px;line-height:1.6;display:flex;gap:14px;background:var(--card);}
-  .ask-num{font-weight:700;color:var(--accent-dark);flex-shrink:0;}
+  .ask-num{font-weight:700;color:var(--accent-dark);flex-shrink:0;font-size:15px;}
 
   .footer-note{padding:32px 0 0;font-size:12px;color:var(--ink-mute);}
 </style>
@@ -115,29 +130,54 @@
   <div class="hero">
     <div class="brand">● TELEPIX · SW Development Team</div>
     <h1>ERPIX — ERP for TelePIX</h1>
-    <div class="lead">흩어진 사내 업무를 하나의 시스템으로. ERPIX는 HR을 시작으로 자산·프로젝트·공수 관리까지 단계적으로 통합하는 것을 목표로 합니다.</div>
+    <div class="lead">TelePIX 사내 업무를 하나로 통합하는 자체 개발 ERP, 개발 중간점검 보고</div>
+    <div class="hero-summary">흩어진 HR 업무를 하나의 시스템으로 통합하고,<br>향후 자산·프로젝트 관리까지 확장하는 TelePIX ERP</div>
   </div>
 
-  <!-- 왜 자체 개발인가 -->
+  <!-- 한 장 요약 -->
   <section>
-    <div class="eyebrow">00 · 왜 자체 개발인가</div>
-    <h2 class="section-title">Flex에서 못했던 것을, ERPIX에서</h2>
-    <p class="section-sub">기존 HR 툴(Flex)로 운영하며 실제로 부딪혔던 한계가, ERPIX를 자체 구축하는 이유입니다.</p>
+    <div class="eyebrow">한 장 요약</div>
+    <h2 class="section-title">30초 요약</h2>
+    <div class="brief-grid">
+      <div class="brief-card">
+        <div class="brief-label">■ 목표</div>
+        <div class="brief-value">HR 업무 통합</div>
+      </div>
+      <div class="brief-card current">
+        <div class="brief-label">■ 현재</div>
+        <div class="brief-value">1차 HR 코어 개발 중</div>
+      </div>
+      <div class="brief-card">
+        <div class="brief-label">■ 다음</div>
+        <div class="brief-value">조직도 · 전자계약</div>
+      </div>
+      <div class="brief-card">
+        <div class="brief-label">■ 최종</div>
+        <div class="brief-value">ERP 통합 플랫폼</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 왜 ERPIX인가 -->
+  <section>
+    <div class="eyebrow">00 · 왜 ERPIX인가</div>
+    <h2 class="section-title">Flex의 한계, ERPIX로 해결</h2>
+    <p class="section-sub">Flex 운영 중 부딪힌 한계가 ERPIX를 직접 만드는 이유입니다.</p>
     <table class="compare">
       <tr><th>구분</th><th>Flex (기존)</th><th>ERPIX (자체 구축)</th></tr>
       <tr>
         <td>인사현황표</td>
-        <td class="before">학력 등 세부 항목 기준 필터 불가 — 전체 목록만 조회 가능</td>
-        <td class="after">학력정보 등 항목별 필터링 지원, 원하는 조건으로 즉시 현황 확인</td>
+        <td class="before">학력 등 세부 필터 불가, 전체 목록만 조회</td>
+        <td class="after">항목별 필터로 원하는 조건 즉시 조회</td>
       </tr>
       <tr>
         <td>권한관리</td>
-        <td class="before">역할 단위로만 권한 부여, 정보 유형별 세분화 불가</td>
-        <td class="after">정보 유형별로 묶어 필드 단위로 촘촘하게 권한 설정</td>
+        <td class="before">역할 단위로만 부여, 세분화 불가</td>
+        <td class="after">정보 유형별 필드 단위로 세분화</td>
       </tr>
     </table>
     <div class="ai-box">
-      <b>AI 활용 현황</b> — 프로토타입·정책서·화면정의서 작성에 Claude를 적극 활용해 속도는 이미 끌어올린 상태입니다. 다만 주민번호·연봉 마스킹, 필드 단위 권한, 감사로그처럼 개인정보를 다루는 로직은 AI가 만든 초안을 그대로 쓰지 않고, 정책과의 일치 여부를 사람이 직접 검증하는 데 남은 시간을 쓰고 있습니다.
+      <b>AI 활용</b> — AI를 활용해 기획 생산성을 높이고, 개인정보·권한 정책은 PM이 직접 검증합니다.
     </div>
   </section>
 
@@ -145,7 +185,7 @@
   <section>
     <div class="eyebrow">01 · 우리가 만드는 것</div>
     <h2 class="section-title">ERPIX가 지향하는 시스템</h2>
-    <p class="section-sub">흩어진 HR 업무를 하나의 시스템으로 — 구성원의 모든 HR 여정을 ERPIX에서.</p>
+    <p class="section-sub">구성원의 모든 HR 여정을 ERPIX 하나로.</p>
     <div class="vision-line">"구성원의 모든 HR 여정을, 하나의 시스템 ERPIX에서"</div>
     <table class="compare">
       <tr><th>구분</th><th>현재 (Before)</th><th>ERPIX (After)</th></tr>
@@ -156,57 +196,59 @@
     </table>
   </section>
 
-  <!-- 기획 원칙 -->
+  <!-- 설계 원칙 -->
   <section>
-    <div class="eyebrow">01-1 · 기획 원칙</div>
-    <h2 class="section-title">HR 관리자를 위해 무엇을 지켰나</h2>
-    <p class="section-sub">예쁜 화면이 아니라, 관리자가 안전하게 반복 업무를 할 수 있는 구조를 만드는 것이 목표였습니다.</p>
+    <div class="eyebrow">01-1 · 설계 원칙</div>
+    <h2 class="section-title">HR 관리자를 위한 설계 원칙</h2>
+    <p class="section-sub">예쁜 화면보다, 안전하게 반복 업무를 하는 구조가 목표였습니다.</p>
     <div class="principle-grid">
       <div class="principle-card">
         <div class="p-num">01</div>
         <h3>실수를 시스템이 막아준다</h3>
-        <p>저장 안 한 변경사항을 두고 나가려 하면 이탈 방지 모달. 필수값 미입력·날짜 순서 오류 시 저장 버튼 자체가 비활성화됩니다.</p>
+        <p>이탈 방지 모달, 미입력·오류 시 저장 버튼 비활성화</p>
       </div>
       <div class="principle-card">
         <div class="p-num">02</div>
         <h3>마스터데이터 무결성을 지킨다</h3>
-        <p>구성원이 연결된 사이트·직무·채용채널은 비활성화 불가. 필수 근무유형은 아예 비활성화가 막혀 있습니다.</p>
+        <p>구성원과 연결된 값·필수 항목은 비활성화 불가</p>
       </div>
       <div class="principle-card">
         <div class="p-num">03</div>
         <h3>민감정보는 기본값이 "가려짐"</h3>
-        <p>급여·학자금은 기본 마스킹, 섹션 단위 일괄 보기로만 열람. 권한이 있어도 기본은 가려둡니다.</p>
+        <p>급여·학자금 기본 마스킹, 일괄 보기로만 열람</p>
       </div>
       <div class="principle-card">
         <div class="p-num">04</div>
         <h3>반복 업무는 클릭을 줄인다</h3>
-        <p>권한관리는 진입 즉시 구성원 선택 모달이 열려 불필요한 단계를 생략합니다.</p>
+        <p>권한관리 진입 즉시 구성원 선택 모달</p>
       </div>
     </div>
   </section>
 
-  <!-- 지금 체험해보기 -->
+  <!-- 핵심 업무 흐름 -->
   <section>
-    <div class="eyebrow">02 · 실제 화면</div>
-    <h2 class="section-title">지금 체험해보기 — HR 영역</h2>
-    <p class="section-sub">입사 시 기준정보를 등록하고, 권한을 연결하면, 실제 사용 권한이 자동 적용되는 흐름으로 확인해보세요.</p>
-    <div class="demo-grid">
+    <div class="eyebrow">02 · 핵심 업무 흐름</div>
+    <h2 class="section-title">인사정보 등록 → 기준정보 연결 → 권한 적용</h2>
+    <p class="section-sub">입사 등록부터 권한 적용까지, 3단계 흐름으로 확인하세요.</p>
+    <div class="flow-wrap">
       <a class="demo-card" href="./hr-employee.html">
         <div class="demo-num">STEP 1</div>
         <h3>인사정보관리</h3>
-        <p>구성원 등록·수정·조회, 재직상태 관리. 신규입사자를 최소 필드로 즉시 등록합니다.</p>
+        <p>신규 입사자 등록, 재직상태 관리</p>
         <div class="demo-link">화면 열기 →</div>
       </a>
+      <div class="flow-arrow">→</div>
       <a class="demo-card" href="./hr-master-data.html">
         <div class="demo-num">STEP 2</div>
         <h3>기준정보관리</h3>
-        <p>조직·직위·직책·직무 등 HR 마스터데이터 관리. 구성원과 연결된 값은 임의로 삭제되지 않도록 보호합니다.</p>
+        <p>조직·직위 등 HR 마스터데이터 연결</p>
         <div class="demo-link">화면 열기 →</div>
       </a>
+      <div class="flow-arrow">→</div>
       <a class="demo-card" href="./hr-permission.html">
         <div class="demo-num">STEP 3</div>
         <h3>권한관리</h3>
-        <p>등록된 구성원에게 정보 유형별로 필드 단위 접근 권한을 부여합니다.</p>
+        <p>필드 단위 접근 권한 자동 적용</p>
         <div class="demo-link">화면 열기 →</div>
       </a>
     </div>
@@ -216,7 +258,7 @@
   <section>
     <div class="eyebrow">02-1 · 사용자 접근 범위</div>
     <h2 class="section-title">누가, 어디까지 쓰는 시스템인가</h2>
-    <p class="section-sub">관리자 도구로 시작하지만, 결과적으로 전 구성원이 체감하는 시스템으로 확장됩니다.</p>
+    <p class="section-sub">관리자 도구로 시작해 전 구성원 시스템으로 확장됩니다.</p>
     <svg width="100%" viewBox="0 0 680 380" style="display:block;margin:0 auto;">
       <rect x="40" y="40" width="600" height="300" rx="24" fill="var(--accent-light)" stroke="var(--accent-dark)" stroke-width="0.5"/>
       <text x="64" y="72" font-size="14" font-weight="700" fill="var(--accent-darker)">전체 구성원</text>
@@ -244,7 +286,7 @@
   <section>
     <div class="eyebrow">03 · 전체 구조 · 진행 범위</div>
     <h2 class="section-title">ERPIX가 다루는 영역</h2>
-    <p class="section-sub">HR 영역부터 우선 개발 중이며, 이후 자산·프로젝트·공수 영역으로 확장할 예정입니다.</p>
+    <p class="section-sub">HR부터 시작해 자산·프로젝트·공수 영역으로 확장합니다.</p>
     <div class="scope-grid">
       <div class="scope-card active">
         <span class="scope-status active">개발 중</span>
@@ -284,65 +326,74 @@
     </div>
   </section>
 
-  <!-- 진행 현황 -->
+  <!-- 현재 개발 현황 -->
   <section>
-    <div class="eyebrow">04 · 진행 현황</div>
-    <h2 class="section-title">모듈별 진행 상태</h2>
-    <p class="section-sub">기획 산출물(프로토타입·정책)과 실제 개발 착수 여부를 구분해서 정리했습니다.</p>
-    <table class="progress">
-      <tr><th>모듈</th><th>상태</th><th>비고</th></tr>
-      <tr>
-        <td class="mod">인사정보관리</td>
-        <td><span class="badge done">프로토타입 검증 완료 수준</span></td>
-        <td class="note">v30+ · 등록/수정/조회, 재직상태 관리 반영</td>
-      </tr>
-      <tr>
-        <td class="mod">기준정보관리</td>
-        <td><span class="badge progress">설계·프로토타입 진행 중</span></td>
-        <td class="note">조직관리 UI(토글, 비활성화 확인 모달) 최근 작업</td>
-      </tr>
-      <tr>
-        <td class="mod">권한관리</td>
-        <td><span class="badge done">정책 확정 (v2.x)</span></td>
-        <td class="note">필드 단위 권한, 양방향 커플링 로직 프로토타입 반영 중</td>
-      </tr>
-      <tr>
-        <td class="mod">전자계약</td>
-        <td><span class="badge plan">초기 스코핑 완료</span></td>
-        <td class="note">GNB 배치 확정 · 외부 전자서명 서비스 연동 방식으로 진행</td>
-      </tr>
-    </table>
+    <div class="eyebrow">04 · 현재 개발 현황</div>
+    <h2 class="section-title">모듈별 진행률</h2>
+    <p class="section-sub">숫자로 보는 현재 개발 진척도입니다.</p>
+
+    <div class="progress-row">
+      <div class="progress-top"><span class="progress-name">인사정보관리</span><span class="progress-pct">90%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:90%;"></div></div>
+      <div class="progress-note">v30+ · 등록/수정/조회, 재직상태 관리 반영</div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-top"><span class="progress-name">기준정보관리</span><span class="progress-pct">70%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:70%;"></div></div>
+      <div class="progress-note">조직관리 UI(토글, 비활성화 확인 모달) 진행 중</div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-top"><span class="progress-name">권한관리</span><span class="progress-pct">85%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:85%;"></div></div>
+      <div class="progress-note">정책 확정(v2.x) · 필드 단위 권한 프로토타입 반영 중</div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-top"><span class="progress-name">전자계약</span><span class="progress-pct">30%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:30%;"></div></div>
+      <div class="progress-note">초기 스코핑 완료 · 외부 전자서명 연동 방식으로 진행</div>
+    </div>
   </section>
 
   <!-- 로드맵 -->
   <section>
     <div class="eyebrow">05 · 로드맵</div>
     <h2 class="section-title">HR 그룹웨어 개발 로드맵</h2>
-    <p class="section-sub">HR 마스터데이터 중심 · 2026 — 1.5차 완료 시 HR 핵심 기능이 완성됩니다.</p>
+    <p class="section-sub">1.5차 완료 시 HR 핵심 기능이 완성됩니다.</p>
+
+    <div class="stepper">
+      <div class="step done">1차 · HR 코어</div>
+      <div class="step-arrow">→</div>
+      <div class="step current">● Current</div>
+      <div class="step-arrow">→</div>
+      <div class="step">1.5차 · HR 고도화</div>
+      <div class="step-arrow">→</div>
+      <div class="step">2차 · 확장</div>
+    </div>
+
     <div class="roadmap-grid">
       <div class="rm-col">
         <div class="rm-head"><div class="rm-circle">1차</div><div class="rm-title">HR 코어</div></div>
         <div class="rm-status">● 진행 중 · 확정</div>
-        <div class="rm-card"><div class="rm-card-title">임직원 정보 통합 관리</div><div class="rm-card-body">· 임직원 등록·수정·조회<br>· 퇴사자 관리<br>· 재직상태 관리</div></div>
-        <div class="rm-card"><div class="rm-card-title">조직·직책·직무 기준정보</div><div class="rm-card-body">· 조직·직위·직책·직무 코드<br>· 채용채널·엔지니어링레벨</div></div>
-        <div class="rm-card"><div class="rm-card-title">HR 담당자 권한 관리</div><div class="rm-card-body">· 개인별·직책별 접근 권한 설정</div></div>
-        <div class="rm-card moved"><div class="rm-card-title">인사현황표 <span style="font-size:9.5px;font-weight:400;color:var(--accent-dark)">(1.5차→이동)</span></div><div class="rm-card-body">· 통계 대시보드<br>· 엑셀 다운로드</div></div>
+        <div class="rm-card"><div class="rm-card-title">임직원 정보 통합 관리</div><div class="rm-card-body">등록·수정·조회 · 재직상태 관리</div></div>
+        <div class="rm-card"><div class="rm-card-title">조직·직책·직무 기준정보</div><div class="rm-card-body">조직·직위·직책·직무·채용채널 코드</div></div>
+        <div class="rm-card"><div class="rm-card-title">HR 담당자 권한 관리</div><div class="rm-card-body">개인·직책별 접근 권한 설정</div></div>
+        <div class="rm-card moved"><div class="rm-card-title">인사현황표 <span style="font-size:9.5px;font-weight:400;color:var(--accent-dark)">(1.5차→이동)</span></div><div class="rm-card-body">통계 대시보드 · 엑셀 다운로드</div></div>
       </div>
       <div class="rm-col">
         <div class="rm-head"><div class="rm-circle">1.5</div><div class="rm-title">HR 고도화</div></div>
         <div class="rm-status">● 예정 · 확정</div>
-        <div class="rm-card"><div class="rm-card-title">발령 관리</div><div class="rm-card-body">· 발령 9종 (전배·직위변경 등)<br>· 인사기록부 타임라인</div></div>
-        <div class="rm-card"><div class="rm-card-title">조직도</div><div class="rm-card-body">· 조직 트리 + 팀원 카드<br>· 임직원 상세 조회</div></div>
-        <div class="rm-card new"><div class="rm-card-title">전자계약 <span class="tag-new">NEW</span></div><div class="rm-card-body">· 계약서 작성·발송<br>· 외부 전자서명 서비스 연동</div></div>
+        <div class="rm-card"><div class="rm-card-title">발령 관리</div><div class="rm-card-body">발령 9종 · 인사기록부 타임라인</div></div>
+        <div class="rm-card"><div class="rm-card-title">조직도</div><div class="rm-card-body">조직 트리 + 팀원 카드</div></div>
+        <div class="rm-card new"><div class="rm-card-title">전자계약 <span class="tag-new">NEW</span></div><div class="rm-card-body">계약 작성·발송 · 전자서명 연동</div></div>
         <div class="rm-foot">1.5차 완료 시 HR 핵심 기능 완성</div>
       </div>
       <div class="rm-col">
         <div class="rm-head"><div class="rm-circle amber">2차</div><div class="rm-title">확장</div></div>
         <div class="rm-status amber">● 범위 협의 중</div>
-        <div class="rm-card warn"><div class="rm-card-title">근태 관리<span class="tag-alert">협의 필요</span></div><div class="rm-card-body">· 그룹웨어 구축 vs Wanted Space 유지</div></div>
-        <div class="rm-card neutral"><div class="rm-card-title">프로젝트 공수 관리</div><div class="rm-card-body">· 프로젝트별 공수 입력·집계</div></div>
-        <div class="rm-card neutral"><div class="rm-card-title">자산 관리</div><div class="rm-card-body">· 관리자용 자산 시스템<br>· 운영정책 확정 후 착수</div></div>
-        <div class="rm-card neutral"><div class="rm-card-title">외부 연동</div><div class="rm-card-body">· Slack · Wanted Space<br>· Google Calendar</div></div>
+        <div class="rm-card warn"><div class="rm-card-title">근태 관리<span class="tag-alert">협의 필요</span></div><div class="rm-card-body">그룹웨어 구축 vs Wanted Space 유지</div></div>
+        <div class="rm-card neutral"><div class="rm-card-title">프로젝트 공수 관리</div><div class="rm-card-body">프로젝트별 공수 입력·집계</div></div>
+        <div class="rm-card neutral"><div class="rm-card-title">자산 관리</div><div class="rm-card-body">관리자용 자산 시스템</div></div>
+        <div class="rm-card neutral"><div class="rm-card-title">외부 연동</div><div class="rm-card-body">Slack · Wanted Space · Google Calendar</div></div>
       </div>
     </div>
     <div class="rm-legend">
@@ -368,7 +419,7 @@
         <h3>1.5차 · 9월</h3>
         <ul class="scope-list">
           <li class="dot">발령·조직도·전자계약</li>
-          <li class="dot" style="color:var(--amber-dark);">전제: 발령 정책 확정 · 전자서명 벤더 계약 8월 내 완료</li>
+          <li class="dot" style="color:var(--amber-dark);">전제: 발령 정책·전자서명 벤더 8월 내 확정</li>
         </ul>
       </div>
       <div class="scope-card">
@@ -382,15 +433,15 @@
     </div>
   </section>
 
-  <!-- 남은 일정 및 요청 -->
+  <!-- 의사결정 사항 -->
   <section>
-    <div class="eyebrow">06 · 남은 일정 및 요청</div>
-    <h2 class="section-title">앞으로의 계획</h2>
-    <p class="section-sub">진행 상황 공유와 함께, 의사결정이 필요한 부분을 정리했습니다.</p>
+    <div class="eyebrow">06 · 의사결정 사항</div>
+    <h2 class="section-title">오늘 결정이 필요한 것</h2>
+    <p class="section-sub">진행 상황 공유와 함께, 아래 3가지에 대한 의사결정을 요청드립니다.</p>
     <ul class="ask-list">
-      <li><span class="ask-num">1</span> 1차(HR 코어) 개발 착수 시점 및 백엔드 리소스 배정 확인 필요</li>
-      <li><span class="ask-num">2</span> 전자계약 외부 전자서명 서비스 선정(모두싸인 등) — 예산·계약 검토 요청</li>
-      <li><span class="ask-num">3</span> 2차(근태 관리) 그룹웨어 자체 구축 여부 — 범위 협의 필요</li>
+      <li><span class="ask-num">□</span> 1차 개발 범위 확정 (백엔드 리소스 배정 포함)</li>
+      <li><span class="ask-num">□</span> 전자계약 벤더 선정 (모두싸인 등, 예산 승인)</li>
+      <li><span class="ask-num">□</span> 근태 자체 구축 여부 결정 (그룹웨어 vs Wanted Space)</li>
     </ul>
   </section>
 
