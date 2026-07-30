@@ -233,95 +233,9 @@
     <div class="vision-line" style="margin-top:22px;margin-bottom:0;white-space:nowrap;">ERPIX는 E-count ERP를 대체하는 시스템이 아니라, 구성원의 Lifecycle을 하나로 연결하는 운영 플랫폼입니다.</div>
   </section>
 
-  <!-- 설계 원칙 -->
-  <section>
-    <div class="eyebrow">03 · 설계 원칙</div>
-    <h2 class="section-title">HR 관리자를 위한 설계 원칙</h2>
-    <p class="section-sub">예쁜 화면보다, 안전하게 반복 업무를 하는 구조가 목표였습니다.</p>
-    <div class="principle-grid">
-      <div class="principle-card">
-        <div class="p-num">01</div>
-        <h3>실수를 시스템이 막아준다</h3>
-        <p>이탈 방지 모달, 미입력·오류 시 저장 버튼 비활성화</p>
-      </div>
-      <div class="principle-card">
-        <div class="p-num">02</div>
-        <h3>마스터데이터 무결성을 지킨다</h3>
-        <p>구성원과 연결된 값·필수 항목은 비활성화 불가</p>
-      </div>
-      <div class="principle-card">
-        <div class="p-num">03</div>
-        <h3>민감정보는 기본값이 "가려짐"</h3>
-        <p>급여·학자금 기본 마스킹, 일괄 보기로만 열람</p>
-      </div>
-      <div class="principle-card">
-        <div class="p-num">04</div>
-        <h3>반복 업무는 클릭을 줄인다</h3>
-        <p>권한관리 진입 즉시 구성원 선택 모달</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 핵심 업무 흐름 -->
-  <section>
-    <div class="eyebrow">04 · 핵심 업무 흐름</div>
-    <h2 class="section-title">인사정보 등록 → 기준정보 연결 → 권한 적용</h2>
-    <p class="section-sub">입사 등록부터 권한 적용까지, 3단계 흐름으로 확인하세요.</p>
-    <div class="flow-wrap">
-      <a class="demo-card" href="./hr-employee.html">
-        <div class="demo-num">STEP 1</div>
-        <h3>인사정보관리</h3>
-        <p>신규 입사자 등록, 재직상태 관리</p>
-        <div class="demo-link">화면 열기 →</div>
-      </a>
-      <div class="flow-arrow">→</div>
-      <a class="demo-card" href="./hr-master-data.html">
-        <div class="demo-num">STEP 2</div>
-        <h3>기준정보관리</h3>
-        <p>조직·직위 등 HR 마스터데이터 연결</p>
-        <div class="demo-link">화면 열기 →</div>
-      </a>
-      <div class="flow-arrow">→</div>
-      <a class="demo-card" href="./hr-permission.html">
-        <div class="demo-num">STEP 3</div>
-        <h3>권한관리</h3>
-        <p>필드 단위 접근 권한 자동 적용</p>
-        <div class="demo-link">화면 열기 →</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- 사용자 접근 범위 -->
-  <section>
-    <div class="eyebrow">04-1 · 사용자 접근 범위</div>
-    <h2 class="section-title">누가, 어디까지 쓰는 시스템인가</h2>
-    <p class="section-sub">관리자 도구로 시작해 전 구성원 시스템으로 확장됩니다.</p>
-    <svg width="90%" viewBox="0 0 680 380" style="display:block;margin:0 auto;">
-      <rect x="40" y="40" width="600" height="300" rx="24" fill="var(--accent-light)" stroke="var(--accent-dark)" stroke-width="0.5"/>
-      <text x="64" y="72" font-size="14" font-weight="700" fill="var(--accent-darker)">전체 구성원</text>
-      <text x="64" y="92" font-size="12" fill="var(--accent-dark)">조직도 열람 · 전자계약 서명</text>
-      <rect x="530" y="52" width="90" height="24" rx="12" fill="var(--amber-light)" stroke="var(--amber)" stroke-width="0.5"/>
-      <text x="575" y="66" text-anchor="middle" font-size="11" font-weight="700" fill="var(--amber-dark)">1.5차 배포</text>
-
-      <rect x="100" y="110" width="480" height="200" rx="16" fill="var(--teal-mid)" stroke="var(--accent-dark)" stroke-width="0.5"/>
-      <text x="124" y="138" font-size="14" font-weight="700" fill="var(--accent-darker)">권한 받은 구성원</text>
-      <text x="124" y="158" font-size="12" fill="var(--accent-dark)">HR 오퍼레이터 · 조직장 등</text>
-      <text x="124" y="176" font-size="12" fill="var(--accent-dark)">인사정보데이터 조회 및 기능 사용</text>
-      <rect x="470" y="120" width="90" height="24" rx="12" fill="#fff" stroke="var(--accent-dark)" stroke-width="0.5"/>
-      <text x="515" y="134" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent-darker)">1차 배포</text>
-
-      <rect x="170" y="188" width="340" height="118" rx="12" fill="var(--teal-mid2)" stroke="var(--accent-darker)" stroke-width="0.5"/>
-      <text x="340" y="228" text-anchor="middle" font-size="14" font-weight="700" fill="#04342C">HR 최고관리자</text>
-      <text x="340" y="252" text-anchor="middle" font-size="12" fill="var(--accent-darker)">권한 부여 <tspan font-weight="700">(1차)</tspan></text>
-      <text x="340" y="272" text-anchor="middle" font-size="12" fill="var(--accent-darker)">발령 처리 <tspan font-weight="700" fill="var(--amber-dark)">(1.5차)</tspan></text>
-      <text x="340" y="294" text-anchor="middle" font-size="10.5" fill="var(--accent-dark)">※ 기능별 배포 시점이 다릅니다</text>
-    </svg>
-    <p class="flow-caption">1차: 권한 관리(권한 받은 구성원~HR 최고관리자) · 1.5차: 발령 관리 + 전체 구성원까지 확장</p>
-  </section>
-
   <!-- 전체 구조 · 진행 범위 -->
   <section>
-    <div class="eyebrow">05 · 전체 구조 · 진행 범위</div>
+    <div class="eyebrow">03 · 전체 구조 · 진행 범위</div>
     <h2 class="section-title">ERPIX가 다루는 영역</h2>
     <p class="section-sub">HR부터 시작해 자산·프로젝트·공수 영역으로 확장합니다.</p>
     <div class="scope-grid">
@@ -361,6 +275,92 @@
         </ul>
       </div>
     </div>
+  </section>
+
+  <!-- 설계 원칙 -->
+  <section>
+    <div class="eyebrow">04 · 설계 원칙</div>
+    <h2 class="section-title">HR 관리자를 위한 설계 원칙</h2>
+    <p class="section-sub">예쁜 화면보다, 안전하게 반복 업무를 하는 구조가 목표였습니다.</p>
+    <div class="principle-grid">
+      <div class="principle-card">
+        <div class="p-num">01</div>
+        <h3>실수를 시스템이 막아준다</h3>
+        <p>이탈 방지 모달, 미입력·오류 시 저장 버튼 비활성화</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">02</div>
+        <h3>마스터데이터 무결성을 지킨다</h3>
+        <p>구성원과 연결된 값·필수 항목은 비활성화 불가</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">03</div>
+        <h3>민감정보는 기본값이 "가려짐"</h3>
+        <p>급여·학자금 기본 마스킹, 일괄 보기로만 열람</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">04</div>
+        <h3>반복 업무는 클릭을 줄인다</h3>
+        <p>권한관리 진입 즉시 구성원 선택 모달</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 핵심 업무 흐름 -->
+  <section>
+    <div class="eyebrow">05 · 핵심 업무 흐름</div>
+    <h2 class="section-title">인사정보 등록 → 기준정보 연결 → 권한 적용</h2>
+    <p class="section-sub">입사 등록부터 권한 적용까지, 3단계 흐름으로 확인하세요.</p>
+    <div class="flow-wrap">
+      <a class="demo-card" href="./hr-employee.html">
+        <div class="demo-num">STEP 1</div>
+        <h3>인사정보관리</h3>
+        <p>신규 입사자 등록, 재직상태 관리</p>
+        <div class="demo-link">화면 열기 →</div>
+      </a>
+      <div class="flow-arrow">→</div>
+      <a class="demo-card" href="./hr-master-data.html">
+        <div class="demo-num">STEP 2</div>
+        <h3>기준정보관리</h3>
+        <p>조직·직위 등 HR 마스터데이터 연결</p>
+        <div class="demo-link">화면 열기 →</div>
+      </a>
+      <div class="flow-arrow">→</div>
+      <a class="demo-card" href="./hr-permission.html">
+        <div class="demo-num">STEP 3</div>
+        <h3>권한관리</h3>
+        <p>필드 단위 접근 권한 자동 적용</p>
+        <div class="demo-link">화면 열기 →</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 사용자 접근 범위 -->
+  <section>
+    <div class="eyebrow">05-1 · 사용자 접근 범위</div>
+    <h2 class="section-title">누가, 어디까지 쓰는 시스템인가</h2>
+    <p class="section-sub">관리자 도구로 시작해 전 구성원 시스템으로 확장됩니다.</p>
+    <svg width="90%" viewBox="0 0 680 380" style="display:block;margin:0 auto;">
+      <rect x="40" y="40" width="600" height="300" rx="24" fill="var(--accent-light)" stroke="var(--accent-dark)" stroke-width="0.5"/>
+      <text x="64" y="72" font-size="14" font-weight="700" fill="var(--accent-darker)">전체 구성원</text>
+      <text x="64" y="92" font-size="12" fill="var(--accent-dark)">조직도 열람 · 전자계약 서명</text>
+      <rect x="530" y="52" width="90" height="24" rx="12" fill="var(--amber-light)" stroke="var(--amber)" stroke-width="0.5"/>
+      <text x="575" y="66" text-anchor="middle" font-size="11" font-weight="700" fill="var(--amber-dark)">1.5차 배포</text>
+
+      <rect x="100" y="110" width="480" height="200" rx="16" fill="var(--teal-mid)" stroke="var(--accent-dark)" stroke-width="0.5"/>
+      <text x="124" y="138" font-size="14" font-weight="700" fill="var(--accent-darker)">권한 받은 구성원</text>
+      <text x="124" y="158" font-size="12" fill="var(--accent-dark)">HR 오퍼레이터 · 조직장 등</text>
+      <text x="124" y="176" font-size="12" fill="var(--accent-dark)">인사정보데이터 조회 및 기능 사용</text>
+      <rect x="470" y="120" width="90" height="24" rx="12" fill="#fff" stroke="var(--accent-dark)" stroke-width="0.5"/>
+      <text x="515" y="134" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent-darker)">1차 배포</text>
+
+      <rect x="170" y="188" width="340" height="118" rx="12" fill="var(--teal-mid2)" stroke="var(--accent-darker)" stroke-width="0.5"/>
+      <text x="340" y="228" text-anchor="middle" font-size="14" font-weight="700" fill="#04342C">HR 최고관리자</text>
+      <text x="340" y="252" text-anchor="middle" font-size="12" fill="var(--accent-darker)">권한 부여 <tspan font-weight="700">(1차)</tspan></text>
+      <text x="340" y="272" text-anchor="middle" font-size="12" fill="var(--accent-darker)">발령 처리 <tspan font-weight="700" fill="var(--amber-dark)">(1.5차)</tspan></text>
+      <text x="340" y="294" text-anchor="middle" font-size="10.5" fill="var(--accent-dark)">※ 기능별 배포 시점이 다릅니다</text>
+    </svg>
+    <p class="flow-caption">1차: 권한 관리(권한 받은 구성원~HR 최고관리자) · 1.5차: 발령 관리 + 전체 구성원까지 확장</p>
   </section>
 
   <!-- 현재 개발 현황 -->
