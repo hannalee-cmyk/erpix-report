@@ -112,11 +112,11 @@
   .step.current{background:var(--accent);color:#fff;border-color:var(--accent);}
   .step-arrow{color:var(--ink-mute);padding:0 10px;font-size:14px;}
 
-  .pyramid{display:flex;flex-direction:column;align-items:center;gap:12px;}
-  .pyramid-tier{border-radius:14px;padding:18px 24px;text-align:center;border:1px solid var(--accent-dark);}
-  .pyramid-tier.tier-1{width:38%;background:var(--teal-mid2);}
-  .pyramid-tier.tier-2{width:66%;background:var(--teal-mid);}
-  .pyramid-tier.tier-3{width:100%;background:var(--accent-light);}
+  .access-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  .access-card{border-radius:14px;padding:20px;text-align:center;border:1px solid var(--accent-dark);}
+  .access-card.tier-1{background:var(--teal-mid2);}
+  .access-card.tier-2{background:var(--teal-mid);}
+  .access-card.tier-3{background:var(--accent-light);}
   .pyramid-title{font-size:14.5px;font-weight:700;color:#04342C;margin-bottom:6px;}
   .pyramid-desc{font-size:12px;color:var(--accent-darker);margin-bottom:10px;}
   .pyramid-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
@@ -258,15 +258,13 @@
         </div>
       </div>
     </div>
-
-    <div class="vision-line" style="margin-top:26px;margin-bottom:0;">같은 6단계, 현재는 여러 시스템을 오가지만 ERPIX 적용 후에는 하나로 연결됩니다.</div>
   </section>
 
   <!-- 전체 구조 -->
   <section>
     <div class="eyebrow">02 · 전체 구조</div>
     <h2 class="section-title">모든 데이터의 출발점, HR Master</h2>
-    <p class="section-sub">프로젝트·자산·권한·조직·공수 — 모든 데이터는 HR Master에서 시작됩니다.</p>
+    <p class="section-sub">프로젝트 공수·자산관리·인사정보관리·조직 및 직위 발령·Slack 연동 — 모든 데이터는 HR Master에서 시작됩니다.</p>
     <svg width="90%" viewBox="0 0 680 430" style="display:block;margin:8px auto 0;">
       <line x1="340" y1="230" x2="340" y2="60" stroke="var(--line)" stroke-width="1.5"/>
       <line x1="340" y1="230" x2="502" y2="177" stroke="var(--line)" stroke-width="1.5"/>
@@ -275,24 +273,24 @@
       <line x1="340" y1="230" x2="178" y2="177" stroke="var(--line)" stroke-width="1.5"/>
 
       <rect x="265" y="35" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-      <text x="340" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">프로젝트</text>
+      <text x="340" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">프로젝트 공수</text>
 
       <rect x="427" y="152" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-      <text x="502" y="182" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">자산</text>
+      <text x="502" y="182" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">자산관리</text>
 
       <rect x="365" y="343" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-      <text x="440" y="373" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">권한</text>
+      <text x="440" y="373" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">인사정보관리</text>
 
       <rect x="165" y="343" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-      <text x="240" y="373" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">조직</text>
+      <text x="240" y="373" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">조직 및 직위 발령</text>
 
       <rect x="103" y="152" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-      <text x="178" y="182" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">공수</text>
+      <text x="178" y="182" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">Slack 연동</text>
 
       <circle cx="340" cy="230" r="72" fill="var(--accent-darker)"/>
       <text x="340" y="236" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">HR Master</text>
     </svg>
-    <p class="flow-caption">HR은 1차 개발 중 · 프로젝트·자산·권한·조직·공수는 단계적으로 연결 확장</p>
+    <p class="flow-caption">HR은 1차 개발 중 · 프로젝트 공수·자산관리·조직 및 직위 발령·Slack 연동은 단계적으로 연결 확장</p>
   </section>
 
   <!-- 설계 원칙 -->
@@ -357,9 +355,9 @@
   <section>
     <div class="eyebrow">04-1 · 사용자 접근 범위</div>
     <h2 class="section-title">누가, 어디까지 쓰는 시스템인가</h2>
-    <p class="section-sub">관리자 도구로 시작해 전 구성원 시스템으로 확장되는 권한 피라미드입니다.</p>
-    <div class="pyramid">
-      <div class="pyramid-tier tier-1">
+    <p class="section-sub">관리자 도구로 시작해 전 구성원 시스템으로 확장됩니다.</p>
+    <div class="access-grid">
+      <div class="access-card tier-1">
         <div class="pyramid-title">HR 최고관리자</div>
         <div class="pyramid-desc">권한 부여 · 발령 처리</div>
         <div class="pyramid-badges">
@@ -367,14 +365,14 @@
           <span class="pyramid-badge phase15">발령 처리 · 1.5차</span>
         </div>
       </div>
-      <div class="pyramid-tier tier-2">
+      <div class="access-card tier-2">
         <div class="pyramid-title">HR 담당자 · 조직장</div>
         <div class="pyramid-desc">인사정보 조회 및 기능 사용</div>
         <div class="pyramid-badges">
           <span class="pyramid-badge">1차 배포</span>
         </div>
       </div>
-      <div class="pyramid-tier tier-3">
+      <div class="access-card tier-3">
         <div class="pyramid-title">전체 구성원</div>
         <div class="pyramid-desc">조직도 열람 · 전자계약 서명</div>
         <div class="pyramid-badges">
