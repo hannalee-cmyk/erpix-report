@@ -37,6 +37,13 @@
 
   .vision-line{font-size:19px;font-weight:700;color:var(--accent-darker);background:var(--accent-light);border-radius:12px;padding:20px 24px;margin-bottom:26px;line-height:1.5;}
 
+  .lifecycle-step{border:1px solid var(--line);border-radius:14px;padding:16px 20px;background:var(--card);}
+  .lifecycle-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:6px;}
+  .lifecycle-title{font-size:14.5px;font-weight:700;color:var(--ink);}
+  .lifecycle-sys{font-size:11px;font-weight:700;color:var(--amber-dark);background:var(--amber-light);padding:3px 10px;border-radius:20px;white-space:nowrap;}
+  .lifecycle-body{font-size:12.5px;color:var(--ink-sub);line-height:1.6;}
+  .lifecycle-arrow{text-align:center;font-size:16px;color:var(--ink-mute);padding:4px 0;}
+
 
   .principle-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
   .principle-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;}
@@ -148,17 +155,43 @@
     </div>
   </section>
 
-  <!-- SaaS의 한계 -->
+  <!-- Employee Lifecycle -->
   <section>
-    <div class="eyebrow">01 · 왜 내부 플랫폼이 필요한가</div>
-    <h2 class="section-title">범용 SaaS가 아니라, TelePIX에 맞는 연결 필요</h2>
-    <p class="section-sub" style="max-width:none;white-space:nowrap;">SaaS는 훌륭한 범용 도구입니다. 다만 연구개발 조직인 TelePIX는 업무를 하나의 데이터로 연결하는 플랫폼이 필요합니다.</p>
-    <table class="compare">
-      <tr><th>구분</th><th>범용 SaaS</th><th>TelePIX 내부 플랫폼</th></tr>
-      <tr><td>목적</td><td class="before">표준화된 업무 처리</td><td class="after">연구개발 조직에 맞춘 데이터 연결</td></tr>
-      <tr><td>데이터</td><td class="before">서비스별로 분리 관리</td><td class="after">프로젝트·공수·정부과제까지 하나로 연결</td></tr>
-      <tr><td>확장</td><td class="before">벤더 로드맵에 따라 결정</td><td class="after">회사 성장 속도에 맞춰 즉시 확장</td></tr>
-    </table>
+    <div class="eyebrow">01 · Employee Lifecycle</div>
+    <h2 class="section-title">입사부터 퇴사까지, 여러 시스템을 오가는 구성원 정보</h2>
+    <p class="section-sub">한 명의 구성원이 거치는 6단계, 그 사이 정보는 계속 여러 시스템을 오갑니다.</p>
+
+    <div class="lifecycle-step">
+      <div class="lifecycle-head"><div class="lifecycle-title">입사 · HR Master 생성</div><div class="lifecycle-sys">Flex · 국가연구자번호 시스템</div></div>
+      <div class="lifecycle-body">Flex·사번·국가연구자번호 등록</div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="lifecycle-step">
+      <div class="lifecycle-head"><div class="lifecycle-title">프로젝트 배정</div><div class="lifecycle-sys">Excel · 프로젝트 관리 시트</div></div>
+      <div class="lifecycle-body">연구 프로젝트에 인력 투입</div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="lifecycle-step">
+      <div class="lifecycle-head"><div class="lifecycle-title">자산 지급</div><div class="lifecycle-sys">자산대장 · E-count ERP</div></div>
+      <div class="lifecycle-body">노트북·라이선스·계정 지급</div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="lifecycle-step">
+      <div class="lifecycle-head"><div class="lifecycle-title">정부과제 참여</div><div class="lifecycle-sys">국가연구자번호 시스템 · 과제 제출 서류</div></div>
+      <div class="lifecycle-body">연구자 정보·참여 이력 등록</div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="lifecycle-step">
+      <div class="lifecycle-head"><div class="lifecycle-title">조직 변경</div><div class="lifecycle-sys">Flex · 자산대장 · 권한, 개별 수정</div></div>
+      <div class="lifecycle-body">부서 이동·권한 변경·자산 변경</div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="lifecycle-step">
+      <div class="lifecycle-head"><div class="lifecycle-title">퇴사</div><div class="lifecycle-sys">자산대장 · Flex · 계정관리, 개별 처리</div></div>
+      <div class="lifecycle-body">자산 회수·계정 회수·권한 종료</div>
+    </div>
+
+    <div class="vision-line" style="margin-top:26px;margin-bottom:0;white-space:nowrap;">하나의 구성원 정보가 입사부터 퇴사까지, 여러 시스템을 오가며 반복 관리되고 있습니다.</div>
   </section>
 
   <!-- 왜 자체 ERP인가 -->
@@ -197,40 +230,12 @@
       <text x="340" y="240" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">Master Data</text>
     </svg>
     <p class="flow-caption">하나의 조직 데이터가 회사 전체 업무와 연결되는 구조</p>
-  </section>
-
-  <!-- 기대 효과 -->
-  <section>
-    <div class="eyebrow">03 · 기대 효과</div>
-    <h2 class="section-title">그래서, TelePIX는 무엇을 얻는가</h2>
-    <p class="section-sub">하나의 데이터로 회사 업무를 연결하면, 아래 4가지 경영 효과가 생깁니다.</p>
-    <div class="principle-grid">
-      <div class="principle-card">
-        <div class="p-num">✓</div>
-        <h3>연구개발 운영 효율 향상</h3>
-        <p>정부과제·프로젝트 대응 속도 개선</p>
-      </div>
-      <div class="principle-card">
-        <div class="p-num">✓</div>
-        <h3>프로젝트 데이터 통합</h3>
-        <p>연구인력·공수·계약을 하나의 데이터로 연결</p>
-      </div>
-      <div class="principle-card">
-        <div class="p-num">✓</div>
-        <h3>운영 비용 감소</h3>
-        <p>수작업·중복 관리 비용 절감</p>
-      </div>
-      <div class="principle-card">
-        <div class="p-num">✓</div>
-        <h3>회사 성장에 따른 확장성 확보</h3>
-        <p>조직이 커져도 즉시 대응 가능한 구조</p>
-      </div>
-    </div>
+    <div class="vision-line" style="margin-top:22px;margin-bottom:0;white-space:nowrap;">ERPIX는 E-count ERP를 대체하는 시스템이 아니라, 구성원의 Lifecycle을 하나로 연결하는 운영 플랫폼입니다.</div>
   </section>
 
   <!-- 설계 원칙 -->
   <section>
-    <div class="eyebrow">04 · 설계 원칙</div>
+    <div class="eyebrow">03 · 설계 원칙</div>
     <h2 class="section-title">HR 관리자를 위한 설계 원칙</h2>
     <p class="section-sub">예쁜 화면보다, 안전하게 반복 업무를 하는 구조가 목표였습니다.</p>
     <div class="principle-grid">
@@ -259,7 +264,7 @@
 
   <!-- 핵심 업무 흐름 -->
   <section>
-    <div class="eyebrow">05 · 핵심 업무 흐름</div>
+    <div class="eyebrow">04 · 핵심 업무 흐름</div>
     <h2 class="section-title">인사정보 등록 → 기준정보 연결 → 권한 적용</h2>
     <p class="section-sub">입사 등록부터 권한 적용까지, 3단계 흐름으로 확인하세요.</p>
     <div class="flow-wrap">
@@ -288,7 +293,7 @@
 
   <!-- 사용자 접근 범위 -->
   <section>
-    <div class="eyebrow">05-1 · 사용자 접근 범위</div>
+    <div class="eyebrow">04-1 · 사용자 접근 범위</div>
     <h2 class="section-title">누가, 어디까지 쓰는 시스템인가</h2>
     <p class="section-sub">관리자 도구로 시작해 전 구성원 시스템으로 확장됩니다.</p>
     <svg width="90%" viewBox="0 0 680 380" style="display:block;margin:0 auto;">
@@ -316,7 +321,7 @@
 
   <!-- 전체 구조 · 진행 범위 -->
   <section>
-    <div class="eyebrow">06 · 전체 구조 · 진행 범위</div>
+    <div class="eyebrow">05 · 전체 구조 · 진행 범위</div>
     <h2 class="section-title">ERPIX가 다루는 영역</h2>
     <p class="section-sub">HR부터 시작해 자산·프로젝트·공수 영역으로 확장합니다.</p>
     <div class="scope-grid">
@@ -360,7 +365,7 @@
 
   <!-- 현재 개발 현황 -->
   <section>
-    <div class="eyebrow">07 · 현재 개발 현황</div>
+    <div class="eyebrow">06 · 현재 개발 현황</div>
     <h2 class="section-title">모듈별 진행률</h2>
     <p class="section-sub">숫자로 보는 현재 개발 진척도입니다.</p>
 
@@ -388,7 +393,7 @@
 
   <!-- 로드맵 -->
   <section>
-    <div class="eyebrow">08 · 로드맵</div>
+    <div class="eyebrow">07 · 로드맵</div>
     <h2 class="section-title">HR 그룹웨어 개발 로드맵</h2>
     <p class="section-sub">1.5차 완료 시 HR 핵심 기능이 완성됩니다.</p>
 
@@ -435,7 +440,7 @@
 
   <!-- 전체 일정 -->
   <section>
-    <div class="eyebrow">08-1 · 전체 일정</div>
+    <div class="eyebrow">07-1 · 전체 일정</div>
     <h2 class="section-title">언제까지, 무엇을</h2>
     <p class="section-sub">1.5차·2차는 정책·범위 확정을 전제로 한 목표 일정입니다.</p>
     <div class="scope-grid" style="grid-template-columns:1fr 1fr 1fr;">
