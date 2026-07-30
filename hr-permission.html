@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>권한관리현황</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Segoe UI',sans-serif;background:#F5F6F8;color:#111827;font-size:13px}
+
+/* ── GNB ── */
+.gnb{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:46px;background:#fff;border-bottom:0.5px solid #E5E7EB;position:sticky;top:0;z-index:100}
+.gnb-logo{display:flex;align-items:center;gap:6px;font-weight:500;font-size:14px}
+.gnb-menus{display:flex;align-items:center;gap:2px}
+.gnb-i{padding:6px 14px;font-size:13px;color:#6B7280;border-radius:6px;cursor:pointer}
+.gnb-i:hover{background:#F3F4F6}
+.gnb-i.on{color:#111827;font-weight:500;background:#F3F4F6;border:0.5px solid #E5E7EB}
+.gnb-dropdown{position:relative;display:flex;align-items:center;padding:6px 14px;font-size:13px;color:#111827;font-weight:600;border-radius:7px;cursor:pointer;transition:all .2s}
+.gnb-dropdown:hover{background:#F3F4F6}
+.dropdown-icon{transition:transform .2s;margin-left:4px;font-size:9px}
+.gnb-dropdown:hover .dropdown-icon{transform:rotateZ(180deg)}
+.dropdown-menu{display:none;position:absolute;top:48px;left:0;background:#fff;border:1px solid #E5E7EB;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.1);min-width:160px;z-index:20;overflow:hidden}
+.gnb-dropdown:hover .dropdown-menu{display:block}
+.dmi{padding:10px 16px;font-size:13px;color:#6B7280;cursor:pointer;border-bottom:1px solid #F9FAFB;transition:all .2s;white-space:nowrap}
+.dmi:last-child{border-bottom:none}
+.dmi:hover{background:#F9FAFB;color:#111827;font-weight:500}
+.dmi.on{background:#F0FBF7;color:#1D9E75;font-weight:600;border-left:3px solid #1D9E75;padding-left:13px}
+.gnb-right{display:flex;align-items:center;gap:8px;font-size:12px;color:#6B7280}
+.admin-badge{font-size:10px;padding:2px 8px;border-radius:10px;background:#E1F5EE;color:#085041;font-weight:500}
+.gnb-icon-btn{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;background:transparent;color:#6B7280;transition:all .12s;position:relative}
+.gnb-icon-btn:hover{background:#F3F4F6;color:#111827}
+.gnb-user{display:flex;align-items:center;gap:8px;padding:4px 10px;border-radius:8px;cursor:pointer;border:1px solid transparent;background:transparent;transition:all .12s}
+.gnb-user:hover{border-color:#E5E7EB;background:#F9FAFB}
+.gnb-user-name{font-size:12px;font-weight:500;color:#374151}
+.av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;overflow:hidden}
+.av-g{background:#E1F5EE;color:#085041}.av-b{background:#E6F1FB;color:#0C447C}
+.av-p{background:#EEEDFE;color:#3C3489}.av-a{background:#FAEEDA;color:#633806}
+.av-gr{background:#F1EFE8;color:#444441}
+
+/* 설정 드롭다운 */
+
+
+/* ── 브레드크럼 ── */
+.breadcrumb-bar{background:#F9FAFB;border-bottom:1px solid #E5E7EB;padding:12px 24px;font-size:13px;color:#9CA3AF}
+
+/* ── 페이지 헤더 ── */
+.page-header{padding:20px 28px 16px;background:#fff;border-bottom:1px solid #E5E7EB}
+.page-header-top{display:flex;align-items:flex-end;justify-content:space-between}
+.page-title{font-size:18px;font-weight:600;color:#111827;letter-spacing:-0.2px}
+.page-desc{font-size:12px;color:#9CA3AF;margin-top:4px}
+.add-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:none;border-radius:8px;background:#1D9E75;font-size:13px;font-weight:500;color:#fff;cursor:pointer;transition:all .12s}
+
+.add-btn:hover{background:#0F8A63}
+.add-btn svg{flex-shrink:0}
+
+/* ── 요약 카드 영역 ── */
+.summary-bar{padding:16px 28px;background:#fff;border-bottom:1px solid #E5E7EB;display:flex;gap:12px}
+.sum-card{flex:1;padding:14px 18px;border-radius:12px;border:1px solid #F3F4F6;background:#FAFAFA;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .15s}
+.sum-card:hover{border-color:#1D9E75;background:#F0FBF7}
+.sum-card.active{border-color:#1D9E75;background:#F0FBF7}
+.sum-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.si-total{background:#EFF6FF}
+.si-sens{background:#FEF2F2}
+.si-nosens{background:#F0FBF7}
+.si-none{background:#F9FAFB}
+.sum-label{font-size:11px;color:#9CA3AF;font-weight:500;margin-bottom:3px}
+.sum-val{font-size:20px;font-weight:800;color:#111827;line-height:1}
+.sum-val-unit{font-size:12px;font-weight:400;color:#9CA3AF;margin-left:2px}
+.sum-trend{font-size:10px;margin-top:4px;color:#9CA3AF}
+
+/* ── 메인 컨텐츠 ── */
+.main-wrap{display:flex;height:calc(100vh - 118px);overflow:hidden}
+
+/* ── 왼쪽 패널 ── */
+.left-panel{width:300px;flex-shrink:0;background:#fff;border-right:1px solid #E5E7EB;display:flex;flex-direction:column;overflow:hidden}
+.search-box{display:flex;align-items:center;gap:7px;padding:7px 11px;border:1px solid #E5E7EB;border-radius:8px;background:#F9FAFB;transition:all .12s}
+.search-box:focus-within{border-color:#1D9E75;background:#fff;box-shadow:0 0 0 3px rgba(29,158,117,.08)}
+.search-box input{border:none;outline:none;font-size:12px;color:#111827;background:transparent;width:100%}
+.search-box input::placeholder{color:#C4C9D4}
+.left-filter{padding:8px 14px;border-bottom:1px solid #F3F4F6;display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap}
+.filter-pill{padding:4px 10px;border-radius:20px;border:1px solid #E5E7EB;background:#fff;font-size:11px;color:#6B7280;cursor:pointer;transition:all .12s;font-weight:500;display:inline-flex;align-items:center;gap:5px}
+.filter-pill:hover{border-color:#1D9E75;color:#065F46}
+.filter-pill.on{background:#F0FBF7;border-color:#1D9E75;color:#065F46;font-weight:600}
+.filter-pill-count{font-size:10px;padding:1px 6px;border-radius:8px;background:#F3F4F6;color:#9CA3AF;font-weight:700}
+.filter-pill.on .filter-pill-count{background:#fff;color:#1D9E75}
+.left-list{flex:1;overflow-y:auto}
+.left-list-header{padding:12px 14px 8px;background:#fff;border-bottom:0.5px solid #F3F4F6;position:sticky;top:0;z-index:2;display:flex;flex-direction:column;gap:8px}
+.left-list-header-top{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:700;color:#6B7280;letter-spacing:.04em}
+.left-list-header-top .total{font-size:13px;font-weight:700;color:#111827;letter-spacing:-0.2px}
+.left-list-header-top .total span{font-size:11px;font-weight:500;color:#9CA3AF;margin-left:3px}
+.left-list-filters{display:flex;gap:5px;flex-wrap:wrap}
+.emp-row{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:0.5px solid #F9FAFB;border-left:3px solid transparent;transition:all .08s}
+.emp-row:hover{background:#F9FAFB}
+.emp-row.active{background:#F0FBF7;border-left-color:#1D9E75}
+.reset-section{background:#FFFBF5;border-bottom:1px solid #FDE9D0}
+.reset-section-title{padding:9px 14px 5px;font-size:10.5px;font-weight:700;color:#9A3412;letter-spacing:.03em;display:flex;align-items:center;gap:6px}
+.reset-section-count{background:#FDBA74;color:#7C2D12;font-size:10px;font-weight:700;padding:0 6px;border-radius:10px;line-height:16px}
+.reset-row{border-left:3px solid transparent}
+.reset-row:hover{background:#FDEBD3}
+.reset-row.active{background:#FDE0B8;border-left-color:#C2410C}
+.emp-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.emp-meta{flex:1;min-width:0}
+.emp-name{font-size:13px;font-weight:600;color:#111827}
+.emp-sub{font-size:11px;color:#9CA3AF;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.emp-badges{display:flex;gap:3px;margin-top:5px;flex-wrap:wrap}
+.ebadge{font-size:10px;padding:1px 6px;border-radius:6px;font-weight:600}
+.eb-n{background:#EFF6FF;color:#1E40AF}
+.eb-s{background:#FEF2F2;color:#DC2626}
+.eb-f{background:#F0FBF7;color:#065F46}
+.eb-empty{background:#F9FAFB;color:#D1D5DB;border:1px solid #F3F4F6}
+.eb-unset{background:#FEF3C7;color:#92400E;border:1px solid #FDE68A;font-weight:700}
+.eb-reset{background:#FFF7ED;color:#C2410C;border:1px solid #FDBA74}
+.add-row{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 14px;cursor:pointer;color:#9CA3AF;font-size:12px;font-weight:500;border-bottom:0.5px solid #F9FAFB;border-left:3px solid transparent;transition:all .12s}
+.add-row:hover{color:#1D9E75;background:#F9FAFB}
+
+/* ── 오른쪽 상세 ── */
+.right-panel{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#F4F5F7}
+
+/* 상세 헤더 */
+.detail-head{padding:16px 24px;background:#fff;border-bottom:1px solid #E5E7EB;flex-shrink:0}
+.dh-top{display:flex;align-items:center;justify-content:space-between}
+.dh-person{display:flex;align-items:center;gap:12px}
+.dh-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;flex-shrink:0}
+.dh-name{font-size:16px;font-weight:700;color:#111827}
+.dh-sub{font-size:12px;color:#6B7280;margin-top:3px}
+.dh-actions{display:flex;gap:8px}
+.btn-ghost{padding:7px 14px;border:1px solid #E5E7EB;border-radius:8px;background:#fff;font-size:12px;font-weight:600;color:#374151;cursor:pointer;transition:all .12s}
+.btn-ghost:hover{border-color:#1D9E75;color:#065F46;background:#F0FBF7}
+.btn-primary{padding:7px 14px;border:none;border-radius:8px;background:#1D9E75;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .12s}
+.btn-primary:hover{background:#17896A}
+.scope-tag{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;background:#F0FBF7;border:1px solid #A7F3D0;font-size:11px;font-weight:600;color:#065F46;margin-top:6px}
+
+/* 3개 카운트 박스 */
+.dh-counts{display:flex;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid #F3F4F6}
+.count-box{flex:1;padding:11px 14px;border-radius:10px}
+.cb-n{background:#EFF6FF}.cb-s{background:#FEF2F2}.cb-f{background:#F0FBF7}
+.cb-label{font-size:10px;font-weight:600;color:#6B7280;margin-bottom:5px;letter-spacing:.03em}
+.cb-val{font-size:22px;font-weight:800;line-height:1}
+.cb-vn{color:#1E40AF}.cb-vs{color:#DC2626}.cb-vf{color:#065F46}
+.cb-unit{font-size:11px;font-weight:400;color:#9CA3AF;margin-left:2px}
+
+/* 탭 (기본/인사/계약/역량/문서/기능) */
+.detail-tabs{display:flex;padding:0 24px;background:#fff;border-bottom:1px solid #E5E7EB;gap:0;flex-shrink:0}
+.dtab{padding:10px 16px;font-size:12px;font-weight:500;color:#9CA3AF;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .12s}
+.dtab:hover{color:#374151}
+.dtab.on{color:#111827;font-weight:700;border-bottom-color:#1D9E75}
+
+/* 상세 본문 */
+.detail-body{flex:1;overflow-y:auto;padding:20px 24px}
+.perm-group{background:#fff;border:1px solid #E5E7EB;border-radius:12px;overflow:hidden}
+.pg-head{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid #F3F4F6}
+.pg-title{font-size:13px;font-weight:700;color:#111827}
+.pg-count{font-size:11px;font-weight:600}
+.pg-count.has{color:#1D9E75}.pg-count.none{color:#D1D5DB}
+.perm-row{display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:0.5px solid #F9FAFB}
+.perm-row:last-child{border-bottom:none}
+.perm-row.off{opacity:.38}
+.pr-icon{flex-shrink:0}
+.pr-label{flex:1;font-size:12px;font-weight:500;color:#111827}
+.pr-fields{font-size:11px;color:#9CA3AF}
+.badge-sens{font-size:9px;padding:1px 5px;border-radius:5px;background:#FEF2F2;color:#DC2626;font-weight:700;margin-left:5px;vertical-align:middle}
+.func-row{display:flex;align-items:center;justify-content:space-between;padding:9px 16px;border-bottom:0.5px solid #F9FAFB}
+.func-row:last-child{border-bottom:none}
+.func-label{font-size:12px;font-weight:500;color:#111827}
+.func-acts{display:flex;gap:4px}
+.fact{font-size:10px;padding:2px 8px;border-radius:6px;font-weight:600}
+.fact-on{background:#F0FBF7;color:#065F46}
+.fact-off{background:#F9FAFB;color:#D1D5DB}
+
+/* 빈 상태 */
+.empty-panel{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:12px;color:#C4C9D4;padding:60px}
+.empty-icon{width:56px;height:56px;border-radius:16px;background:#F3F4F6;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:4px}
+
+/* 권한단위별 우측 */
+.perm-unit-body{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:8px}
+.pu-member-row{display:flex;align-items:center;gap:10px;padding:10px 16px;background:#fff;border-radius:10px;border:1px solid #F3F4F6;transition:all .12s;cursor:pointer}
+.pu-member-row:hover{border-color:#1D9E75;background:#F0FBF7}
+
+/* 모달 */
+.modal-bg{position:fixed;inset:0;background:rgba(15,23,42,.4);display:none;align-items:center;justify-content:center;z-index:300;backdrop-filter:blur(2px)}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal-head{padding:18px 22px;border-bottom:1px solid #F3F4F6;display:flex;align-items:flex-start;justify-content:space-between;flex-shrink:0}
+.modal-title{font-size:15px;font-weight:700;color:#111827}
+.modal-sub{font-size:12px;color:#9CA3AF;margin-top:3px}
+.modal-close{background:none;border:none;cursor:pointer;color:#9CA3AF;font-size:18px;line-height:1;padding:2px}
+.modal-close:hover{color:#374151}
+.modal-body{flex:1;overflow-y:auto;padding:16px 22px;display:flex;flex-direction:column;gap:8px}
+.modal-foot{padding:14px 22px;border-top:1px solid #F3F4F6;display:flex;justify-content:flex-end;gap:8px;background:#FAFAFA;flex-shrink:0}
+.bcn{padding:8px 18px;border:1px solid #E5E7EB;border-radius:8px;background:#fff;font-size:13px;font-weight:600;color:#374151;cursor:pointer}
+.bsv{padding:8px 18px;border:none;border-radius:8px;background:#1D9E75;font-size:13px;font-weight:600;color:#fff;cursor:pointer}
+.bcn:hover{border-color:#D1D5DB;background:#F9FAFB}
+.bsv:hover{background:#17896A}
+.pick-chips{min-height:44px;padding:8px 22px;border-bottom:1px solid #F3F4F6;display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:#FAFAFA;flex-shrink:0}
+.pick-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 7px 3px 4px;border-radius:20px;border:1px solid #6EE7B7;background:#fff;font-size:11px;font-weight:600;color:#111827}
+.pick-chip-x{background:none;border:none;color:#9CA3AF;cursor:pointer;font-size:11px;padding:0;margin-left:2px;line-height:1}
+.pick-chip-x:hover{color:#DC2626}
+.emp-pick-item{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:0.5px solid #F9FAFB;cursor:pointer;border-left:3px solid transparent;transition:all .08s}
+.emp-pick-item:hover{background:#F9FAFB}
+.emp-pick-item.sel{background:#F0FBF7;border-left-color:#1D9E75}
+.pick-checkbox{width:16px;height:16px;border-radius:4px;border:1.5px solid #D1D5DB;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .1s}
+.pick-checkbox.on{background:#1D9E75;border-color:#1D9E75}
+
+/* 권한단위별 좌측 */
+.pu-left-list .pu-item{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;cursor:pointer;border-bottom:0.5px solid #F9FAFB;border-left:3px solid transparent;transition:all .08s}
+.pu-item:hover{background:#F9FAFB}
+.pu-item.active{background:#F0FBF7;border-left-color:#1D9E75}
+.pu-item-label{font-size:12px;color:#111827;display:flex;align-items:center;gap:5px}
+.pu-cnt{font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px}
+.pu-cnt.has{background:#F0FBF7;color:#065F46}
+.pu-cnt.zero{background:#F9FAFB;color:#D1D5DB}
+.pu-tag-s{font-size:9px;padding:1px 5px;border-radius:5px;background:#FEF2F2;color:#DC2626;font-weight:700}
+.pu-grp-header{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:#F9FAFB;border-top:0.5px solid #F3F4F6;border-bottom:0.5px solid #F3F4F6;cursor:pointer;margin-top:2px}
+.pu-grp-header:hover{background:#F3F4F6}
+.pu-grp-title{font-size:11px;font-weight:700;color:#374151;display:flex;align-items:center;gap:4px}
+
+/* 토스트 */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;z-index:9999;display:none;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+
+/* 토글 스위치 */
+.tog{width:36px;height:20px;border-radius:10px;background:#E5E7EB;position:relative;transition:background .15s;flex-shrink:0}
+.tog::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .15s}
+.tog-on{background:#1D9E75}
+.tog-on::after{transform:translateX(16px)}
+
+/* 아코디언 (데이터 권한 탭) */
+.acc{margin-bottom:10px;background:#fff;border:1px solid #E5E7EB;border-radius:12px;overflow:hidden}
+.acc-sum{padding:14px 18px;cursor:pointer;display:flex;align-items:center;gap:10px;list-style:none;user-select:none;transition:background .12s}
+.acc-sum::-webkit-details-marker{display:none}
+.acc-sum:hover{background:#FAFAFA}
+.acc-arrow{width:14px;height:14px;flex-shrink:0;transition:transform .2s;color:#9CA3AF}
+.acc[open]>.acc-sum>.acc-arrow{transform:rotate(90deg);color:#1D9E75}
+.acc[open]>.acc-sum{background:#FAFAFA;border-bottom:1px solid #F3F4F6}
+.acc-title{font-size:14px;font-weight:800;color:#111827;letter-spacing:-0.2px}
+.acc-badges{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.acc-body{padding:0}
+.acc-desc{font-size:11px;color:#9CA3AF;line-height:1.5;padding:10px 20px 0}
+.acc-col-head{padding:8px 20px;background:#FAFAFA;border-bottom:1px solid #F3F4F6;margin-top:10px}
+.acc-col-head>span{font-size:10px;font-weight:700;color:#9CA3AF;letter-spacing:.08em}
+</style>
+</head>
+<body>
+
+<!-- GNB -->
+<div class="gnb">
+  <div class="gnb-logo"><span>●</span> 그룹웨어</div>
+  <div class="gnb-menus">
+    <div class="gnb-i" onclick="location.href='조직도.html'">조직도</div>
+    <div class="gnb-dropdown">
+      HR 관리 <span class="dropdown-icon">▼</span>
+      <div class="dropdown-menu">
+        <div class="dmi" onclick="location.href='인사정보관리.html'">인사정보관리</div>
+        <div class="dmi" onclick="location.href='기준정보.html'">기준정보관리</div>
+        <div class="dmi on">권한관리</div>
+      </div>
+    </div>
+    <div class="gnb-i" onclick="location.href='자산관리.html'">자산관리</div>
+  </div>
+  <div class="gnb-right">
+    <!-- 설정 아이콘 -->
+    <button class="gnb-icon-btn" id="settings-btn" onclick="openHrModal()" title="HR 최고관리자 관리">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 10a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="1.3"/><path d="M13.2 7.1c0-.3 0-.7-.1-1l1.3-1-1.3-2.2-1.6.7c-.5-.4-1-.7-1.6-.9L9.6 1H6.4l-.3 1.7c-.6.2-1.1.5-1.6.9l-1.6-.7L1.6 5.1l1.3 1c-.1.3-.1.6-.1 1 0 .3 0 .7.1 1l-1.3 1 1.3 2.2 1.6-.7c.5.4 1 .7 1.6.9l.3 1.5h3.2l.3-1.5c.6-.2 1.1-.5 1.6-.9l1.6.7 1.3-2.2-1.3-1c.1-.3.1-.6.1-1z" stroke="currentColor" stroke-width="1.3"/></svg>
+    </button>
+    <span class="admin-badge">HR 최고관리자</span>
+    <!-- 유저 -->
+    <div class="gnb-user">
+      <div class="av av-g">박</div>
+      <div class="gnb-user-name">박HR총괄</div>
+    </div>
+  </div>
+</div>
+
+<!-- 브레드크럼 -->
+<div class="breadcrumb-bar">
+  <span id="hr-breadcrumb-text">HR 관리 &gt; 권한관리 &gt; 현황</span>
+</div>
+
+<!-- 페이지 헤더 -->
+<div class="page-header">
+  <div class="page-header-top">
+    <div>
+      <div class="page-title">권한관리현황</div>
+    </div>
+  </div>
+</div>
+
+<!-- 메인 탭 + 컨텐츠 -->
+<div class="main-wrap">
+  <!-- 왼쪽 패널 -->
+  <div class="left-panel">
+    <div style="padding:14px 14px 0">
+      <button class="add-btn" onclick="goToMemberAddPage()" style="width:100%;justify-content:center">
+        <svg width="12" height="12" viewBox="0 0 11 11" fill="none"><path d="M5.5 1v9M1 5.5h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        구성원 권한 설정
+      </button>
+    </div>
+    <div class="left-list" id="left-list"></div>
+  </div>
+
+  <!-- 오른쪽 상세 -->
+  <div class="right-panel" id="right-panel">
+    <div class="empty-panel">
+      <div class="empty-icon">👤</div>
+      <div style="font-size:14px;font-weight:600;color:#9CA3AF">구성원을 선택해 주세요</div>
+      <div style="font-size:12px;color:#C4C9D4;margin-top:2px">왼쪽 목록에서 권한을 확인할 구성원을 클릭하세요</div>
+    </div>
+  </div>
+</div>
+
+<!-- HR 최고관리자 모달 -->
+<div class="modal-bg" id="hr-modal-bg" onclick="if(event.target===this)closeHrModal()">
+  <div style="background:#fff;border-radius:16px;width:780px;max-height:86vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2)">
+    <!-- 모달 헤더 -->
+    <div style="padding:20px 24px 14px;border-bottom:1px solid #F3F4F6;flex-shrink:0;display:flex;align-items:flex-start;justify-content:space-between">
+      <div>
+        <div style="font-size:16px;font-weight:800;color:#111827">👑 HR 최고관리자 관리</div>
+        <div style="font-size:12px;color:#9CA3AF;margin-top:3px">시스템 전체 권한을 가진 최고관리자를 지정합니다 · 복수 선택 가능(직책과 무관하게 유지됩니다)</div>
+      </div>
+      <button onclick="closeHrModal()" style="background:none;border:none;font-size:20px;color:#9CA3AF;cursor:pointer;line-height:1;padding:2px;margin-top:2px">✕</button>
+    </div>
+    <!-- 선택 칩 바 + 오류 배너 -->
+    <div id="hr-pick-chips-wrap" style="padding:10px 24px;border-bottom:1px solid #F3F4F6;flex-shrink:0"></div>
+    <!-- 본문: 조직트리 + 목록 -->
+    <div style="flex:1;display:flex;overflow:hidden;min-height:360px">
+      <!-- 조직 트리 -->
+      <div style="width:200px;flex-shrink:0;border-right:1px solid #F3F4F6;overflow-y:auto;background:#FAFAFA" id="hr-pick-orgtree"></div>
+      <!-- 구성원 목록 -->
+      <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+        <div style="padding:10px 16px;border-bottom:1px solid #F3F4F6;flex-shrink:0">
+          <div class="search-box">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="5.5" cy="5.5" r="4" stroke="#C4C9D4" stroke-width="1.2"/><path d="M9 9l2.5 2.5" stroke="#C4C9D4" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <input id="hr-pick-search" type="text" placeholder="이름·직책으로 검색" oninput="renderHrPickList()" style="border:none;outline:none;font-size:12px;background:transparent;width:100%">
+          </div>
+        </div>
+        <div id="hr-pick-list" style="flex:1;overflow-y:auto"></div>
+      </div>
+    </div>
+    <!-- 모달 푸터 -->
+    <div style="padding:14px 24px;border-top:1px solid #F3F4F6;display:flex;align-items:center;justify-content:space-between;background:#FAFAFA;flex-shrink:0">
+      <span id="hr-pick-count" style="font-size:12px;color:#9CA3AF;font-weight:500">0명 선택됨</span>
+      <div style="display:flex;gap:8px">
+        <button class="bcn" onclick="closeHrModal()">취소</button>
+        <button class="bsv" id="hr-save-btn" onclick="confirmHrModal()">저장</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 공용 확인 모달 (native confirm 대체) -->
+<div class="modal-bg" id="confirm-modal-bg" style="z-index:600" onclick="if(event.target===this)closeConfirmModal()">
+  <div class="modal" style="width:380px">
+    <div class="modal-body" style="padding-top:24px">
+      <div id="confirm-modal-msg" style="font-size:14px;color:#111827;line-height:1.6;font-weight:500"></div>
+      <div id="confirm-modal-sub" style="font-size:12.5px;color:#9CA3AF;margin-top:6px;display:none"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="bcn" onclick="closeConfirmModal()">취소</button>
+      <button class="bsv" id="confirm-modal-ok" style="background:#DC2626">확인</button>
+    </div>
+  </div>
+</div>
+
+<!-- 구성원 선택 모달 -->
+<div class="modal-bg" id="emp-pick-modal-bg" onclick="if(event.target===this)closePickModal()" style="z-index:500">
+  <div style="background:#fff;border-radius:16px;width:780px;max-height:86vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2)">
+    <!-- 모달 헤더 -->
+    <div style="padding:20px 24px 14px;border-bottom:1px solid #F3F4F6;flex-shrink:0;display:flex;align-items:flex-start;justify-content:space-between">
+      <div>
+        <div style="font-size:16px;font-weight:800;color:#111827">구성원 선택</div>
+        <div style="font-size:12px;color:#9CA3AF;margin-top:3px">신규 설정 구성원은 복수 선택 가능(동일한 권한이 전원에게 적용됩니다) · 이미 권한이 있는 구성원은 클릭 시 단독으로 변경 화면에 진입합니다</div>
+      </div>
+      <button onclick="closePickModal()" style="background:none;border:none;font-size:20px;color:#9CA3AF;cursor:pointer;line-height:1;padding:2px;margin-top:2px">✕</button>
+    </div>
+    <!-- 선택 칩 바 -->
+    <div id="emp-pick-chips" style="padding:10px 24px;border-bottom:1px solid #F3F4F6;min-height:48px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;flex-shrink:0">
+      <span id="emp-pick-chips-ph" style="font-size:12px;color:#C4C9D4">선택된 구성원 없음</span>
+    </div>
+    <!-- 본문: 조직트리 + 목록 -->
+    <div style="flex:1;display:flex;overflow:hidden;min-height:360px">
+      <!-- 조직 트리 -->
+      <div style="width:200px;flex-shrink:0;border-right:1px solid #F3F4F6;overflow-y:auto;background:#FAFAFA" id="emp-pick-orgtree"></div>
+      <!-- 구성원 목록 -->
+      <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+        <div style="padding:10px 16px;border-bottom:1px solid #F3F4F6;flex-shrink:0">
+          <div class="search-box">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="5.5" cy="5.5" r="4" stroke="#C4C9D4" stroke-width="1.2"/><path d="M9 9l2.5 2.5" stroke="#C4C9D4" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <input id="emp-pick-search" type="text" placeholder="이름·직책으로 검색" oninput="renderEmpPickList()" style="border:none;outline:none;font-size:12px;background:transparent;width:100%">
+          </div>
+        </div>
+        <div id="emp-pick-list" style="flex:1;overflow-y:auto"></div>
+      </div>
+    </div>
+    <!-- 모달 푸터 -->
+    <div style="padding:14px 24px;border-top:1px solid #F3F4F6;display:flex;align-items:center;justify-content:space-between;background:#FAFAFA;flex-shrink:0">
+      <span id="emp-pick-count" style="font-size:12px;color:#9CA3AF;font-weight:500">0명 선택됨</span>
+      <div style="display:flex;gap:8px">
+        <button onclick="closePickModal()" style="padding:8px 18px;border:1px solid #E5E7EB;border-radius:8px;background:#fff;font-size:13px;font-weight:600;color:#374151;cursor:pointer">취소</button>
+        <button onclick="confirmPickModal()" style="padding:8px 20px;border:none;border-radius:8px;background:#1D9E75;font-size:13px;font-weight:600;color:#fff;cursor:pointer">선택 완료</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     권한 설정 페이지 — 단일 화면 (좌: 구성원 | 우: 권한 설정)
+     ══════════════════════════════════════ -->
+<div id="member-add-page" style="display:none;position:fixed;inset:0;background:#F4F5F7;z-index:400;flex-direction:column;overflow:hidden">
+
+  <!-- 헤더 -->
+  <div style="background:#fff;border-bottom:1px solid #E5E7EB;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button onclick="closeMemberAddPage()" style="display:flex;align-items:center;gap:5px;padding:6px 12px;border:1px solid #E5E7EB;border-radius:8px;background:#fff;font-size:13px;font-weight:600;color:#374151;cursor:pointer">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8 2L3 6.5 8 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        뒤로
+      </button>
+      <div style="width:1px;height:18px;background:#E5E7EB"></div>
+      <div>
+        <div style="font-size:15px;font-weight:800;color:#111827;letter-spacing:-0.3px">권한 설정</div>
+        <div style="font-size:11px;color:#9CA3AF;margin-top:1px">구성원을 선택하고 권한을 설정하세요</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button onclick="closeMemberAddPage()" style="padding:7px 16px;border:1px solid #E5E7EB;border-radius:8px;background:#fff;font-size:13px;font-weight:600;color:#374151;cursor:pointer">취소</button>
+      <button id="perm-save-btn" onclick="saveNewPerm()" disabled style="padding:7px 18px;border:none;border-radius:8px;background:#D1D5DB;font-size:13px;font-weight:600;color:#fff;cursor:not-allowed;transition:all .15s">저장</button>
+    </div>
+  </div>
+
+  <!-- 브레드크럼 -->
+  <div style="padding:8px 24px;background:#fff;border-bottom:1px solid #E5E7EB;font-size:12px;color:#9CA3AF;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+    <div style="display:flex;align-items:center;gap:5px">
+      <span style="color:#6B7280;cursor:pointer" onclick="closeMemberAddPage()">권한 관리</span>
+      <span style="color:#D1D5DB;font-size:10px">›</span>
+      <span style="color:#374151;font-weight:500">권한 설정</span>
+    </div>
+    <span style="font-size:11px;color:#C4C9D4">조회 가능 = 데이터 권한 ON + 기능 조회 ON · 저장 버튼을 눌러야 반영됩니다</span>
+  </div>
+
+  <!-- 본문: 좌측 구성원 목록 + 우측 권한 설정 -->
+  <div style="flex:1;display:flex;overflow:hidden">
+
+    <!-- ── 좌측: 구성원 목록 ── -->
+    <div style="width:260px;flex-shrink:0;background:#fff;border-right:1px solid #E5E7EB;display:flex;flex-direction:column;overflow:hidden;position:relative">
+      <!-- 헤더 -->
+      <div style="padding:12px 14px;border-bottom:1px solid #F3F4F6;flex-shrink:0">
+        <!-- + 구성원 권한 설정 버튼 -->
+        <button id="pick-add-btn" onclick="openPickPopup()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 12px;border:1.5px dashed #A7F3D0;border-radius:8px;background:#F0FBF7;font-size:12px;font-weight:700;color:#1D9E75;cursor:pointer;transition:all .12s" onmouseover="if(!this.disabled)this.style.background='#D1FAE5'" onmouseout="if(!this.disabled)this.style.background='#F0FBF7'">
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 1v9M1 5.5h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          구성원 권한 설정
+        </button>
+      </div>
+      <!-- 추가된 구성원 목록 (권한 설정 대기/완료) -->
+      <div id="pick-list" style="flex:1;overflow-y:auto"></div>
+    </div>
+
+    <!-- ── 우측: 권한 설정 ── -->
+    <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+
+      <!-- 미선택 empty -->
+      <div id="new-perm-empty" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
+        <div style="width:52px;height:52px;border-radius:14px;background:#F3F4F6;display:flex;align-items:center;justify-content:center;font-size:22px">👤</div>
+        <div style="font-size:14px;font-weight:600;color:#9CA3AF">구성원을 선택해 주세요</div>
+        <div style="font-size:12px;color:#C4C9D4">왼쪽에서 권한을 설정할 구성원을 클릭하세요</div>
+      </div>
+
+      <!-- 선택 후 권한 설정 -->
+      <div id="new-perm-body" style="display:none;flex:1;flex-direction:column;overflow:hidden">
+
+        <!-- 선택된 구성원 인포 바 -->
+        <div id="new-perm-info" style="background:#fff;border-bottom:1px solid #E5E7EB;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0"></div>
+
+        <!-- 메인 탭: 기능 권한 / 데이터 권한 -->
+        <div id="new-perm-tabs" style="display:flex;padding:0 24px;background:#fff;border-bottom:1px solid #E5E7EB;flex-shrink:0">
+          <div id="nptab-func" onclick="switchPermTab('func')" style="padding:11px 18px;font-size:13px;font-weight:700;cursor:pointer;border-bottom:2px solid #1D9E75;color:#111827">⚙️ 기능 권한</div>
+          <div id="nptab-data" onclick="switchPermTab('data')" style="padding:11px 18px;font-size:13px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;color:#9CA3AF">📋 데이터 권한</div>
+        </div>
+
+        <!-- 탭 컨텐츠 -->
+        <div id="perm-toggle-body" style="flex:1;overflow:hidden;display:flex;flex-direction:column"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- perm-step-page 제거됨 (단일 페이지로 통합) -->
+<div id="perm-step-page" style="display:none"></div>
+
+<div id="toast"></div>
+
+<script>
+/* ───────── DATA ───────── */
+var orgTree=[
+  {name:'텔레픽스',level:0,parent:null},
+  {name:'미래혁신기술연구소',level:1,parent:'텔레픽스'},
+  {name:'위성시스템부문',level:1,parent:'텔레픽스'},
+  {name:'미션시스템부',level:2,parent:'위성시스템부문'},
+  {name:'위성SW팀',level:3,parent:'미션시스템부'},
+  {name:'데이터사이언스 부문',level:1,parent:'텔레픽스'},
+  {name:'AI연구부',level:2,parent:'데이터사이언스 부문'},
+  {name:'DS사업부',level:2,parent:'데이터사이언스 부문'},
+  {name:'데이터팀',level:3,parent:'DS사업부'},
+  {name:'효율경영 부문',level:1,parent:'텔레픽스'},
+  {name:'피플앤컬처팀',level:2,parent:'효율경영 부문'},
+];
+var emps=[
+  {id:1,name:'박대표',pos:'대표이사',org:'텔레픽스',role:'CEO',av:'av-g',ini:'박',hrRole:'super',leader:true},
+  {id:2,name:'김이사',pos:'상무',org:'위성시스템부문',role:'CTO',av:'av-p',ini:'김',hrRole:null,leader:false},
+  {id:3,name:'박HR총괄',pos:'상무',org:'피플앤컬처팀',role:'COO',av:'av-g',ini:'박',hrRole:'super',leader:false},
+  {id:4,name:'이한나',pos:'주임연구원',org:'피플앤컬처팀',role:'Team member',av:'av-b',ini:'이',hrRole:'manager',leader:false},
+  {id:5,name:'홍팀장',pos:'선임연구원',org:'위성SW팀',role:'Team member',av:'av-a',ini:'홍',hrRole:null,leader:true},
+  {id:6,name:'김개발',pos:'선임연구원',org:'위성SW팀',role:'Team member',av:'av-p',ini:'김',hrRole:null,leader:false},
+  {id:7,name:'이기획',pos:'책임연구원',org:'DS사업부',role:'Team member',av:'av-gr',ini:'이',hrRole:null,leader:false},
+  {id:8,name:'정연구',pos:'연구원',org:'AI연구부',role:'Team member',av:'av-b',ini:'정',hrRole:null,leader:false},
+  {id:9,name:'최데이터',pos:'선임연구원',org:'AI연구부',role:'Team member',av:'av-a',ini:'최',hrRole:null,leader:false},
+  {id:10,name:'강팀장',pos:'주임연구원',org:'데이터팀',role:'Team Leader',av:'av-p',ini:'강',hrRole:null,leader:true},
+  {id:11,name:'김부문장',pos:'상무',org:'위성시스템부문',role:'부문장',av:'av-b',ini:'김',hrRole:null,leader:true},
+  {id:12,name:'이부문장',pos:'상무',org:'데이터사이언스 부문',role:'부문장',av:'av-gr',ini:'이',hrRole:null,leader:true},
+  {id:13,name:'오승진',pos:'책임연구원',org:'DS사업부',role:'Team member',av:'av-p',ini:'오',hrRole:null,leader:false},
+];
+var tabDefs=[
+  {id:'basic',label:'기본 정보',fields:[
+    {key:'n_basic',label:'기본 정보',sub:'법적 성별·생년월일·만나이',s:false,always:'이름·영문이름·프로필 사진·생일'},
+    {key:'n_nation',label:'국적·거주 정보',sub:'국적·국적코드·거주국가·체류자격',s:false},
+    {key:'s_id',label:'신원 정보',sub:'주민등록번호(외국인등록번호)·장애인·국가유공자·장애정도',s:true},
+    {key:'n_contact',label:'연락처 정보',sub:'개인 이메일',s:true,always:'회사 이메일·휴대전화국가코드·휴대전화번호'},
+    {key:'s_addr',label:'주소 정보',sub:'주소·우편번호',s:true},
+    {key:'n_family',label:'가족 정보',sub:'이름·관계·생년월일·휴대전화번호·주민등록번호·소득공제 관계·기본공제대상 여부·장애인·국가유공자·건강보험 피부양자 여부',s:false},
+  ]},
+  {id:'hr',label:'인사 정보',fields:[
+    {key:'n_join',label:'입사·재직 정보',sub:'사번·입사일·최초 입사일·채용채널·재직기간·총 경력기간',s:false},
+    {key:'n_pos',label:'직무·직위 정보',sub:'엔지니어링 레벨·마지막 직위 발령일·현 직위 체류기간',s:false,always:'직군·직무·직위·주직무 여부'},
+    {key:'n_worksite',label:'근무지 정보',sub:'근무지역·사이트',s:false},
+    {key:'n_status',label:'재직상태',sub:'고용보험 상실사유·퇴사일·개인정보 보존기한',s:false,always:'재직상태'},
+    {key:'n_leave',label:'휴직 정보',sub:'휴직 종류·근속기간 포함 여부·휴직시작일·휴직종료일·휴직기간·급여지급률·비고',s:false},
+    {key:'n_award',label:'수상 정보',sub:'수상명·수상 일자·수여기관·메모',s:false},
+    {key:'s_disc',label:'징계 정보',sub:'징계 종류·징계 일자·메모',s:true},
+    {key:'n_career',label:'경력 정보',sub:'회사명·고용형태·입사 연월·퇴사 연월·직무·조직·직위·직책·연봉',s:false},
+    {key:'n_edu',label:'학력 정보',sub:'최종학력 여부·학교 구분·학교명·졸업구분·전공·입학 연월·졸업 연월',s:false},
+    {key:'s_eval',label:'인사평가',sub:'평가 연월·평가 등급·주요 내용',s:true},
+    {key:'s_note',label:'특이사항',sub:'등록일자·내용',s:true},
+  ]},
+  {id:'contract',label:'계약 정보',fields:[
+    {key:'n_contract',label:'근로계약 정보',sub:'고용형태·근무유형·수습여부·수습 시작일·수습 종료일·수습기간 급여율·근로계약 시작일·근로계약 종료일·변경 메모',s:false},
+    {key:'n_wage',label:'임금계약 정보',sub:'소득구분·임금계약 시작일·종료일·지급 구분·계약연봉·지급일·포괄임금 계약 여부·기준·유형·기타 계약 내용·변경 메모',s:false},
+    {key:'s_salary',label:'급여 정보',sub:'통상 시급·적용일·통화·기본급(월/시급제)·고정초과근무수당·연구보조비·식비·차량유지비·자녀보육비·성과연봉·직책수당(월)',s:true},
+    {key:'s_account',label:'급여 계좌',sub:'은행/증권사·계좌번호·SWIFT Code·예금주 이름',s:true},
+    {key:'n_shortwork',label:'단축근무 정보',sub:'단축근무 시작일·종료일',s:false},
+    {key:'n_flattax',label:'단일세율 정보',sub:'단일세율 시작일·종료일',s:true},
+    {key:'s_loan',label:'학자금 대출 상환',sub:'상환 시작·종료 연월·연간 의무상환액·매월 원천공제액',s:true},
+    {key:'n_taxreduce',label:'소득세 감면',sub:'감면 유형',s:true},
+    {key:'s_incentive',label:'인센티브',sub:'인센티브 유형·약정 시작·종료일·성과 조건·지급 금액·메모',s:true},
+  ]},
+  {id:'comp',label:'역량·경험',fields:[
+    {key:'n_lang',label:'언어 정보',sub:'언어·레벨',s:false},
+    {key:'n_cert',label:'자격증 정보',sub:'자격증명·등급(점수)·취득일·발급기관·유효기간·발급번호',s:false},
+    {key:'n_proj',label:'프로젝트·기술',sub:'제목·내용·기간·프로젝트·기술',s:false},
+    {key:'n_edu2',label:'교육 정보',sub:'교육 이름·교육 일자·유형·교육기관·교육구분·총 교육시간',s:false},
+    {key:'s_research',label:'연구·국방 정보',sub:'국가연구자번호·국방과학기술인번호',s:true},
+  ]},
+  {id:'docs',label:'문서·증명서',fields:[
+    {key:'n_mydoc',label:'내 문서',sub:'기본 제공 16종 + 커스텀 추가 항목',s:false},
+    {key:'n_famdoc',label:'가족 문서',sub:'기본 제공 4종 + 커스텀 추가 항목',s:false},
+  ]},
+  {id:'func',label:'기능 권한',rows:[
+    {key:'f_emp',lbl:'구성원관리',acts:['view','regedit']},
+    {key:'f_stat',lbl:'인사현황표',acts:['view']},
+    {key:'f_excel',lbl:'인사현황표',acts:['view']},
+    {key:'f_base',lbl:'기준정보관리',acts:['view','regdeact']},
+  ]},
+];
+
+function cp(o){return JSON.parse(JSON.stringify(o));}
+
+/* ── 권한 변경 diff 계산 (변경 내역 모달에서 사용) ── */
+var FUNC_DIFF_DEFS=[
+  {menu:'구성원관리',acts:[['f_emp','view','조회'],['f_emp','regedit','등록·수정']]},
+  {menu:'인사현황표',acts:[['f_stat','view','조회'],['f_excel','view','다운로드']]},
+  {menu:'기준정보관리',acts:[['f_base','view','조회'],['f_base','regdeact','등록·비활성화']]},
+];
+function diffPerm(oldP,newP){
+  var dataAdded=[],dataRemoved=[];
+  tabDefs.filter(function(t){return !!t.fields;}).forEach(function(tab){
+    tab.fields.forEach(function(f){
+      var was=oldP?!!(f.s?oldP.sens[f.key]:oldP.norm[f.key]):false;
+      var now=!!(f.s?newP.sens[f.key]:newP.norm[f.key]);
+      if(!was&&now)dataAdded.push(f.label);
+      if(was&&!now)dataRemoved.push(f.label);
+    });
+  });
+  var funcAllowed=[],funcRevoked=[];
+  FUNC_DIFF_DEFS.forEach(function(fd){
+    fd.acts.forEach(function(triple){
+      var fkey=triple[0],akey=triple[1],alabel=triple[2];
+      var was=(oldP&&oldP.func[fkey])?!!oldP.func[fkey][akey]:false;
+      var now=newP.func[fkey]?!!newP.func[fkey][akey]:false;
+      if(!was&&now)funcAllowed.push(fd.menu+' · '+alabel);
+      if(was&&!now)funcRevoked.push(fd.menu+' · '+alabel);
+    });
+  });
+  return{dataAdded:dataAdded,dataRemoved:dataRemoved,funcAllowed:funcAllowed,funcRevoked:funcRevoked};
+}
+
+var empPerm={};
+var permHistory={}; /* 구성원을 제거해도 절대 삭제되지 않는 감사로그 저장소 (empPerm과 분리) */
+/* 직책 변경으로 권한이 자동 제거된 구성원 — empPerm에는 없지만 화면에는 계속 노출되어야 함
+   {id: {prevPos, prevOrg, at}} */
+var titleChangeRemoved={};
+function logHistory(id,desc,diff){
+  if(!permHistory[id]) permHistory[id]=[];
+  permHistory[id].push({at:nowStr(),by:'박HR총괄',desc:desc,diff:diff});
+}
+
+/* 현재 pickSel에 담긴 구성원 중, 기준값(신규=기본값 전체 OFF / 기존=저장된 empPerm) 대비
+   실제로 하나라도 바뀐 사람이 있는지 여부 — 저장 버튼 활성화 조건으로 사용 */
+function hasAnyPermChange(){
+  return Array.from(pickSel).some(function(id){
+    var draft=newPermDraftMap[id];
+    if(!draft) return false;
+    var baseline=empPerm[id]||null;
+    var diff=diffPerm(baseline,draft);
+    return (diff.dataAdded.length+diff.dataRemoved.length+diff.funcAllowed.length+diff.funcRevoked.length)>0;
+  });
+}
+function updateSaveBtnState(){
+  var btn=document.getElementById('perm-save-btn');
+  if(!btn) return;
+  var enabled=hasAnyPermChange();
+  btn.disabled=!enabled;
+  btn.style.background=enabled?'#1D9E75':'#D1D5DB';
+  btn.style.cursor=enabled?'pointer':'not-allowed';
+}
+(function(){
+  function mkP(id,nk,sk,scope,fov){
+    var norm={},sens={};
+    nk.forEach(function(k){norm[k]=true;});
+    sk.forEach(function(k){sens[k]=true;});
+    var func={f_emp:{view:false,regedit:false},f_stat:{view:false},f_excel:{view:false},f_base:{view:false,regdeact:false}};
+    if(fov)Object.keys(fov).forEach(function(k){func[k]=Object.assign({},func[k]||{},fov[k]);});
+    var obj={norm:norm,sens:sens,scope:scope||'sub',func:func,at:'14:32'};
+    permHistory[id]=[{at:'2026.06.20 14:32',by:'박HR총괄',desc:'권한 최초 설정',diff:diffPerm(null,obj)}];
+    return obj;
+  }
+  empPerm[2]=mkP(2,['n_basic','n_nation','n_join','n_pos','n_worksite','n_status','n_career','n_edu','n_contract','n_lang','n_cert','n_proj','n_edu2'],['n_contact','s_eval'],'all',{f_emp:{view:true},f_stat:{view:true},f_excel:{view:true}});
+  empPerm[5]=mkP(5,['n_basic','n_pos','n_worksite','n_status','n_leave','n_award','n_career','n_edu','n_contract','n_lang','n_cert','n_proj','n_edu2'],['n_contact'],'sub',{f_emp:{view:true},f_stat:{view:true}});
+  empPerm[10]=mkP(10,['n_basic','n_pos','n_status','n_award','n_career','n_lang','n_cert','n_edu2'],['n_contact'],'sub',{f_emp:{view:true}});
+  empPerm[11]=mkP(11,['n_basic','n_nation','n_join','n_pos','n_worksite','n_status','n_leave','n_award','n_career','n_edu','n_contract','n_lang','n_cert','n_proj','n_edu2'],['n_contact','s_disc','s_eval'],'sub',{f_emp:{view:true},f_stat:{view:true},f_excel:{view:true}});
+  empPerm[12]=mkP(12,['n_basic','n_pos','n_status','n_career','n_edu','n_contract','n_lang','n_cert','n_proj'],['n_contact','s_eval'],'sub',{f_emp:{view:true},f_stat:{view:true}});
+  empPerm[7]=mkP(7,['n_basic','n_pos'],['n_contact'],'sub');
+  empPerm[9]=mkP(9,['n_basic','n_pos','n_lang','n_cert'],['n_contact'],'sub');
+
+  /* ── 오승진(id 13): 위성SW팀 선임연구원(Team Leader) → DS사업부 책임연구원(Team member)으로 직책 변경, 정책에 따라 기존 권한 전량 자동 제거 ── */
+  var oldP13=mkP(13,['n_basic','n_pos','n_status','n_career','n_lang','n_cert','n_edu2'],['n_contact'],'sub',{f_emp:{view:true}});
+  var diff13=diffPerm(oldP13,mkDefaultPerm());
+  logHistory(13,'직책 변경으로 권한 자동 제거',diff13);
+  delete empPerm[13];
+  titleChangeRemoved[13]={prevPos:'선임연구원',prevOrg:'위성SW팀',prevRole:'Team Leader',at:'2026.07.02 09:15'};
+})();
+
+/* 플렉스 표기 방식: 조직 · 직책 | 직위 */
+function fmtOrgRole(e){ return e.org+' · '+e.role+' | '+e.pos; }
+
+/* ───────── STATE ───────── */
+var curEmpId=null, curDetailTab='data';
+var curFilter='all'; // 'all' | 'sens' | 'nosens' | 'none'
+var curDetailTab='data';
+
+/* ───────── HELPERS ───────── */
+function getPerm(id){return empPerm[id]||null;}
+function getSum(id){
+  var p=getPerm(id); if(!p)return{norm:0,sens:0,func:0,scope:'sub'};
+  var n=0,s=0,f=0;
+  tabDefs.forEach(function(t){
+    if(t.fields)t.fields.forEach(function(fd){if(fd.s){if(p.sens&&p.sens[fd.key])s++;}else{if(p.norm&&p.norm[fd.key])n++;}});
+  });
+  var fr=tabDefs.find(function(t){return t.id==='func';});
+  if(fr)fr.rows.forEach(function(r){
+    if(r.key==='f_excel')return; /* f_stat에 합쳐서 카운트 */
+    if(r.key==='f_stat'){
+      var statOn=!!(p.func&&p.func.f_stat&&p.func.f_stat.view);
+      var excelOn=!!(p.func&&p.func.f_excel&&p.func.f_excel.view);
+      if(statOn||excelOn)f++;
+    } else {
+      if(p.func&&p.func[r.key]&&p.func[r.key].view)f++;
+    }
+  });
+  return{norm:n,sens:s,func:f,scope:typeof p.scope==='string'?p.scope:'sub'};
+}
+/* 직책 변경으로 권한이 자동 제거된 구성원 — 새 권한이 아직 설정되지 않았다면 '재설정 필요' 상태로 표시 */
+function needsReset(id){ return !!titleChangeRemoved[id]&&!empPerm[id]; }
+function getAssigned(){
+  var ids=Object.keys(empPerm).map(Number);
+  var titleChangedIds=Object.keys(titleChangeRemoved).map(Number);
+  var allIds=ids.concat(titleChangedIds);
+  return emps.filter(function(e){return allIds.indexOf(e.id)>-1&&!e.hrRole;});
+}
+function scopeLabel(s){return s==='all'?'전체 구성원':'소속 및 하위 조직';}
+
+/* ───────── SUMMARY BAR (deprecated — 좌측 헤더로 이동) ───────── */
+function renderSummary(){
+  /* 상단 카드 제거됨 — 좌측 헤더의 필터 칩으로 대체 */
+}
+
+/* ───────── FILTER & LEFT LIST ───────── */
+function isUnset(id){ var s=getSum(id); return s.norm===0&&s.sens===0&&s.func===0; }
+function setFilter(f){
+  curFilter=f; curEmpId=null;
+  renderLeftList();
+  showEmptyRight();
+}
+
+
+function getFiltered(){
+  var q='';
+  var assigned=getAssigned().filter(function(e){return !needsReset(e.id);});
+  var list=assigned.filter(function(e){
+    if(q&&e.name.toLowerCase().indexOf(q)<0&&e.org.toLowerCase().indexOf(q)<0)return false;
+    if(curFilter==='all')return true;
+    var s=getSum(e.id);
+    if(curFilter==='data')return(s.norm+s.sens)>0;
+    if(curFilter==='func')return s.func>0;
+    return true;
+  });
+  /* 권한이 미설정(전부 0)인 구성원을 맨 위로 */
+  list.sort(function(a,b){
+    var ua=isUnset(a.id)?0:1, ub=isUnset(b.id)?0:1;
+    return ua-ub;
+  });
+  return list;
+}
+
+var resetPopupOpen=false;
+function renderLeftList(){
+  var el=document.getElementById('left-list');
+  var list=getFiltered();
+  var needing=getAssigned().filter(function(e){return needsReset(e.id);});
+
+  /* 각 필터별 카운트 계산 (재설정 필요 구성원은 별도 섹션에 고정 표시되므로 카운트에서는 제외) */
+  var assigned=getAssigned().filter(function(e){return !needsReset(e.id);});
+  var cAll=assigned.length;
+  var cData=assigned.filter(function(e){var s=getSum(e.id);return(s.norm+s.sens)>0;}).length;
+  var cFunc=assigned.filter(function(e){var s=getSum(e.id);return s.func>0;}).length;
+
+  /* 헤더: 필터 칩만 (구성원 라벨은 정보가치 없어 제거) */
+  var html=
+    '<div class="left-list-header">'+
+      '<div class="left-list-filters" style="margin:0">'+
+        '<span class="filter-pill'+(curFilter==='all'?' on':'')+'" onclick="setFilter(\'all\')">전체<span class="filter-pill-count">'+cAll+'</span></span>'+
+        '<span class="filter-pill'+(curFilter==='data'?' on':'')+'" onclick="setFilter(\'data\')">데이터<span class="filter-pill-count">'+cData+'</span></span>'+
+        '<span class="filter-pill'+(curFilter==='func'?' on':'')+'" onclick="setFilter(\'func\')">기능<span class="filter-pill-count">'+cFunc+'</span></span>'+
+      '</div>'+
+    '</div>';
+
+  /* 재설정 필요 구성원 — 필터와 무관하게 항상 목록 최상단에 고정 노출 */
+  if(needing.length){
+    html+='<div class="reset-section">'+
+      '<div class="reset-section-title">⚠️ 재설정 필요 <span class="reset-section-count">'+needing.length+'</span></div>'+
+      needing.map(function(e){
+        var isOn=curEmpId===e.id;
+        return '<div class="emp-row reset-row'+(isOn?' active':'')+'" onclick="selectEmp('+e.id+')">'+
+          '<div class="emp-av '+e.av+'">'+e.ini+'</div>'+
+          '<div class="emp-meta">'+
+            '<div class="emp-name">'+e.name+'</div>'+
+            '<div class="emp-sub">'+fmtOrgRole(e)+'</div>'+
+            '<div class="emp-badges"><span class="ebadge eb-unset">● 미설정</span></div>'+
+          '</div>'+
+        '</div>';
+      }).join('')+
+    '</div>';
+  }
+
+  if(list.length===0){
+    html+='<div style="padding:40px 20px;text-align:center;color:#C4C9D4;font-size:12px;line-height:1.7">'+
+      (getAssigned().length===0?'권한이 설정된 구성원이 없습니다.<br><span style="color:#1D9E75;cursor:pointer;font-weight:600" onclick="goToMemberAddPage()">+ 권한 설정</span>':'검색 결과가 없습니다.')+
+    '</div>';
+  } else {
+    list.forEach(function(e){
+      var s=getSum(e.id);
+      var isOn=curEmpId===e.id;
+      var unset=isUnset(e.id);
+      var chips='';
+      if(s.norm>0||s.sens>0||s.func>0){
+        if((s.norm+s.sens)>0)chips+='<span class="ebadge eb-n">데이터 '+(s.norm+s.sens)+'</span>';
+        if(s.func>0)chips+='<span class="ebadge eb-f">기능 '+s.func+'</span>';
+      } else {
+        chips='<span class="ebadge eb-unset">● 미설정</span>';
+      }
+      html+='<div class="emp-row'+(isOn?' active':'')+'" onclick="selectEmp('+e.id+')">'+
+        '<div class="emp-av '+e.av+'">'+e.ini+'</div>'+
+        '<div class="emp-meta">'+
+          '<div class="emp-name">'+e.name+'</div>'+
+          '<div class="emp-sub">'+fmtOrgRole(e)+(e.leader?' <span style="display:inline-block;font-size:9px;font-weight:700;color:#065F46;background:#F0FBF7;border:1px solid #A7F3D0;border-radius:8px;padding:0 5px;margin-left:2px;vertical-align:middle">조직장</span>':'')+'</div>'+
+          '<div class="emp-badges">'+chips+'</div>'+
+        '</div>'+
+      '</div>';
+    });
+  }
+  el.innerHTML=html;
+}
+
+/* ───────── RIGHT PANEL ───────── */
+var curMainTab = 'func';   // 'func' | 'data'
+var curDataSubTab = 'basic'; // 'basic'|'hr'|'contract'|'comp'|'docs'
+
+function showEmptyRight(){
+  var totalEmpty=getAssigned().length===0;
+  document.getElementById('right-panel').innerHTML= totalEmpty?
+    '<div class="empty-panel">'+
+      '<div class="empty-icon">👤</div>'+
+      '<div style="font-size:14px;font-weight:600;color:#9CA3AF">아직 권한이 설정된 구성원이 없습니다</div>'+
+      '<div style="font-size:12px;color:#C4C9D4;margin-top:2px;margin-bottom:14px">구성원을 추가하고 권한을 설정해 보세요</div>'+
+      '<button class="add-btn" onclick="goToMemberAddPage()">'+
+        '<svg width="12" height="12" viewBox="0 0 11 11" fill="none"><path d="M5.5 1v9M1 5.5h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'+
+        '구성원 권한 설정'+
+      '</button>'+
+    '</div>'
+    :
+    '<div class="empty-panel">'+
+      '<div class="empty-icon">👤</div>'+
+      '<div style="font-size:14px;font-weight:600;color:#9CA3AF">구성원을 선택해 주세요</div>'+
+      '<div style="font-size:12px;color:#C4C9D4;margin-top:2px">왼쪽 목록에서 권한을 확인할 구성원을 클릭하세요</div>'+
+    '</div>';
+}
+
+function selectEmp(id){
+  curEmpId=id; curMainTab='func'; curDataSubTab='basic';
+  renderLeftList();
+  renderRight();
+}
+
+function renderRight(){
+  var e=emps.find(function(x){return x.id===curEmpId;}); if(!e) return;
+  var p=getPerm(e.id);
+  var s=getSum(e.id);
+  var reset=needsReset(e.id);
+  var right=document.getElementById('right-panel');
+
+  var badgesHtml=reset?
+    ''
+    :
+    '<span class="ebadge eb-n" style="font-size:11px;padding:3px 9px;border-radius:14px">데이터 '+(s.norm+s.sens)+'</span>'+
+    '<span class="ebadge eb-f" style="font-size:11px;padding:3px 9px;border-radius:14px">기능 '+s.func+'</span>';
+
+  var actionsHtml=reset?
+    ''
+    :
+    '<div class="dh-actions">'+
+      '<button class="btn-ghost" onclick="editEmpPerm('+e.id+')">권한 변경</button>'+
+      '<button class="btn-ghost" style="font-size:11px;color:#9CA3AF" onclick="removeEmp('+e.id+')">제거</button>'+
+    '</div>';
+
+  var resetBanner='';
+  if(reset){
+    var info=titleChangeRemoved[e.id];
+    var bannerMsg=(info.reason==='hrSuper')?
+      ('<b>HR 최고관리자 해제로 기존 권한이 모두 자동 제거됐습니다.</b><br>'+
+        'HR 최고관리자 해제됨 ('+info.at+')')
+      :
+      ('<b>직책 변경으로 기존 권한이 모두 자동 제거됐습니다.</b><br>'+
+        info.prevOrg+' · '+info.prevRole+' | '+info.prevPos+' → '+e.org+' · '+e.role+' | '+e.pos+' ('+info.at+' 변경)');
+    resetBanner='<div style="padding:16px 24px;border-bottom:1px solid #E5E7EB">'+
+      '<div style="padding:14px 18px;background:#FFF7ED;border:1px solid #FDBA74;border-radius:12px;display:flex;align-items:flex-start;gap:10px">'+
+        '<span style="font-size:15px;line-height:1.4">⚠️</span>'+
+        '<div style="flex:1;font-size:12px;color:#9A3412;line-height:1.6">'+bannerMsg+'</div>'+
+      '</div>'+
+    '</div>';
+  }
+
+  right.innerHTML=
+    '<div style="background:#fff">'+
+    /* ── 상단 인물 헤더 ── */
+    '<div class="detail-head" style="'+(reset?'border-bottom:none':'')+'">'+
+      '<div class="dh-top">'+
+        '<div class="dh-person">'+
+          '<div class="dh-av '+e.av+'">'+e.ini+'</div>'+
+          '<div>'+
+            '<div class="dh-name">'+e.name+'</div>'+
+            '<div class="dh-sub">'+fmtOrgRole(e)+(e.leader?' <span style="display:inline-flex;align-items:center;font-size:10px;font-weight:700;color:#065F46;background:#F0FBF7;border:1px solid #A7F3D0;border-radius:10px;padding:1px 8px;margin-left:3px;vertical-align:middle">조직장</span>':'')+'</div>'+
+            (badgesHtml?'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center">'+badgesHtml+'</div>':'')+
+          '</div>'+
+        '</div>'+
+        actionsHtml+
+      '</div>'+
+    '</div>'+
+    resetBanner+
+    /* ── 메인 탭: 기능 권한 / 데이터 권한 ── */
+    '<div style="display:flex;padding:0 24px;background:#fff;border-bottom:1px solid #E5E7EB;gap:0;flex-shrink:0">'+
+      '<div id="mtab-func" onclick="switchMainTab(\'func\')" style="padding:11px 18px;font-size:13px;font-weight:700;cursor:pointer;border-bottom:2px solid '+(curMainTab==='func'?'#1D9E75':'transparent')+';color:'+(curMainTab==='func'?'#111827':'#9CA3AF')+';white-space:nowrap;transition:all .12s">⚙️ 기능 권한</div>'+
+      '<div id="mtab-data" onclick="switchMainTab(\'data\')" style="padding:11px 18px;font-size:13px;font-weight:700;cursor:pointer;border-bottom:2px solid '+(curMainTab==='data'?'#1D9E75':'transparent')+';color:'+(curMainTab==='data'?'#111827':'#9CA3AF')+';white-space:nowrap;transition:all .12s">📋 데이터 권한</div>'+
+    '</div>'+
+    '</div>'+
+    /* ── 탭 컨텐츠 ── */
+    '<div id="detail-body" style="flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:12px"></div>';
+
+  renderDetailBody();
+}
+
+function switchMainTab(tab){
+  curMainTab=tab;
+  /* 탭 스타일 갱신 */
+  ['func','data'].forEach(function(t){
+    var el=document.getElementById('mtab-'+t);
+    if(!el) return;
+    el.style.borderBottom='2px solid '+(curMainTab===t?'#1D9E75':'transparent');
+    el.style.color=curMainTab===t?'#111827':'#9CA3AF';
+  });
+  renderDetailBody();
+}
+
+function switchDataSubTab(sub){
+  curDataSubTab=sub;
+  renderDetailBody();
+}
+
+function switchDetailTab(tab){ switchMainTab(tab); }
+
+function permEmptyStateHtml(kind, empId){
+  return '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:56px 20px;text-align:center;background:#fff;border:1px solid #E5E7EB;border-radius:12px">'+
+    '<div style="font-size:26px;margin-bottom:4px">🗂️</div>'+
+    '<div style="font-size:13.5px;font-weight:700;color:#374151">현재 부여된 '+kind+' 권한이 없습니다</div>'+
+    '<div style="font-size:12px;color:#9CA3AF;margin-bottom:10px">[권한 재설정]으로 새 역할에 맞는 권한을 설정해 주세요</div>'+
+    '<div style="display:flex;gap:8px">'+
+      '<button class="btn-primary" style="background:#C2410C" onclick="editEmpPerm('+empId+')">권한 재설정</button>'+
+      '<button class="btn-ghost" style="font-size:12px;color:#9CA3AF" onclick="removeEmp('+empId+')">재설정 없이 삭제</button>'+
+    '</div>'+
+  '</div>';
+}
+
+function renderDetailBody(){
+  var e=emps.find(function(x){return x.id===curEmpId;}); if(!e) return;
+  var p=getPerm(e.id);
+  var s=getSum(e.id);
+  var isReset=needsReset(e.id);
+  var body=document.getElementById('detail-body'); if(!body) return;
+  body.innerHTML='';
+  body.style.padding='20px 24px';
+
+  if(curMainTab==='func'){
+    /* ══ 기능 권한 탭 ══ */
+    if(isReset){ body.innerHTML=permEmptyStateHtml('기능', e.id); return; }
+    var fr=tabDefs.find(function(x){return x.id==='func';});
+    if(!fr){body.innerHTML='<div style="color:#C4C9D4;font-size:13px">기능 권한 데이터 없음</div>';return;}
+    var actLabels={view:'조회',regedit:'등록·수정',regdeact:'등록·비활성화'};
+    var mergedRows=[];
+    fr.rows.forEach(function(r){
+      if(r.key==='f_excel') return;
+      if(r.key==='f_stat'){
+        mergedRows.push({lbl:'인사현황표',actions:[{label:'조회',key:'f_stat',act:'view'},{label:'다운로드',key:'f_excel',act:'view'}]});
+      } else {
+        mergedRows.push({lbl:r.lbl,actions:r.acts.map(function(a){return{label:actLabels[a],key:r.key,act:a};})});
+      }
+    });
+    var html='<div style="background:#fff;border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;flex-shrink:0">';
+    html+='<div style="padding:10px 20px;border-bottom:1px solid #F3F4F6;background:#FAFAFA;display:flex;align-items:center;gap:12px">'+
+      '<span style="flex:1;font-size:10px;font-weight:700;color:#9CA3AF;letter-spacing:.08em">메뉴명</span>'+
+      '<span style="width:230px;flex-shrink:0;font-size:10px;font-weight:700;color:#9CA3AF;letter-spacing:.08em">기능권한</span>'+
+    '</div>';
+    mergedRows.forEach(function(r,i){
+      var anyOn=r.actions.some(function(a){return !!(p&&p.func&&p.func[a.key]&&p.func[a.key][a.act]);});
+      var isLast=i===mergedRows.length-1;
+      var actsHtml='';
+      r.actions.forEach(function(a){
+        var on=!!(p&&p.func&&p.func[a.key]&&p.func[a.key][a.act]);
+        actsHtml+='<span style="font-size:11px;padding:3px 9px;border-radius:6px;background:'+(on?'#F0FBF7':'#F9FAFB')+';color:'+(on?'#065F46':'#6B7280')+';font-weight:700;border:1px solid '+(on?'#A7F3D0':'#E5E7EB')+'">'+a.label+(on?' ✓':'')+'</span>';
+      });
+      html+='<div style="padding:15px 20px;'+(isLast?'':'border-bottom:1px solid #F3F4F6;')+'display:flex;align-items:center;gap:12px;background:#fff">'+
+        '<span style="flex:1;font-size:14px;font-weight:700;color:'+(anyOn?'#111827':'#374151')+'">'+r.lbl+'</span>'+
+        '<div style="width:230px;flex-shrink:0;display:flex;gap:5px;flex-wrap:wrap">'+actsHtml+'</div>'+
+      '</div>';
+    });
+    html+='</div>';
+    body.innerHTML=html;
+
+  } else {
+    /* ══ 데이터 권한 탭 ══ */
+    if(isReset){ body.innerHTML=permEmptyStateHtml('데이터', e.id); return; }
+    /* 서브 탭 바 */
+    var dataTabDefs=tabDefs.filter(function(t){return !!t.fields;});
+    var subTabHtml='<div style="display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap">';
+    dataTabDefs.forEach(function(tab){
+      var normFields=tab.fields.filter(function(f){return !f.s;});
+      var sensFields=tab.fields.filter(function(f){return f.s;});
+      var normOn=normFields.filter(function(f){return p&&p.norm&&p.norm[f.key];}).length;
+      var sensOn=sensFields.filter(function(f){return p&&p.sens&&p.sens[f.key];}).length;
+      var totalOn=normOn+sensOn;
+      var totalAll=tab.fields.length;
+      var isOn=curDataSubTab===tab.id;
+      var badgeText=totalOn>0?(totalOn+'/'+totalAll):totalAll;
+      var badgeBg=isOn?(totalOn>0?'rgba(255,255,255,.3)':'rgba(255,255,255,.15)'):(totalOn>0?'#E0F2FE':'#F3F4F6');
+      var badgeColor=isOn?'#fff':(totalOn>0?'#0369A1':'#9CA3AF');
+      subTabHtml+='<div onclick="switchDataSubTab(\''+tab.id+'\')" style="'+
+        'display:inline-flex;align-items:center;gap:5px;padding:6px 13px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;transition:all .1s;'+
+        'background:'+(isOn?'#111827':'#fff')+';color:'+(isOn?'#fff':'#374151')+';border:1px solid '+(isOn?'#111827':'#E5E7EB')+';'+
+      '">'+tab.label+'<span style="font-size:10px;padding:1px 6px;border-radius:8px;background:'+badgeBg+';color:'+badgeColor+';font-weight:700">'+badgeText+'</span></div>';
+    });
+    subTabHtml+='</div>';
+
+    /* 선택된 서브탭 컨텐츠 */
+    var activeTab=dataTabDefs.find(function(t){return t.id===curDataSubTab;})||dataTabDefs[0];
+    var rowHtml='<div style="background:#fff;border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;flex-shrink:0">';
+    /* 컬럼 헤더 */
+    rowHtml+='<div style="padding:10px 20px;border-bottom:1px solid #E5E7EB;background:#F3F4F6;display:flex;align-items:center;gap:14px">'+
+      '<div style="flex:1;font-size:10px;font-weight:700;color:#6B7280;letter-spacing:.08em">권한 단위</div>'+
+      '<div style="width:160px;font-size:10px;font-weight:700;color:#6B7280;letter-spacing:.08em;flex-shrink:0">공개 범위</div>'+
+      '<div style="width:60px;font-size:10px;font-weight:700;color:#6B7280;letter-spacing:.08em;flex-shrink:0">허용</div>'+
+    '</div>';
+    activeTab.fields.forEach(function(f,i){
+      var on=f.s?(p&&p.sens&&p.sens[f.key]):(p&&p.norm&&p.norm[f.key]);
+      var fieldScope=(p&&p.fieldScope&&p.fieldScope[f.key])||(p&&p.scope)||'sub';
+      var scopeTxt=fieldScope==='all'?'전체 구성원':'소속 및 하위 조직';
+      var isLast=i===activeTab.fields.length-1;
+      var sensB=f.s?'<span style="font-size:10px;padding:1px 6px;border-radius:5px;background:#FEE2E2;color:#DC2626;font-weight:700;margin-left:7px">민감</span>':'';
+      var onBadge=on?
+        '<span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:3px 9px;border-radius:6px;background:#F0FBF7;color:#065F46;font-weight:700;flex-shrink:0">'+
+          '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" fill="#1D9E75"/><path d="M3 5l1.5 1.5L7 4" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>ON</span>':
+        '<span style="display:inline-flex;align-items:center;font-size:10px;padding:3px 9px;border-radius:6px;background:#F9FAFB;color:#C4C9D4;font-weight:700;flex-shrink:0;border:1px solid #F3F4F6">OFF</span>';
+      rowHtml+='<div style="padding:14px 20px;'+(isLast?'':'border-bottom:0.5px solid #F3F4F6;')+'display:flex;align-items:center;gap:14px;background:'+(on?'#fff':'#FAFAFA')+'">'+
+        '<div style="flex:1;min-width:0">'+
+          '<div style="font-size:13px;font-weight:700;color:'+(on?'#111827':'#9CA3AF')+'">'+f.label+sensB+'</div>'+
+          (f.sub?'<div style="font-size:11px;color:'+(on?'#9CA3AF':'#C4C9D4')+';margin-top:3px">'+f.sub+'</div>':'')+
+        '</div>'+
+        /* 항목별 공개 범위 */
+        '<div style="width:160px;flex-shrink:0">'+
+          (on
+            ? '<span style="display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:6px;background:#F0FBF7;color:#065F46;font-weight:600;border:1px solid #A7F3D0">'+
+                '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#1D9E75" stroke-width="1"/><path d="M5 2.5v2.5l1.5 1" stroke="#1D9E75" stroke-width="1" stroke-linecap="round"/></svg>'+
+                scopeTxt+
+              '</span>'
+            : '<span style="font-size:11px;color:#D1D5DB">—</span>')+
+        '</div>'+
+        '<div style="width:60px;flex-shrink:0">'+onBadge+'</div>'+
+      '</div>';
+    });
+    rowHtml+='</div>';
+
+    body.innerHTML=buildAlwaysBanner(activeTab)+subTabHtml+rowHtml;
+  }
+}
+
+function removeEmp(id){
+  if(needsReset(id)){
+    showConfirm('권한을 재설정하지 않고 목록에서 삭제하시겠습니까?',function(){
+      logHistory(id,'재설정 없이 목록에서 삭제',null);
+      delete titleChangeRemoved[id];
+      delete empPerm[id];
+      if(curEmpId===id){curEmpId=null;showEmptyRight();}
+      renderSummary();renderLeftList();
+      toast('목록에서 삭제되었습니다.');
+    },{sub:'이 구성원은 현재 권한이 미설정 상태이며, 재설정 없이 목록에서 제외됩니다.',okLabel:'삭제',okColor:'#6B7280'});
+    return;
+  }
+  showConfirm('해당 구성원의 권한 설정을 제거하시겠습니까?',function(){
+    var oldP=empPerm[id];
+    if(oldP){
+      var diff=diffPerm(oldP,mkDefaultPerm());
+      logHistory(id,'권한 전체 제거',diff);
+    }
+    delete empPerm[id];
+    if(curEmpId===id){curEmpId=null;showEmptyRight();}
+    renderSummary();renderLeftList();
+    toast('권한 설정이 제거됐습니다.');
+  });
+}
+
+/* ── 공용 확인 모달 (native confirm 대체) ── */
+function showConfirm(message,onOk,opts){
+  opts=opts||{};
+  document.getElementById('confirm-modal-msg').textContent=message;
+  var subEl=document.getElementById('confirm-modal-sub');
+  if(opts.subHtml){ subEl.innerHTML=opts.subHtml; subEl.style.display='block'; }
+  else if(opts.sub){ subEl.textContent=opts.sub; subEl.style.display='block'; }
+  else { subEl.textContent=''; subEl.style.display='none'; }
+  var okBtn=document.getElementById('confirm-modal-ok');
+  okBtn.textContent=opts.okLabel||'확인';
+  okBtn.style.background=opts.okColor||'#DC2626';
+  okBtn.onclick=function(){ closeConfirmModal(); onOk&&onOk(); };
+  document.getElementById('confirm-modal-bg').classList.add('open');
+}
+function closeConfirmModal(){document.getElementById('confirm-modal-bg').classList.remove('open');}
+
+/* ───────── HR 모달 ───────── */
+var hrSel=new Set();
+var hrOrgFilter=null;
+
+function openHrModal(){
+  hrSel=new Set(emps.filter(function(e){return e.hrRole==='super';}).map(function(e){return e.id;}));
+  hrOrgFilter=null;
+  var si=document.getElementById('hr-pick-search'); if(si) si.value='';
+  renderHrOrgTree();
+  renderHrPickList();
+  renderHrChipsBar();
+  document.getElementById('hr-modal-bg').classList.add('open');
+}
+function closeHrModal(){document.getElementById('hr-modal-bg').classList.remove('open');}
+
+/* 좌측 조직 트리 — 전체 구성원 기준(권한 설정 모달과 달리 최고관리자 후보 제외 없음) */
+function renderHrOrgTree(){
+  var el=document.getElementById('hr-pick-orgtree'); el.innerHTML='';
+  var mkItem=function(name,level,isAll){
+    var cnt=isAll?emps.length:emps.filter(function(e){return e.org===name;}).length;
+    if(!isAll&&cnt===0) return;
+    var on=isAll?(hrOrgFilter===null):(hrOrgFilter===name);
+    var item=document.createElement('div');
+    item.style.cssText='padding:9px 14px;padding-left:'+(isAll?14:14+level*10)+'px;cursor:pointer;font-size:12px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid #F0F0F0;background:'+(on?'#F0FBF7':'transparent')+';color:'+(on?'#065F46':'#374151')+';font-weight:'+(on?'700':'400');
+    item.innerHTML='<span>'+(isAll?'전체':name)+'</span><span style="font-size:11px;color:#9CA3AF">'+cnt+'</span>';
+    item.onclick=function(){ hrOrgFilter=isAll?null:name; renderHrOrgTree(); renderHrPickList(); };
+    el.appendChild(item);
+  };
+  mkItem('',0,true);
+  orgTree.forEach(function(o){ mkItem(o.name,o.level,false); });
+}
+
+/* 우측 구성원 목록 — 조직별 그룹, 체크박스 다중 선택(권한 설정과 달리 '변경하기' 단독 진입 없음) */
+function renderHrPickList(){
+  var list=document.getElementById('hr-pick-list');
+  var q=(document.getElementById('hr-pick-search')||{value:''}).value.trim().toLowerCase();
+  var candidates=emps.filter(function(e){
+    if(hrOrgFilter && e.org!==hrOrgFilter) return false;
+    if(q && e.name.toLowerCase().indexOf(q)<0 && e.pos.toLowerCase().indexOf(q)<0 && e.role.toLowerCase().indexOf(q)<0) return false;
+    return true;
+  });
+  list.innerHTML='';
+  if(candidates.length===0){
+    list.innerHTML='<div style="padding:32px;text-align:center;font-size:12px;color:#C4C9D4">'+(q?'검색 결과 없음':'구성원이 없습니다')+'</div>';
+    return;
+  }
+  var groups={},gOrder=[];
+  candidates.forEach(function(e){ if(!groups[e.org]){groups[e.org]=[];gOrder.push(e.org);}groups[e.org].push(e); });
+  gOrder.forEach(function(org){
+    var hdr=document.createElement('div');
+    hdr.style.cssText='padding:8px 16px;background:#FAFAFA;border-bottom:0.5px solid #F3F4F6;position:sticky;top:0;z-index:2';
+    hdr.innerHTML='<span style="font-size:12px;font-weight:700;color:#374151">'+org+'</span><span style="font-size:11px;color:#9CA3AF;margin-left:6px">'+groups[org].length+'명</span>';
+    list.appendChild(hdr);
+    groups[org].forEach(function(e){
+      var on=hrSel.has(e.id);
+      var row=document.createElement('div');
+      row.style.cssText='display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:0.5px solid #F9FAFB;cursor:pointer;background:'+(on?'#F0FBF7':'#fff')+';transition:background .08s';
+      row.innerHTML=
+        '<div class="pick-checkbox'+(on?' on':'')+'" style="flex-shrink:0">'+
+          (on?'<svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>':'')+
+        '</div>'+
+        '<div class="av '+e.av+'" style="width:32px;height:32px;font-size:13px;font-weight:700;flex-shrink:0">'+e.ini+'</div>'+
+        '<div style="flex:1;min-width:0">'+
+          '<div style="font-size:13px;font-weight:600;color:#111827">'+e.name+
+            (e.hrRole==='super'?' <span style="font-size:10px;font-weight:700;color:#92400E;background:#FFFBEB;border:1px solid #FDE68A;border-radius:5px;padding:1px 5px;margin-left:4px">현재 최고관리자</span>':'')+
+          '</div>'+
+          '<div style="font-size:11px;color:#9CA3AF;margin-top:1px">'+e.role+' | '+e.pos+' | '+e.org+'</div>'+
+        '</div>';
+      var _id=e.id;
+      row.onclick=function(){ toggleHrPick(_id); };
+      list.appendChild(row);
+    });
+  });
+}
+
+function toggleHrPick(id){
+  if(hrSel.has(id)) hrSel.delete(id); else hrSel.add(id);
+  renderHrPickList();
+  renderHrChipsBar();
+}
+
+/* 상단 선택 칩 바 + 미선택 오류 배너 + 저장 버튼 활성/비활성 상태 갱신 */
+function renderHrChipsBar(){
+  var wrap=document.getElementById('hr-pick-chips-wrap');
+  var selEmps=emps.filter(function(e){return hrSel.has(e.id);});
+  var isEmpty=hrSel.size===0;
+  var chips=selEmps.length?selEmps.map(function(e){
+    return '<div style="display:flex;align-items:center;gap:5px;padding:3px 8px 3px 4px;border-radius:20px;border:1px solid #FDE68A;background:#FFFBEB;font-size:11px">'+
+      '<div class="av '+e.av+'" style="width:18px;height:18px;font-size:8px">'+e.ini+'</div>'+
+      '<span style="font-weight:600;color:#92400E">'+e.name+'</span>'+
+      '<button onclick="toggleHrPick('+e.id+')" style="background:none;border:none;color:#9CA3AF;cursor:pointer;font-size:11px;padding:0;margin-left:2px;line-height:1">✕</button>'+
+    '</div>';
+  }).join(''):'<span style="font-size:12px;color:#C4C9D4">선택된 구성원 없음</span>';
+
+  var errBanner=isEmpty
+    ? '<div style="display:flex;align-items:center;gap:6px;padding:8px 10px;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;font-size:12px;color:#B91C1C;font-weight:500;margin-bottom:8px">⚠ 최고관리자를 1명 이상 선택해 주세요</div>'
+    : '';
+
+  wrap.innerHTML=errBanner+'<div style="padding:10px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;min-height:44px;display:flex;flex-wrap:wrap;gap:6px;align-items:center">'+chips+'</div>';
+
+  var cntEl=document.getElementById('hr-pick-count');
+  if(cntEl) cntEl.textContent=hrSel.size+'명 선택됨';
+
+  var saveBtn=document.getElementById('hr-save-btn');
+  if(saveBtn){
+    saveBtn.disabled=isEmpty;
+    saveBtn.style.background=isEmpty?'#D1D5DB':'#1D9E75';
+    saveBtn.style.cursor=isEmpty?'not-allowed':'pointer';
+  }
+}
+
+function confirmHrModal(){
+  if(hrSel.size===0){toast('⚠ 최고관리자는 최소 1명 이상이어야 합니다');return;}
+  var prevSuperIds=emps.filter(function(e){return e.hrRole==='super';}).map(function(e){return e.id;});
+  var newSuperIds=Array.from(hrSel);
+  var unchanged=prevSuperIds.length===newSuperIds.length &&
+    prevSuperIds.every(function(id){return newSuperIds.indexOf(id)>-1;});
+
+  if(unchanged){ closeHrModal(); return; }
+
+  var removedIds=prevSuperIds.filter(function(id){return newSuperIds.indexOf(id)===-1;});
+  var addedIds=newSuperIds.filter(function(id){return prevSuperIds.indexOf(id)===-1;});
+  var empById=function(id){return emps.filter(function(e){return e.id===id;})[0];};
+
+  /* 변경 후 최고관리자 목록 — 신규 지정자는 뱃지로 구분 */
+  var finalListHtml=newSuperIds.map(function(id){
+    var e=empById(id); if(!e) return '';
+    var isNew=addedIds.indexOf(id)>-1;
+    return '<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px 3px 3px;border-radius:14px;background:#F9FAFB;border:1px solid #E5E7EB;font-size:12px;color:#111827;font-weight:600">'+
+      '<span class="emp-av '+e.av+'" style="width:18px;height:18px;font-size:9px">'+e.ini+'</span>'+e.name+
+      (isNew?'<span style="font-size:10px;font-weight:700;color:#1D9E75;margin-left:2px">신규</span>':'')+
+    '</span>';
+  }).join('');
+
+  var removedListHtml=removedIds.map(function(id){
+    var e=empById(id); if(!e) return '';
+    return '<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px 3px 3px;border-radius:14px;background:#FEF2F2;border:1px solid #FECACA;font-size:12px;color:#991B1B;font-weight:600">'+
+      '<span class="emp-av '+e.av+'" style="width:18px;height:18px;font-size:9px">'+e.ini+'</span>'+e.name+
+    '</span>';
+  }).join('');
+
+  var subHtml=
+    '<div style="display:flex;flex-direction:column;gap:10px">'+
+      '<div>'+
+        '<div style="font-weight:700;color:#374151;margin-bottom:6px">변경 후 HR 최고관리자 ('+newSuperIds.length+'명)</div>'+
+        '<div style="display:flex;flex-wrap:wrap;gap:6px">'+finalListHtml+'</div>'+
+      '</div>'+
+      (removedListHtml?
+        '<div>'+
+          '<div style="font-weight:700;color:#991B1B;margin-bottom:6px">해제 ('+removedIds.length+'명)</div>'+
+          '<div style="display:flex;flex-wrap:wrap;gap:6px">'+removedListHtml+'</div>'+
+          '<div style="margin-top:6px;color:#9A3412">해제되는 구성원은 기존 권한이 자동 제거되며 재설정이 필요합니다.</div>'+
+        '</div>'
+      :'')+
+    '</div>';
+
+  showConfirm('HR 최고관리자 지정을 변경하시겠습니까?',function(){
+    applyHrModal(newSuperIds,removedIds);
+  },{
+    subHtml:subHtml,
+    okLabel:'변경',
+    okColor:'#1D9E75'
+  });
+}
+
+/* HR 최고관리자 지정 변경을 실제로 적용 — 되돌리기 없이 즉시 반영됨.
+   최고관리자에서 해제된 구성원은 직책 변경 시와 동일하게 기존 권한이 자동 제거되고 '재설정 필요' 상태가 됨 */
+function applyHrModal(newSuperIds,removedIds){
+  emps.forEach(function(e){if(e.hrRole==='super')e.hrRole=null;});
+  emps.forEach(function(e){if(newSuperIds.indexOf(e.id)>-1)e.hrRole='super';});
+
+  removedIds.forEach(function(id){
+    var e=emps.filter(function(x){return x.id===id;})[0];
+    if(!e) return;
+    var oldP=empPerm[id]||null;
+    var diff=diffPerm(oldP,mkDefaultPerm());
+    logHistory(id,'HR 최고관리자 해제로 권한 자동 제거',diff);
+    delete empPerm[id];
+    titleChangeRemoved[id]={reason:'hrSuper',at:nowStr()};
+  });
+
+  closeHrModal();
+  renderSummary();
+  renderLeftList();
+  if(curEmpId && removedIds.indexOf(curEmpId)>-1) renderRight();
+  toast('HR 최고관리자 지정이 변경됐습니다.');
+}
+
+/* ═══ 권한 설정 페이지 — 단일 화면 ═══ */
+var pickSel = new Set();
+var newPermData = {};
+var newPermDraftMap = {}; /* 구성원별 편집 중인 권한 draft — key: empId, value: newPermData와 동일 참조 */
+var newPermMainTab = 'func';
+var newPermDataSub = 'basic';
+var newPermCurEmpId = null;
+var batchDraft = null; /* 신규(미설정) 구성원 여러 명을 동시에 선택했을 때 공유되는 권한 draft — 이 객체를 전부가 참조하므로 하나를 편집하면 전원에게 동일하게 적용됨 */
+
+function mkDefaultPerm(){
+  return {norm:{},sens:{},scope:'sub',fieldScope:{},
+    func:{f_emp:{view:false,regedit:false},f_stat:{view:false},f_excel:{view:false},f_base:{view:false,regdeact:false}}};
+}
+
+function setFieldScope(key, val){
+  if(!newPermData.fieldScope) newPermData.fieldScope={};
+  newPermData.fieldScope[key]=val;
+  updateSaveBtnState();
+}
+
+/* 현재 서브탭의 ON된 항목 전체에 공개범위 일괄 적용 */
+function applyAllScope(val){
+  if(!val) return;
+  if(!newPermData.fieldScope) newPermData.fieldScope={};
+  var dataTabDefs=tabDefs.filter(function(t){return !!t.fields;});
+  var activeTab=dataTabDefs.find(function(t){return t.id===newPermDataSub;})||dataTabDefs[0];
+  activeTab.fields.forEach(function(f){
+    newPermData.fieldScope[f.key]=val; /* 허용 ON/OFF와 무관하게 탭 내 전체 항목에 적용 */
+  });
+  renderPermTabBody();
+  updateSaveBtnState();
+}
+
+function goToMemberAddPage(){
+  pickSel = new Set();
+  newPermData = mkDefaultPerm();
+  newPermDraftMap = {};
+  newPermCurEmpId = null;
+  batchDraft = null;
+  newPermMainTab = 'func'; newPermDataSub = 'basic';
+  var si=document.getElementById('pick-search'); if(si) si.value='';
+  document.getElementById('member-add-page').style.display='flex';
+  document.body.style.overflow='hidden';
+  renderPickList();
+  showNewPermEmpty();
+  updateSaveBtnState();
+  openPickPopup(); /* 진입 즉시 구성원 선택 모달 오픈 */
+}
+function openMemberPickModal(){ goToMemberAddPage(); }
+function closeMemberAddPage(){
+  document.getElementById('member-add-page').style.display='none';
+  document.body.style.overflow='';
+}
+function closeMemberPickModal(){ closeMemberAddPage(); }
+function confirmMemberPick(){ saveNewPerm(); }
+function goToPermStep(){}
+function backToPickStep(){}
+function renderPermStepChips(){}
+
+/* 좌측 목록 — 이미 이 세션에서 추가된 구성원만 표시 */
+function renderPickList(){
+  var list=document.getElementById('pick-list');
+  var q=(document.getElementById('pick-search')||{value:''}).value.trim().toLowerCase();
+  /* pickSel에 있는 구성원만 */
+  var selected=emps.filter(function(e){
+    if(!pickSel.has(e.id)) return false;
+    if(q && e.name.toLowerCase().indexOf(q)<0 && e.pos.toLowerCase().indexOf(q)<0 && e.role.toLowerCase().indexOf(q)<0) return false;
+    return true;
+  });
+  list.innerHTML='';
+  if(selected.length===0){
+    list.innerHTML='<div style="padding:32px 14px;text-align:center;font-size:12px;color:#C4C9D4;line-height:1.8">위 버튼으로<br>구성원을 추가하세요</div>';
+    updatePickAddBtnState();
+    return;
+  }
+  selected.forEach(function(e){
+    var isActive=newPermCurEmpId===e.id;
+    var row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:0.5px solid #F9FAFB;cursor:pointer;border-left:3px solid '+(isActive?'#1D9E75':'transparent')+';background:'+(isActive?'#F0FBF7':'#fff')+';transition:all .08s';
+    row.innerHTML=
+      '<div class="av '+e.av+'" style="width:32px;height:32px;font-size:13px;font-weight:700;flex-shrink:0">'+e.ini+'</div>'+
+      '<div style="flex:1;min-width:0">'+
+        '<div style="font-size:13px;font-weight:600;color:#111827">'+e.name+'</div>'+
+        '<div style="font-size:11px;color:#9CA3AF;margin-top:1px">'+e.role+' | '+e.pos+'</div>'+
+      '</div>'+
+      '<button onclick="event.stopPropagation();removeFromPickSel('+e.id+')" style="background:none;border:none;color:#D1D5DB;cursor:pointer;font-size:13px;padding:2px;line-height:1;flex-shrink:0" title="제거">✕</button>';
+    var _id=e.id;
+    row.onclick=function(){ selectNewPermEmp(_id); };
+    list.appendChild(row);
+  });
+  updatePickAddBtnState();
+}
+
+/* 이미 권한이 설정된(기존) 구성원이 현재 선택 목록에 포함되어 있는지 여부
+   — 포함된 경우 해당 구성원 1명만 편집 가능하도록 추가 인원 초대를 막는다 */
+function hasExistingPermInSelection(){
+  return Array.from(pickSel).some(function(id){ return !!empPerm[id]; });
+}
+function updatePickAddBtnState(){
+  var btn=document.getElementById('pick-add-btn');
+  if(!btn) return;
+  var lock=hasExistingPermInSelection();
+  btn.disabled=lock;
+  btn.style.opacity=lock?'0.45':'1';
+  btn.style.cursor=lock?'not-allowed':'pointer';
+  btn.style.pointerEvents=lock?'none':'auto';
+  btn.title=lock?'이미 권한이 설정된 구성원은 단독으로만 변경할 수 있습니다.':'';
+}
+
+function removeFromPickSel(id){
+  pickSel.delete(id);
+  if(newPermCurEmpId===id){ newPermCurEmpId=null; showNewPermEmpty(); }
+  renderPickList();
+  updateSaveBtnState();
+}
+
+/* ── 구성원 선택 모달 ── */
+var empPickSel = new Set(); // 모달 내 임시 선택
+var empPickOrgFilter = null;
+
+function openPickPopup(){
+  if(hasExistingPermInSelection()){
+    toast('⚠ 이미 권한이 설정된 구성원은 단독으로만 변경할 수 있어요.');
+    return;
+  }
+  empPickSel = new Set(pickSel); // 현재 선택 상태 복사
+  empPickOrgFilter = null;
+  var si=document.getElementById('emp-pick-search'); if(si) si.value='';
+  renderEmpPickOrgTree();
+  renderEmpPickList();
+  renderEmpPickChips();
+  document.getElementById('emp-pick-modal-bg').classList.add('open');
+}
+function closePickModal(){
+  document.getElementById('emp-pick-modal-bg').classList.remove('open');
+}
+function confirmPickModal(){
+  pickSel = new Set(empPickSel);
+  closePickModal();
+  /* 이미 권한이 있는 구성원(단독 변경) 이 아니라면 — 신규(미설정) 구성원들은 하나의 draft를 공유해서
+     한 명 기준으로 설정하면 선택된 전원에게 동일하게 적용되도록 한다. */
+  if(!hasExistingPermInSelection()){
+    var isFirstBatch=!batchDraft;
+    if(isFirstBatch) batchDraft=mkDefaultPerm();
+    pickSel.forEach(function(id){ newPermDraftMap[id]=batchDraft; });
+    if(isFirstBatch) setQuickTab('basic');
+  }
+  renderPickList();
+  /* 새로 추가된 구성원 중 첫 번째를 우측에 표시 */
+  var first=null;
+  pickSel.forEach(function(id){ if(!first) first=id; });
+  if(first && newPermCurEmpId===null) selectNewPermEmp(first);
+}
+
+function renderEmpPickOrgTree(){
+  var el=document.getElementById('emp-pick-orgtree'); el.innerHTML='';
+  var mkItem=function(name,level,isAll){
+    var cnt=isAll
+      ? emps.filter(function(e){return !e.hrRole;}).length
+      : emps.filter(function(e){return !e.hrRole&&e.org===name;}).length;
+    if(!isAll&&cnt===0) return;
+    var on=isAll?(empPickOrgFilter===null):(empPickOrgFilter===name);
+    var item=document.createElement('div');
+    item.style.cssText='padding:9px 14px;padding-left:'+(isAll?14:14+level*10)+'px;cursor:pointer;font-size:12px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid #F0F0F0;background:'+(on?'#F0FBF7':'transparent')+';color:'+(on?'#065F46':'#374151')+';font-weight:'+(on?'700':'400');
+    item.innerHTML='<span>'+(isAll?'전체':name)+'</span><span style="font-size:11px;color:#9CA3AF">'+cnt+'</span>';
+    item.onclick=function(){ empPickOrgFilter=isAll?null:name; renderEmpPickOrgTree(); renderEmpPickList(); };
+    el.appendChild(item);
+  };
+  mkItem('',0,true);
+  orgTree.forEach(function(o){ mkItem(o.name,o.level,false); });
+}
+
+function renderEmpPickList(){
+  var list=document.getElementById('emp-pick-list');
+  var q=(document.getElementById('emp-pick-search')||{value:''}).value.trim().toLowerCase();
+  var candidates=emps.filter(function(e){
+    if(e.hrRole) return false;
+    if(empPickOrgFilter && e.org!==empPickOrgFilter) return false;
+    if(q && e.name.toLowerCase().indexOf(q)<0 && e.pos.toLowerCase().indexOf(q)<0 && e.role.toLowerCase().indexOf(q)<0) return false;
+    return true;
+  });
+  list.innerHTML='';
+  if(candidates.length===0){
+    list.innerHTML='<div style="padding:32px;text-align:center;font-size:12px;color:#C4C9D4">'+(q?'검색 결과 없음':'추가할 구성원이 없습니다')+'</div>';
+    return;
+  }
+  /* 조직별 그룹 */
+  var groups={},gOrder=[];
+  candidates.forEach(function(e){ if(!groups[e.org]){groups[e.org]=[];gOrder.push(e.org);}groups[e.org].push(e); });
+  gOrder.forEach(function(org){
+    /* 조직 헤더 — 단순 그룹 라벨 (일괄 선택 없음, 개인별 선택만 가능) */
+    var hdr=document.createElement('div');
+    hdr.style.cssText='padding:8px 16px;background:#FAFAFA;border-bottom:0.5px solid #F3F4F6;position:sticky;top:0;z-index:2';
+    hdr.innerHTML=
+      '<span style="font-size:12px;font-weight:700;color:#374151">'+org+'</span>'+
+      '<span style="font-size:11px;color:#9CA3AF;margin-left:6px">'+groups[org].length+'명</span>';
+    list.appendChild(hdr);
+    groups[org].forEach(function(e){
+      var hasPerm=!!empPerm[e.id];
+      var row=document.createElement('div');
+      if(hasPerm){
+        /* 이미 권한이 설정된 구성원 — 체크박스 다중선택 대상 아님, 클릭 시 단독 변경 화면으로 즉시 이동
+           단, 다른 구성원이 체크박스로 선택된 상태에서는 눌러도 아무 일 없도록 비활성화 (선택 유실 방지) */
+        var blocked = empPickSel.size>0;
+        var sum=getSum(e.id);
+        row.style.cssText='display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:0.5px solid #F9FAFB;cursor:'+(blocked?'not-allowed':'pointer')+';background:#fff;opacity:'+(blocked?'.45':'1')+';transition:background .08s';
+        row.title=blocked?'다른 구성원 선택을 먼저 해제한 뒤 이용해 주세요.':'';
+        if(!blocked){
+          row.onmouseover=function(){this.style.background='#FAFAFA';};
+          row.onmouseout=function(){this.style.background='#fff';};
+        }
+        row.innerHTML=
+          '<div style="width:14px;flex-shrink:0"></div>'+
+          '<div class="av '+e.av+'" style="width:32px;height:32px;font-size:13px;font-weight:700;flex-shrink:0;opacity:.85">'+e.ini+'</div>'+
+          '<div style="flex:1;min-width:0">'+
+            '<div style="font-size:13px;font-weight:600;color:#111827">'+e.name+'</div>'+
+            '<div style="font-size:11px;color:#9CA3AF;margin-top:1px">'+e.role+' | '+e.pos+'</div>'+
+          '</div>'+
+          '<span style="font-size:10px;font-weight:700;color:'+(blocked?'#9CA3AF':'#0369A1')+';background:'+(blocked?'#F3F4F6':'#EFF6FF')+';padding:3px 8px;border-radius:6px;flex-shrink:0;white-space:nowrap">데이터 '+(sum.norm+sum.sens)+' · 기능 '+sum.func+'</span>'+
+          (blocked
+            ? '<span style="font-size:11px;font-weight:600;color:#C4C9D4;flex-shrink:0;white-space:nowrap">선택 해제 후 가능</span>'
+            : '<span style="font-size:11px;font-weight:700;color:#1D9E75;flex-shrink:0;display:flex;align-items:center;gap:2px">변경하기'+
+                '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3.5 2l3 3-3 3" stroke="#1D9E75" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'+
+              '</span>');
+        var _eid=e.id;
+        row.onclick=blocked?null:function(){ pickExistingEmp(_eid); };
+      } else {
+        var on=empPickSel.has(e.id);
+        row.style.cssText='display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:0.5px solid #F9FAFB;cursor:pointer;background:'+(on?'#F0FBF7':'#fff')+';transition:background .08s';
+        row.innerHTML=
+          '<div class="pick-checkbox'+(on?' on':'')+'" style="flex-shrink:0">'+
+            (on?'<svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>':'')+
+          '</div>'+
+          '<div class="av '+e.av+'" style="width:32px;height:32px;font-size:13px;font-weight:700;flex-shrink:0">'+e.ini+'</div>'+
+          '<div style="flex:1;min-width:0">'+
+            '<div style="font-size:13px;font-weight:600;color:#111827">'+e.name+'</div>'+
+            '<div style="font-size:11px;color:#9CA3AF;margin-top:1px">'+e.role+' | '+e.pos+'</div>'+
+          '</div>';
+        var _id=e.id;
+        row.onclick=function(){
+          if(empPickSel.has(_id)) empPickSel.delete(_id); else empPickSel.add(_id);
+          renderEmpPickList(); renderEmpPickChips();
+        };
+      }
+      list.appendChild(row);
+    });
+  });
+}
+
+/* 이미 권한이 설정된 구성원을 모달에서 클릭 — 다중선택 없이 단독으로 즉시 변경 화면 진입 */
+function pickExistingEmp(id){
+  var hadOthers = pickSel.size>0 && !(pickSel.size===1 && pickSel.has(id));
+  pickSel = new Set([id]);
+  newPermDraftMap = {};
+  closePickModal();
+  selectNewPermEmp(id, true);
+  if(hadOthers) toast('이미 권한이 설정된 구성원은 단독으로만 변경할 수 있어 선택이 초기화됐습니다.');
+}
+
+function renderEmpPickChips(){
+  var bar=document.getElementById('emp-pick-chips');
+  var ph=document.getElementById('emp-pick-chips-ph');
+  var cnt=document.getElementById('emp-pick-count');
+  bar.querySelectorAll('.pick-chip').forEach(function(c){c.remove();});
+  var sel=emps.filter(function(e){return empPickSel.has(e.id);});
+  ph.style.display=sel.length?'none':'';
+  sel.forEach(function(e){
+    var c=document.createElement('div'); c.className='pick-chip';
+    c.innerHTML='<div class="av '+e.av+'" style="width:16px;height:16px;font-size:7px">'+e.ini+'</div>'+
+      e.name+'<button class="pick-chip-x" onclick="empPickSel.delete('+e.id+');renderEmpPickList();renderEmpPickChips()">✕</button>';
+    bar.appendChild(c);
+  });
+  if(cnt) cnt.textContent=empPickSel.size+'명 선택됨';
+}
+
+/* 구성원 제거 */
+function removeFromPickSel(id){
+  pickSel.delete(id);
+  if(newPermCurEmpId===id){ newPermCurEmpId=null; showNewPermEmpty(); }
+  renderPickList();
+  updateSaveBtnState();
+}
+
+/* 더미 함수 (이전 버전 호환) */
+function closePickPopup(){}
+function renderPopupList(){}
+
+/* 구성원 클릭 → 우측 권한 설정 즉시 표시 */
+function selectNewPermEmp(id, keepExisting){
+  newPermCurEmpId = id;
+  pickSel.add(id);
+  var isNewDraft = !newPermDraftMap[id];
+  if(!isNewDraft){
+    newPermData = newPermDraftMap[id]; /* 이 세션에서 이미 편집 중이던 값 이어서 사용 — 재클릭해도 초기화되지 않음 */
+  } else {
+    newPermData = (keepExisting && empPerm[id]) ? JSON.parse(JSON.stringify(empPerm[id])) : mkDefaultPerm();
+    newPermDraftMap[id] = newPermData;
+  }
+  newPermMainTab='func'; newPermDataSub='basic';
+
+  /* 저장 버튼 — 실제 변경 사항이 있을 때만 활성화 */
+  updateSaveBtnState();
+
+  /* 빠른 설정 탭 초기화 — 기존 권한을 불러온 경우 및 이미 편집 중이던 draft가 있는 경우엔 덮어쓰지 않음 */
+  if(!keepExisting && isNewDraft){
+    setQuickTab('basic');
+    applyQuickPermSilent('basic');
+  }
+
+  /* 좌측 목록 하이라이트 갱신 */
+  renderPickList();
+
+  /* 우측 구성원 인포 */
+  var e=emps.find(function(x){return x.id===id;});
+  var info=document.getElementById('new-perm-info');
+  if(info && e){
+    var othersCnt=pickSel.size-1;
+    var batchNote=(othersCnt>0&&!hasExistingPermInSelection())
+      ? '<span style="font-size:11px;font-weight:700;color:#1D9E75;background:#F0FBF7;border:1px solid #A7F3D0;border-radius:20px;padding:3px 10px;margin-left:8px;white-space:nowrap">외 '+othersCnt+'명에게 동일 적용</span>'
+      : '';
+    info.innerHTML=
+      '<div style="display:flex;align-items:center;gap:12px">'+
+        '<div class="av '+e.av+'" style="width:40px;height:40px;font-size:16px;font-weight:700">'+e.ini+'</div>'+
+        '<div>'+
+          '<div style="font-size:15px;font-weight:700;color:#111827;display:flex;align-items:center">'+e.name+batchNote+'</div>'+
+          '<div style="font-size:12px;color:#9CA3AF;margin-top:2px">'+fmtOrgRole(e)+'</div>'+
+        '</div>'+
+      '</div>';
+  }
+
+  showNewPermBody();
+  renderPermToggles();
+}
+
+/* 기존 구성원의 권한 변경 — 현황 화면에서 "권한 변경" 클릭 시 진입 */
+function editEmpPerm(id){
+  pickSel = new Set([id]);
+  newPermDraftMap = {};
+  var si=document.getElementById('pick-search'); if(si) si.value='';
+  document.getElementById('member-add-page').style.display='flex';
+  document.body.style.overflow='hidden';
+  renderPickList();
+  selectNewPermEmp(id, true);
+}
+
+function showNewPermEmpty(){
+  var empty=document.getElementById('new-perm-empty');
+  var body=document.getElementById('new-perm-body');
+  if(empty) empty.style.display='flex';
+  if(body) body.style.display='none';
+}
+function showNewPermBody(){
+  var empty=document.getElementById('new-perm-empty');
+  var body=document.getElementById('new-perm-body');
+  if(empty) empty.style.display='none';
+  if(body) body.style.display='flex';
+}
+
+function updateStep1Btn(){}
+function renderPickChips(){}
+
+function setQuickTab(active){
+  document.querySelectorAll('.quick-tab-btn').forEach(function(b){
+    var isOn=(b.dataset.tab===active);
+    b.style.background=isOn?'#fff':'transparent';
+    b.style.color=isOn?'#111827':'#6B7280';
+    b.style.boxShadow=isOn?'0 1px 3px rgba(0,0,0,.08)':'none';
+  });
+}
+
+function applyQuickPermSilent(type){
+  var allNorm=[],allSens=[];
+  tabDefs.forEach(function(t){ if(!t.fields) return; t.fields.forEach(function(f){ if(f.s) allSens.push(f.key); else allNorm.push(f.key); }); });
+  newPermData.norm={}; newPermData.sens={};
+  newPermData.func={f_emp:{view:false,regedit:false},f_stat:{view:false},f_excel:{view:false},f_base:{view:false,regdeact:false}};
+  if(type==='basic'){
+    /* 상시공개 항목만 — 토글 전부 OFF, 안내 배너만 표시 */
+  } else if(type==='nosens'){
+    allNorm.forEach(function(k){newPermData.norm[k]=true;});
+    newPermData.func.f_emp.view=true; newPermData.func.f_stat.view=true;
+  } else {
+    allNorm.forEach(function(k){newPermData.norm[k]=true;});
+    allSens.forEach(function(k){newPermData.sens[k]=true;});
+    newPermData.func.f_emp.view=true; newPermData.func.f_stat.view=true; newPermData.func.f_excel.view=true;
+  }
+}
+
+function applyQuickPerm(type){
+  setQuickTab(type);
+  applyQuickPermSilent(type);
+  renderPermToggles();
+  updateSaveBtnState();
+}
+
+/* 배너 HTML 상수 */
+var BANNER_FUNC='<div style="display:flex;gap:12px;padding:14px 18px;background:#F0FBF7;border:1px solid #A7F3D0;border-radius:10px;margin-bottom:4px">'+
+  '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="7" stroke="#1D9E75" stroke-width="1.3"/><path d="M8 5v4M8 11v.5" stroke="#1D9E75" stroke-width="1.4" stroke-linecap="round"/></svg>'+
+  '<div>'+
+    '<div style="font-size:12px;font-weight:700;color:#065F46;margin-bottom:6px">시스템 고정 권한 안내</div>'+
+    '<div style="display:flex;flex-direction:column;gap:4px">'+
+      '<div style="display:flex;gap:8px;font-size:12px"><span style="font-weight:700;color:#065F46;min-width:110px">상시 허용</span><span style="color:#374151"><span style="font-weight:600;color:#1D9E75">조직도 조회</span> · 전체 임직원에게 항상 노출</span></div>'+
+      '<div style="display:flex;gap:8px;font-size:12px"><span style="font-weight:700;color:#065F46;min-width:110px">HR 최고관리자 전용</span><span style="color:#374151"><span style="font-weight:600;color:#1D9E75">권한관리</span> · 개인 권한 설정 불가, HR 최고관리자에게만 부여</span></div>'+
+    '</div>'+
+  '</div>'+
+'</div>';
+
+/* 세부 항목 전체가 상시공개라 토글 테이블에서 완전히 제외된 권한 단위 — 배너 전용 표시 */
+var EXTRA_ALWAYS_BANNER={
+  hr:[{label:'조직·직책 정보',text:'조직·직책·주조직 여부·조직 레벨·상위 조직·조직장 여부'}]
+};
+
+function buildAlwaysBanner(activeTab){
+  var items=(EXTRA_ALWAYS_BANNER[activeTab.id]||[]).concat(
+    activeTab.fields.filter(function(f){return !!f.always;}).map(function(f){return{label:f.label,text:f.always};})
+  );
+  if(items.length===0) return '';
+  var rows=items.map(function(f){
+    return '<div style="display:flex;gap:8px;font-size:12px"><span style="font-weight:700;color:#065F46;min-width:90px">'+f.label+'</span><span style="color:#374151">'+f.text+'</span></div>';
+  }).join('');
+  return '<div style="display:flex;gap:12px;padding:14px 18px;background:#F0FBF7;border:1px solid #A7F3D0;border-radius:10px;margin-bottom:14px">'+
+    '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="7" stroke="#1D9E75" stroke-width="1.3"/><path d="M8 5v4M8 11v.5" stroke="#1D9E75" stroke-width="1.4" stroke-linecap="round"/></svg>'+
+    '<div>'+
+      '<div style="font-size:12px;font-weight:700;color:#065F46;margin-bottom:6px">상시공개 항목 <span style="font-weight:400;font-size:11px;color:#6B7280">(비활성화 불가)</span> · 권한 설정과 무관하게 전체 구성원에게 항상 공개됩니다.</div>'+
+      '<div style="display:flex;flex-direction:column;gap:3px">'+rows+'</div>'+
+    '</div>'+
+  '</div>';
+}
+
+function renderPermToggles(){
+  var body=document.getElementById('perm-toggle-body');
+  if(!body) return;
+  body.innerHTML='<div id="perm-tab-body" style="flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:12px"></div>';
+  /* 탭 상태 반영 */
+  ['func','data'].forEach(function(t){
+    var el=document.getElementById('nptab-'+t); if(!el) return;
+    el.style.borderBottom='2px solid '+(newPermMainTab===t?'#1D9E75':'transparent');
+    el.style.color=newPermMainTab===t?'#111827':'#9CA3AF';
+  });
+  renderPermTabBody();
+}
+
+function switchPermTab(tab){
+  newPermMainTab=tab;
+  ['func','data'].forEach(function(t){
+    var el=document.getElementById('nptab-'+t); if(!el) return;
+    el.style.borderBottom='2px solid '+(newPermMainTab===t?'#1D9E75':'transparent');
+    el.style.color=newPermMainTab===t?'#111827':'#9CA3AF';
+  });
+  renderPermTabBody();
+}
+
+function switchPermDataSub(sub){
+  newPermDataSub=sub;
+  renderPermTabBody();
+}
+
+function renderPermTabBody(){
+  var body=document.getElementById('perm-tab-body'); if(!body) return;
+  body.innerHTML='';
+
+  if(newPermMainTab==='func'){
+    /* 시스템 고정 권한 안내 배너 */
+    body.innerHTML=BANNER_FUNC;
+    /* 기능 권한 — 칩 방식 */
+    var funcDefs=[
+      {key:'f_emp',lbl:'구성원관리',desc:'구성원 목록 및 상세 조회, 등록·수정 제어 권한',acts:[{a:'view',l:'조회'},{a:'regedit',l:'등록·수정'}]},
+      {key:'f_stat_excel',lbl:'인사현황표',desc:'인사현황표 테이블 조회 및 Excel 다운로드 권한',acts:[{a:'stat_view',l:'조회'},{a:'excel_view',l:'다운로드'}]},
+      {key:'f_base',lbl:'기준정보관리',desc:'조직 코드, 직위, 직책, 직무 등 기준값을 관리합니다',acts:[{a:'view',l:'조회'},{a:'regdeact',l:'등록·비활성화'}]},
+    ];
+    var html='<div style="background:#fff;border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;flex-shrink:0">';
+    html+='<div style="padding:10px 20px;border-bottom:1px solid #E5E7EB;background:#F3F4F6;display:flex;align-items:center;gap:14px">'+
+      '<div style="flex:1;font-size:10px;font-weight:700;color:#6B7280;letter-spacing:.08em">메뉴명</div>'+
+      '<div style="width:280px;flex-shrink:0;font-size:10px;font-weight:700;color:#6B7280;letter-spacing:.08em">기능권한</div>'+
+    '</div>';
+    funcDefs.forEach(function(fd,fi){
+      var isLast=fi===funcDefs.length-1;
+      var chipsHtml='<div style="width:280px;flex-shrink:0;display:flex;gap:6px;flex-wrap:wrap">';
+      fd.acts.forEach(function(act){
+        var fkey,akey;
+        if(act.a==='stat_view'){fkey='f_stat';akey='view';}
+        else if(act.a==='excel_view'){fkey='f_excel';akey='view';}
+        else{fkey=fd.key;akey=act.a;}
+        var on=!!(newPermData.func[fkey]&&newPermData.func[fkey][akey]);
+        chipsHtml+=
+          '<div onclick="toggleFuncChip(\''+fkey+'\',\''+akey+'\',this)" style="'+
+            'display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:700;transition:all .1s;user-select:none;'+
+            'background:'+(on?'#F0FBF7':'#F9FAFB')+';'+
+            'color:'+(on?'#065F46':'#9CA3AF')+';'+
+            'border:1px solid '+(on?'#6EE7B7':'#E5E7EB')+';'+
+          '">'+
+            (on?'<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" fill="#1D9E75"/><path d="M3 5l1.3 1.3L7 3.5" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>':
+                '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#D1D5DB" stroke-width="1.2"/></svg>')+
+            act.l+
+          '</div>';
+      });
+      chipsHtml+='</div>';
+      html+='<div style="padding:16px 20px;'+(isLast?'':'border-bottom:0.5px solid #F3F4F6;')+'display:flex;align-items:center;gap:16px;background:#fff">'+
+        '<div style="flex:1;min-width:0">'+
+          '<div style="font-size:13px;font-weight:700;color:#111827">'+fd.lbl+'</div>'+
+          '<div style="font-size:11px;color:#9CA3AF;margin-top:3px">'+fd.desc+'</div>'+
+        '</div>'+
+        chipsHtml+
+      '</div>';
+    });
+    html+='</div>';
+    body.innerHTML+=html;
+
+  } else {
+    /* 데이터 권한 — 상시공개 배너(현재 탭 한정) + 서브 탭 + 프리셋 */
+    var dataTabDefs=tabDefs.filter(function(t){return !!t.fields;});
+    var activeTab=dataTabDefs.find(function(t){return t.id===newPermDataSub;})||dataTabDefs[0];
+    body.innerHTML=buildAlwaysBanner(activeTab);
+    var subHtml='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">';
+    subHtml+='<div style="display:flex;gap:4px;flex-wrap:wrap">';
+    dataTabDefs.forEach(function(tab){
+      var nf=tab.fields.filter(function(f){return !f.s;}),sf=tab.fields.filter(function(f){return f.s;});
+      var nOn=nf.filter(function(f){return newPermData.norm[f.key];}).length;
+      var sOn=sf.filter(function(f){return newPermData.sens[f.key];}).length;
+      var totalOn=nOn+sOn;
+      var totalAll=tab.fields.length; /* 항상 총 항목수 표시 */
+      var isOn=newPermDataSub===tab.id;
+      /* 뱃지: ON된 수 / 전체 항목 수 */
+      var badgeText=totalOn>0?(totalOn+'/'+totalAll):totalAll;
+      var badgeBg=isOn?(totalOn>0?'rgba(255,255,255,.3)':'rgba(255,255,255,.15)'):(totalOn>0?'#E0F2FE':'#F3F4F6');
+      var badgeColor=isOn?'#fff':(totalOn>0?'#0369A1':'#9CA3AF');
+      subHtml+='<div onclick="switchPermDataSub(\''+tab.id+'\')" style="'+
+        'display:inline-flex;align-items:center;gap:5px;padding:6px 13px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;transition:all .1s;'+
+        'background:'+(isOn?'#111827':'#fff')+';color:'+(isOn?'#fff':'#374151')+';border:1px solid '+(isOn?'#111827':'#E5E7EB')+';'+
+      '">'+tab.label+'<span style="font-size:10px;padding:1px 6px;border-radius:8px;background:'+badgeBg+';color:'+badgeColor+';font-weight:700">'+badgeText+'</span></div>';
+    });
+    subHtml+='</div>';
+    /* 프리셋 버튼 */
+    subHtml+='<div style="display:flex;gap:3px;background:#F3F4F6;border-radius:8px;padding:3px;flex-shrink:0">'+
+      '<button data-tab="basic" class="quick-tab-btn" onclick="applyQuickPerm(\'basic\')" style="padding:4px 11px;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;background:#fff;color:#111827;box-shadow:0 1px 3px rgba(0,0,0,.08)">기본 항목만</button>'+
+      '<button data-tab="nosens" class="quick-tab-btn" onclick="applyQuickPerm(\'nosens\')" style="padding:4px 11px;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#6B7280">민감정보 제외</button>'+
+      '<button data-tab="all" class="quick-tab-btn" onclick="applyQuickPerm(\'all\')" style="padding:4px 11px;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:#6B7280">민감정보 포함 전체</button>'+
+    '</div>';
+    subHtml+='</div>';
+
+    var tabScopes=activeTab.fields.map(function(f){return (newPermData.fieldScope&&newPermData.fieldScope[f.key])||'sub';});
+    var bulkScope=tabScopes.every(function(s){return s==='all';})?'all':'sub';
+    var rowHtml='<div style="background:#fff;border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;flex-shrink:0">';
+    /* 전체 일괄 적용 툴바 — 헤더와 분리 */
+    var bulkBarHtml='<div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:10px">'+
+      '<span style="font-size:12px;color:#6B7280;font-weight:600">공개 범위 전체 적용</span>'+
+      '<select onchange="applyAllScope(this.value)" title="허용 여부와 무관하게 현재 탭 전체 항목에 적용" style="font-size:12px;font-weight:600;color:#1D9E75;border:1px solid #A7F3D0;border-radius:6px;padding:5px 10px;background:#F0FBF7;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;min-width:170px">'+
+        '<option value="sub"'+(bulkScope==='sub'?' selected':'')+'>소속 및 하위 조직</option>'+
+        '<option value="all"'+(bulkScope==='all'?' selected':'')+'>전체 구성원</option>'+
+      '</select>'+
+    '</div>';
+    /* 컬럼 헤더 — 다른 탭과 동일하게 단순 텍스트 3컬럼 */
+    rowHtml+='<div style="padding:10px 20px;border-bottom:1px solid #E5E7EB;background:#F3F4F6;display:flex;align-items:center;gap:14px">'+
+      '<div style="flex:1;font-size:10px;font-weight:700;color:#6B7280;letter-spacing:.08em">권한 단위</div>'+
+      '<div style="width:170px;flex-shrink:0;font-size:10px;font-weight:700;color:#6B7280;letter-spacing:.08em">공개 범위</div>'+
+      '<div style="width:44px;font-size:10px;font-weight:700;color:#6B7280;letter-spacing:.08em;flex-shrink:0">허용</div>'+
+    '</div>';
+    activeTab.fields.forEach(function(f,i){
+      var on=f.s?!!newPermData.sens[f.key]:!!newPermData.norm[f.key];
+      var scope=newPermData.fieldScope&&newPermData.fieldScope[f.key]||'sub';
+      var isLast=i===activeTab.fields.length-1;
+      var sensB=f.s?'<span style="font-size:10px;padding:1px 6px;border-radius:5px;background:#FEE2E2;color:#DC2626;font-weight:700;margin-left:6px">민감</span>':'';
+      /* 드롭다운 — 커스텀 화살표 SVG */
+      var arrowColor=on?'%236B7280':'%23D1D5DB';
+      var dropdownStyle='width:100%;padding:6px 28px 6px 10px;border:1px solid '+(on?'#D1D5DB':'#F3F4F6')+';border-radius:8px;font-size:12px;color:'+(on?'#374151':'#C4C9D4')+';background:'+(on?'#fff':'#F9FAFB')+(on?' box-shadow:0 1px 2px rgba(0,0,0,.05)':'')+';cursor:'+(on?'pointer':'default')+';outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=\'10\' height=\'6\' viewBox=\'0 0 10 6\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M1 1l4 4 4-4\' stroke=\''+arrowColor+'\' stroke-width=\'1.4\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;transition:all .12s';
+      rowHtml+='<div style="padding:14px 20px;'+(isLast?'':'border-bottom:0.5px solid #F3F4F6;')+'display:flex;align-items:center;gap:14px;background:'+(on?'#fff':'#FAFAFA')+';transition:background .1s">'+
+        '<div style="flex:1;min-width:0">'+
+          '<div style="font-size:13px;font-weight:600;color:'+(on?'#111827':'#9CA3AF')+'">'+f.label+sensB+'</div>'+
+          (f.sub?'<div style="font-size:11px;color:'+(on?'#9CA3AF':'#C4C9D4')+';margin-top:2px">'+f.sub+'</div>':'')+
+        '</div>'+
+        '<div style="width:170px;flex-shrink:0">'+
+          '<select onchange="setFieldScope(\''+f.key+'\',this.value)" '+(on?'':'disabled')+' style="'+dropdownStyle+'">'+
+            '<option value="sub"'+(scope==='sub'?' selected':'')+'>소속 및 하위 조직</option>'+
+            '<option value="all"'+(scope==='all'?' selected':'')+'>전체 구성원</option>'+
+          '</select>'+
+        '</div>'+
+        '<div style="width:44px;flex-shrink:0">'+
+          '<div class="tog'+(on?' tog-on':'')+'" onclick="toggleDataPerm(\''+f.key+'\','+(f.s?'true':'false')+',this)" style="cursor:pointer"></div>'+
+        '</div>'+
+      '</div>';
+    });
+    rowHtml+='</div>';
+    body.innerHTML+=subHtml+bulkBarHtml+rowHtml;
+  }
+}
+
+function toggleFunc(fkey,akey,el){
+  newPermData.func[fkey][akey]=!newPermData.func[fkey][akey];
+  el.className='tog'+(newPermData.func[fkey][akey]?' tog-on':'');
+  var lbl=el.nextElementSibling;
+  if(lbl){lbl.style.color=newPermData.func[fkey][akey]?'#111827':'#9CA3AF';lbl.style.fontWeight=newPermData.func[fkey][akey]?'600':'400';}
+}
+
+function toggleFuncChip(fkey,akey,el){
+  var cur=!!(newPermData.func[fkey]&&newPermData.func[fkey][akey]);
+  newPermData.func[fkey][akey]=!cur;
+  var on=newPermData.func[fkey][akey];
+  /* 등록·수정(regedit)/등록·비활성화(regdeact)를 켜면 조회(view)도 자동으로 켜짐. 끌 때는 조회 유지 */
+  if(on&&(akey==='regedit'||akey==='regdeact')&&!newPermData.func[fkey].view){
+    newPermData.func[fkey].view=true;
+    updateSaveBtnState();
+    renderPermTabBody(); /* 조회 칩 상태 동기화를 위해 리렌더 */
+    return;
+  }
+  el.style.background=on?'#F0FBF7':'#F9FAFB';
+  el.style.color=on?'#065F46':'#9CA3AF';
+  el.style.borderColor=on?'#6EE7B7':'#E5E7EB';
+  el.innerHTML=(on
+    ?'<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" fill="#1D9E75"/><path d="M3 5l1.3 1.3L7 3.5" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    :'<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#D1D5DB" stroke-width="1.2"/></svg>'
+  )+el.textContent.trim();
+  updateSaveBtnState();
+}
+function toggleDataPerm(key,isSens,el){
+  if(isSens) newPermData.sens[key]=!newPermData.sens[key]; else newPermData.norm[key]=!newPermData.norm[key];
+  var on=isSens?newPermData.sens[key]:newPermData.norm[key];
+  el.className='tog'+(on?' tog-on':'');
+  var row=el.parentElement&&el.parentElement.parentElement;
+  if(row){
+    row.style.background=on?'#fff':'#FAFAFA';
+    /* 항목명 색상 */
+    var nameEl=row.querySelector('div>div');
+    if(nameEl) nameEl.style.color=on?'#111827':'#9CA3AF';
+    var subEl=nameEl&&nameEl.nextElementSibling;
+    if(subEl) subEl.style.color=on?'#9CA3AF':'#C4C9D4';
+    /* 드롭다운 */
+    var sel=row.querySelector('select');
+    if(sel){
+      var arrowColor=on?'%236B7280':'%23D1D5DB';
+      sel.disabled=!on;
+      sel.style.color=on?'#374151':'#C4C9D4';
+      sel.style.borderColor=on?'#D1D5DB':'#F3F4F6';
+      sel.style.background=on?'#fff':'#F9FAFB';
+      sel.style.cursor=on?'pointer':'default';
+      sel.style.backgroundImage='url("data:image/svg+xml,%3Csvg width=\'10\' height=\'6\' viewBox=\'0 0 10 6\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M1 1l4 4 4-4\' stroke=\''+arrowColor+'\' stroke-width=\'1.4\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E")';
+    }
+  }
+  refreshAccBadges(el);
+  updateSaveBtnState();
+}
+function refreshAccBadges(el){
+  var details=el.closest('details'); if(!details) return;
+  var tl=details.querySelector('.acc-title'); if(!tl) return;
+  var tab=tabDefs.find(function(t){return t.label===tl.textContent&&t.fields;}); if(!tab) return;
+  var nf=tab.fields.filter(function(f){return !f.s;}), sf=tab.fields.filter(function(f){return f.s;});
+  var nOn=nf.filter(function(f){return newPermData.norm[f.key];}).length;
+  var sOn=sf.filter(function(f){return newPermData.sens[f.key];}).length;
+  var badges=details.querySelectorAll('.acc-badges span');
+  if(badges[0]){badges[0].style.background=nOn>0?'#EFF6FF':'#F3F4F6';badges[0].style.color=nOn>0?'#1E40AF':'#9CA3AF';badges[0].textContent=nOn+'/'+nf.length+' 일반';}
+  if(badges[1]&&sf.length>0){badges[1].style.background=sOn>0?'#FEE2E2':'#F3F4F6';badges[1].style.color=sOn>0?'#DC2626':'#9CA3AF';badges[1].textContent=sOn+'/'+sf.length+' 민감';}
+}
+
+/* 저장 */
+/* 저장 — 좌측에 추가된 모든 구성원을 각자의 draft로 일괄 저장 */
+function saveNewPerm(){
+  if(pickSel.size===0){toast('⚠ 구성원을 선택해 주세요.');return;}
+  var ids=Array.from(pickSel);
+  var savedCount=0;
+  ids.forEach(function(id){
+    var data=newPermDraftMap[id]||mkDefaultPerm();
+    var oldP=empPerm[id]||null;
+    var isFirstSave=!oldP;
+    var everHadHistory=!!(permHistory[id]&&permHistory[id].length>0);
+    var saved=JSON.parse(JSON.stringify(data));
+    var diff=diffPerm(oldP,data);
+    var hasChange=(diff.dataAdded.length+diff.dataRemoved.length+diff.funcAllowed.length+diff.funcRevoked.length)>0;
+    /* 최초 설정(재등록 포함)은 변경 사항이 없어도 항상 기록, 이후 변경은 실제로 뭔가 바뀐 경우에만 기록 */
+    if(isFirstSave||hasChange){
+      var desc=isFirstSave?(everHadHistory?'권한 재설정':'권한 최초 설정'):'권한 변경';
+      logHistory(id,desc,diff);
+    }
+    empPerm[id]=saved;
+    empPerm[id].at='방금';
+    savedCount++;
+  });
+  var firstId=ids[0];
+  closeMemberAddPage();
+  renderSummary(); renderLeftList();
+  selectEmp(firstId);
+  toast(savedCount>1?(savedCount+'명의 권한이 저장됐습니다.'):'권한이 저장됐습니다.');
+}
+function nowStr(){
+  var d=new Date();
+  function p2(n){return n<10?'0'+n:''+n;}
+  return (d.getMonth()+1)+'/'+d.getDate()+' '+p2(d.getHours())+':'+p2(d.getMinutes());
+}
+
+/* ───────── TOAST ───────── */
+function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(t._t);t._t=setTimeout(function(){t.style.display='none';},2600);}
+
+/* ───────── INIT ───────── */
+renderSummary();
+renderLeftList();
+// 첫 번째 구성원 자동 선택
+var first=getAssigned()[0];
+if(first)selectEmp(first.id); else showEmptyRight();
+</script>
+</body>
+</html>
