@@ -41,6 +41,7 @@
   .lifecycle-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:6px;}
   .lifecycle-title{font-size:14.5px;font-weight:700;color:var(--ink);}
   .lifecycle-sys{font-size:11px;font-weight:700;color:var(--amber-dark);background:var(--amber-light);padding:3px 10px;border-radius:20px;white-space:nowrap;}
+  .lifecycle-sys.connected{color:var(--accent-darker);background:var(--accent-light);}
   .lifecycle-body{font-size:12.5px;color:var(--ink-sub);line-height:1.6;}
   .lifecycle-arrow{text-align:center;font-size:16px;color:var(--ink-mute);padding:4px 0;}
 
@@ -157,7 +158,7 @@
 
   <!-- Employee Lifecycle -->
   <section>
-    <div class="eyebrow">01 · Employee Lifecycle</div>
+    <div class="eyebrow">01 · Employee Lifecycle (현재)</div>
     <h2 class="section-title">입사부터 퇴사까지, 여러 시스템을 오가는 구성원 정보</h2>
     <p class="section-sub">한 명의 구성원이 거치는 6단계, 그 사이 정보는 계속 여러 시스템을 오갑니다.</p>
 
@@ -194,43 +195,43 @@
     <div class="vision-line" style="margin-top:26px;margin-bottom:0;white-space:nowrap;">하나의 구성원 정보가 입사부터 퇴사까지, 여러 시스템을 오가며 반복 관리되고 있습니다.</div>
   </section>
 
-  <!-- 왜 자체 ERP인가 -->
+  <!-- ERPIX 적용 후 -->
   <section>
-    <div class="eyebrow">02 · 왜 자체 ERP인가</div>
-    <h2 class="section-title">하나의 조직 데이터로 연결되는 회사 전체 업무</h2>
-    <p class="section-sub">구성원 데이터는 인사관리를 넘어, 프로젝트·공수·정부과제·계약·자산까지 연결되는 회사의 핵심 데이터입니다.</p>
-    <svg width="90%" viewBox="0 0 680 460" style="display:block;margin:8px auto 0;">
-      <line x1="340" y1="230" x2="340" y2="60" stroke="var(--line)" stroke-width="1.5"/>
-      <line x1="340" y1="230" x2="487" y2="145" stroke="var(--line)" stroke-width="1.5"/>
-      <line x1="340" y1="230" x2="487" y2="315" stroke="var(--line)" stroke-width="1.5"/>
-      <line x1="340" y1="230" x2="340" y2="400" stroke="var(--line)" stroke-width="1.5"/>
-      <line x1="340" y1="230" x2="193" y2="315" stroke="var(--line)" stroke-width="1.5"/>
-      <line x1="340" y1="230" x2="193" y2="145" stroke="var(--line)" stroke-width="1.5"/>
+    <div class="eyebrow">02 · ERPIX 적용 후</div>
+    <h2 class="section-title">하나의 시스템으로 연결되는 구성원 Lifecycle</h2>
+    <p class="section-sub">같은 6단계, 이제는 ERPIX 하나로 연결됩니다.</p>
 
-      <rect x="265" y="35" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-      <text x="340" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">프로젝트 공수 관리</text>
+    <div class="lifecycle-step">
+      <div class="lifecycle-head"><div class="lifecycle-title">입사 · HR Master 생성</div><div class="lifecycle-sys connected">ERPIX</div></div>
+      <div class="lifecycle-body">Flex 개별 등록 없이, ERPIX에서 한 번에 HR Master 생성</div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="lifecycle-step">
+      <div class="lifecycle-head"><div class="lifecycle-title">프로젝트 배정</div><div class="lifecycle-sys connected">ERPIX</div></div>
+      <div class="lifecycle-body">HR Master 데이터가 프로젝트에 자동 연동</div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="lifecycle-step">
+      <div class="lifecycle-head"><div class="lifecycle-title">자산 지급</div><div class="lifecycle-sys connected">ERPIX</div></div>
+      <div class="lifecycle-body">자산 정보가 구성원 데이터와 자동 연결</div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="lifecycle-step">
+      <div class="lifecycle-head"><div class="lifecycle-title">정부과제 참여</div><div class="lifecycle-sys connected">ERPIX</div></div>
+      <div class="lifecycle-body">연구자 정보를 별도 확인 없이 즉시 조회</div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="lifecycle-step">
+      <div class="lifecycle-head"><div class="lifecycle-title">조직 변경</div><div class="lifecycle-sys connected">ERPIX</div></div>
+      <div class="lifecycle-body">부서·권한·자산 변경이 한 번에 자동 반영</div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="lifecycle-step">
+      <div class="lifecycle-head"><div class="lifecycle-title">퇴사</div><div class="lifecycle-sys connected">ERPIX</div></div>
+      <div class="lifecycle-body">자산·계정·권한이 한 번에 자동 회수</div>
+    </div>
 
-      <rect x="412" y="120" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-      <text x="487" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">근태관리</text>
-
-      <rect x="412" y="290" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-      <text x="487" y="320" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">정부과제</text>
-
-      <rect x="265" y="375" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-      <text x="340" y="405" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">전자계약</text>
-
-      <rect x="118" y="290" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-      <text x="193" y="320" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">발령·Slack</text>
-
-      <rect x="118" y="120" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-      <text x="193" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">자산관리</text>
-
-      <circle cx="340" cy="230" r="72" fill="var(--accent-darker)"/>
-      <text x="340" y="222" text-anchor="middle" font-size="13.5" font-weight="700" fill="#fff">TelePIX</text>
-      <text x="340" y="240" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">Master Data</text>
-    </svg>
-    <p class="flow-caption">하나의 조직 데이터가 회사 전체 업무와 연결되는 구조</p>
-    <div class="vision-line" style="margin-top:22px;margin-bottom:0;white-space:nowrap;">ERPIX는 E-count ERP를 대체하는 시스템이 아니라, 구성원의 Lifecycle을 하나로 연결하는 운영 플랫폼입니다.</div>
+    <div class="vision-line" style="margin-top:26px;margin-bottom:0;white-space:nowrap;">ERPIX는 E-count ERP를 대체하는 시스템이 아니라, 구성원의 Lifecycle을 하나로 연결하는 운영 플랫폼입니다.</div>
   </section>
 
   <!-- 전체 구조 · 진행 범위 -->
