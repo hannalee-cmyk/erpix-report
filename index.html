@@ -81,6 +81,8 @@
   .progress-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
   .progress-name{font-size:14.5px;font-weight:700;color:var(--ink);}
   .progress-pct{font-size:14.5px;font-weight:700;color:var(--accent-dark);}
+  .progress-pct.active{color:var(--amber-dark);}
+  .progress-pct.plan{color:var(--ink-mute);}
   .progress-track{width:100%;height:10px;background:var(--line);border-radius:6px;overflow:hidden;}
   .progress-fill{height:100%;background:var(--accent);border-radius:6px;}
   .progress-note{font-size:12px;color:var(--ink-sub);margin-top:7px;}
@@ -136,22 +138,22 @@
       <div class="principle-card">
         <div class="p-num">!</div>
         <h3>HR 마스터데이터 분산</h3>
-        <p>Flex·국가연구자번호·E-count ERP·자산 정보 등이 각 시스템에 분산되어 있음</p>
+        <p>→ 입사·이동·퇴사 시 여러 시스템을 각각 수정</p>
       </div>
       <div class="principle-card">
         <div class="p-num">!</div>
         <h3>프로젝트 운영 비효율</h3>
-        <p>프로젝트 투입 인력 및 정보를 수작업으로 확인하여 운영 속도가 저하됨</p>
+        <p>→ 프로젝트 투입 가능 인력 및 정보를 수작업으로 확인</p>
       </div>
       <div class="principle-card">
         <div class="p-num">!</div>
         <h3>자산 및 권한 관리 어려움</h3>
-        <p>입·퇴사 및 조직 변경 시 자산·권한·계정 관리가 개별적으로 이루어짐</p>
+        <p>→ 계정·권한·자산 관리가 개별적으로 이루어져 누락 위험 존재</p>
       </div>
       <div class="principle-card">
         <div class="p-num">!</div>
         <h3>운영 비용 증가</h3>
-        <p>반복적인 수작업과 데이터 관리로 운영 비용이 증가함</p>
+        <p>→ 반복적인 수작업으로 운영 비용 증가</p>
       </div>
     </div>
   </section>
@@ -163,33 +165,33 @@
     <p class="section-sub">한 명의 구성원이 거치는 6단계, 그 사이 정보는 계속 여러 시스템을 오갑니다.</p>
 
     <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">입사 · HR Master 생성</div><div class="lifecycle-sys">Flex · 국가연구자번호 시스템</div></div>
-      <div class="lifecycle-body">Flex·사번·국가연구자번호 등록</div>
+      <div class="lifecycle-head"><div class="lifecycle-title">입사 · HR Master 생성</div><div class="lifecycle-sys">개별 시스템 등록</div></div>
+      <div class="lifecycle-body">구성원 정보를 각 시스템에 따로따로 등록</div>
     </div>
     <div class="lifecycle-arrow">↓</div>
     <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">프로젝트 배정</div><div class="lifecycle-sys">Excel · 프로젝트 관리 시트</div></div>
-      <div class="lifecycle-body">연구 프로젝트에 인력 투입</div>
+      <div class="lifecycle-head"><div class="lifecycle-title">프로젝트 배정</div><div class="lifecycle-sys">개별 시스템 확인</div></div>
+      <div class="lifecycle-body">투입 인력 정보를 다른 시스템에서 다시 확인</div>
     </div>
     <div class="lifecycle-arrow">↓</div>
     <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">자산 지급</div><div class="lifecycle-sys">자산대장 · E-count ERP</div></div>
-      <div class="lifecycle-body">노트북·라이선스·계정 지급</div>
+      <div class="lifecycle-head"><div class="lifecycle-title">자산 지급</div><div class="lifecycle-sys">개별 시스템 기록</div></div>
+      <div class="lifecycle-body">지급 내역을 별도 대장에 다시 기록</div>
     </div>
     <div class="lifecycle-arrow">↓</div>
     <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">정부과제 참여</div><div class="lifecycle-sys">국가연구자번호 시스템 · 과제 제출 서류</div></div>
-      <div class="lifecycle-body">연구자 정보·참여 이력 등록</div>
+      <div class="lifecycle-head"><div class="lifecycle-title">정부과제 참여</div><div class="lifecycle-sys">개별 시스템 등록</div></div>
+      <div class="lifecycle-body">연구자 정보를 또 다른 시스템에 다시 등록</div>
     </div>
     <div class="lifecycle-arrow">↓</div>
     <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">조직 변경</div><div class="lifecycle-sys">Flex · 자산대장 · 권한, 개별 수정</div></div>
-      <div class="lifecycle-body">부서 이동·권한 변경·자산 변경</div>
+      <div class="lifecycle-head"><div class="lifecycle-title">조직 변경</div><div class="lifecycle-sys">개별 시스템 수정</div></div>
+      <div class="lifecycle-body">부서·권한·자산을 각 시스템에서 따로 수정</div>
     </div>
     <div class="lifecycle-arrow">↓</div>
     <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">퇴사</div><div class="lifecycle-sys">자산대장 · Flex · 계정관리, 개별 처리</div></div>
-      <div class="lifecycle-body">자산 회수·계정 회수·권한 종료</div>
+      <div class="lifecycle-head"><div class="lifecycle-title">퇴사</div><div class="lifecycle-sys">개별 시스템 처리</div></div>
+      <div class="lifecycle-body">자산·계정·권한을 각 시스템에서 따로 회수</div>
     </div>
 
     <div class="vision-line" style="margin-top:26px;margin-bottom:0;white-space:nowrap;">하나의 구성원 정보가 입사부터 퇴사까지, 여러 시스템을 오가며 반복 관리되고 있습니다.</div>
@@ -200,6 +202,7 @@
     <div class="eyebrow">02 · ERPIX 적용 후</div>
     <h2 class="section-title">하나의 시스템으로 연결되는 구성원 Lifecycle</h2>
     <p class="section-sub">같은 6단계, 이제는 ERPIX 하나로 연결됩니다.</p>
+    <div class="vision-line" style="white-space:nowrap;">ERPIX 하나에서, 모든 단계가 연결됩니다.</div>
 
     <div class="lifecycle-step">
       <div class="lifecycle-head"><div class="lifecycle-title">입사 · HR Master 생성</div><div class="lifecycle-sys connected">ERPIX</div></div>
@@ -231,48 +234,116 @@
       <div class="lifecycle-body">자산·계정·권한이 한 번에 자동 회수</div>
     </div>
 
-    <div class="vision-line" style="margin-top:26px;margin-bottom:0;white-space:nowrap;">ERPIX는 E-count ERP를 대체하는 시스템이 아니라, 구성원의 Lifecycle을 하나로 연결하는 운영 플랫폼입니다.</div>
+    <div class="vision-line" style="margin-top:26px;margin-bottom:0;white-space:nowrap;">ERPIX는 E-count ERP를 대체하는 시스템이 아니라, HR Master를 중심으로 프로젝트·자산·권한·공수를 연결하는 운영 플랫폼입니다.</div>
   </section>
 
-  <!-- 전체 구조 · 진행 범위 -->
+  <!-- 전체 구조 -->
   <section>
-    <div class="eyebrow">03 · 전체 구조 · 진행 범위</div>
-    <h2 class="section-title">ERPIX가 다루는 영역</h2>
-    <p class="section-sub">HR부터 시작해 자산·프로젝트·공수 영역으로 확장합니다.</p>
-    <div class="scope-grid">
+    <div class="eyebrow">03 · 전체 구조</div>
+    <h2 class="section-title">모든 데이터의 출발점, HR Master</h2>
+    <p class="section-sub">프로젝트·자산·권한·조직·공수 — 모든 데이터는 HR Master에서 시작됩니다.</p>
+    <svg width="90%" viewBox="0 0 680 430" style="display:block;margin:8px auto 0;">
+      <line x1="340" y1="230" x2="340" y2="60" stroke="var(--line)" stroke-width="1.5"/>
+      <line x1="340" y1="230" x2="502" y2="177" stroke="var(--line)" stroke-width="1.5"/>
+      <line x1="340" y1="230" x2="440" y2="368" stroke="var(--line)" stroke-width="1.5"/>
+      <line x1="340" y1="230" x2="240" y2="368" stroke="var(--line)" stroke-width="1.5"/>
+      <line x1="340" y1="230" x2="178" y2="177" stroke="var(--line)" stroke-width="1.5"/>
+
+      <rect x="265" y="35" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
+      <text x="340" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">프로젝트</text>
+
+      <rect x="427" y="152" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
+      <text x="502" y="182" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">자산</text>
+
+      <rect x="365" y="343" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
+      <text x="440" y="373" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">권한</text>
+
+      <rect x="165" y="343" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
+      <text x="240" y="373" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">조직</text>
+
+      <rect x="103" y="152" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
+      <text x="178" y="182" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">공수</text>
+
+      <circle cx="340" cy="230" r="72" fill="var(--accent-darker)"/>
+      <text x="340" y="236" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">HR Master</text>
+    </svg>
+    <p class="flow-caption">HR은 1차 개발 중 · 프로젝트·자산·권한·조직·공수는 단계적으로 연결 확장</p>
+  </section>
+
+  <!-- 로드맵 -->
+  <section>
+    <div class="eyebrow">04 · 로드맵</div>
+    <h2 class="section-title">HR 그룹웨어 개발 로드맵</h2>
+    <p class="section-sub">1.5차 완료 시 HR 핵심 기능이 완성됩니다.</p>
+
+    <div class="stepper">
+      <div class="step done">1차 · HR 코어</div>
+      <div class="step-arrow">→</div>
+      <div class="step current">● Current</div>
+      <div class="step-arrow">→</div>
+      <div class="step">1.5차 · HR 고도화</div>
+      <div class="step-arrow">→</div>
+      <div class="step">2차 · 확장</div>
+    </div>
+
+    <div class="roadmap-grid">
+      <div class="rm-col">
+        <div class="rm-head"><div class="rm-circle">1차</div><div class="rm-title">HR 코어 · ~8월</div></div>
+        <div class="rm-status">● 진행 중 · 확정</div>
+        <div class="rm-card"><div class="rm-card-title">임직원 정보 통합 관리</div><div class="rm-card-body">등록·수정·조회 · 재직상태 관리</div></div>
+        <div class="rm-card"><div class="rm-card-title">조직·직책·직무 기준정보</div><div class="rm-card-body">조직·직위·직책·직무·채용채널 코드</div></div>
+        <div class="rm-card"><div class="rm-card-title">HR 담당자 권한 관리</div><div class="rm-card-body">개인·직책별 접근 권한 설정</div></div>
+        <div class="rm-card moved"><div class="rm-card-title">인사현황표 <span style="font-size:9.5px;font-weight:400;color:var(--accent-dark)">(1.5차→이동)</span></div><div class="rm-card-body">통계 대시보드 · 엑셀 다운로드</div></div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-head"><div class="rm-circle">1.5</div><div class="rm-title">HR 고도화 · 9~10월</div></div>
+        <div class="rm-status">● 예정 · 확정</div>
+        <div class="rm-card"><div class="rm-card-title">발령 관리</div><div class="rm-card-body">발령 9종 · 인사기록부 타임라인</div></div>
+        <div class="rm-card"><div class="rm-card-title">조직도</div><div class="rm-card-body">조직 트리 + 팀원 카드</div></div>
+        <div class="rm-card new"><div class="rm-card-title">전자계약 <span class="tag-new">NEW</span></div><div class="rm-card-body">계약 작성·발송 · 전자서명 연동</div></div>
+        <div class="rm-foot">1.5차 완료 시 HR 핵심 기능 완성</div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-head"><div class="rm-circle amber">2차</div><div class="rm-title">확장 · ~12월</div></div>
+        <div class="rm-status amber">● 범위 협의 중</div>
+        <div class="rm-card warn"><div class="rm-card-title">근태 관리<span class="tag-alert">협의 필요</span></div><div class="rm-card-body">그룹웨어 구축 vs Wanted Space 유지</div></div>
+        <div class="rm-card neutral"><div class="rm-card-title">프로젝트 공수 관리</div><div class="rm-card-body">프로젝트별 공수 입력·집계</div></div>
+        <div class="rm-card neutral"><div class="rm-card-title">자산 관리</div><div class="rm-card-body">관리자용 자산 시스템</div></div>
+        <div class="rm-card neutral"><div class="rm-card-title">외부 연동</div><div class="rm-card-body">Slack · Wanted Space · Google Calendar</div></div>
+      </div>
+    </div>
+    <div class="rm-legend">
+      <span>— 확정</span><span>┄ 협의 중</span><span>출퇴근·휴가 → 현재 Wanted Space 사용 중</span><span>결재·승인·예산 → E-count ERP 유지</span>
+    </div>
+  </section>
+
+  <!-- 전체 일정 -->
+  <section>
+    <div class="eyebrow">04-1 · 전체 일정</div>
+    <h2 class="section-title">언제까지, 무엇을</h2>
+    <p class="section-sub">1.5차·2차는 정책·범위 확정을 전제로 한 목표 일정입니다.</p>
+    <div class="scope-grid" style="grid-template-columns:1fr 1fr 1fr;">
       <div class="scope-card active">
         <span class="scope-status active">개발 중</span>
-        <h3>HR</h3>
+        <h3>1차 · 8월</h3>
         <ul class="scope-list">
-          <li class="done">인사정보관리</li>
-          <li class="done">기준정보관리</li>
-          <li class="done">권한관리</li>
-          <li class="dot">조직도 (1.5차)</li>
-          <li class="dot">전자계약 (1.5차)</li>
+          <li class="done">인사정보관리·기준정보관리·권한관리·인사현황표</li>
         </ul>
       </div>
       <div class="scope-card">
-        <span class="scope-status plan">예정</span>
-        <h3>자산관리</h3>
+        <span class="scope-status plan" style="background:var(--amber-light);color:var(--amber-dark);">목표</span>
+        <h3>1.5차 · 9~10월</h3>
         <ul class="scope-list">
-          <li class="dot">관리자용 자산 시스템</li>
-          <li class="dot">운영정책 수립 후 착수</li>
+          <li class="dot">발령·조직도·전자계약</li>
+          <li class="dot" style="color:var(--amber-dark);">전제: 발령 정책·전자서명 벤더 8월 내 확정</li>
         </ul>
       </div>
       <div class="scope-card">
-        <span class="scope-status plan">예정</span>
-        <h3>프로젝트관리</h3>
+        <span class="scope-status plan" style="background:var(--amber-light);color:var(--amber-dark);">목표</span>
+        <h3>2차 · 12월</h3>
         <ul class="scope-list">
-          <li class="dot">프로젝트 단위 관리</li>
-          <li class="dot">협의 필요</li>
-        </ul>
-      </div>
-      <div class="scope-card">
-        <span class="scope-status plan">예정</span>
-        <h3>공수관리</h3>
-        <ul class="scope-list">
-          <li class="dot">프로젝트별 공수 입력·집계</li>
-          <li class="dot">협의 필요</li>
+          <li class="dot">근태·자산·프로젝트·공수 관리</li>
+          <li class="dot" style="color:var(--amber-dark);">전제: 범위 협의(특히 근태) 8월 내 완료</li>
         </ul>
       </div>
     </div>
@@ -280,7 +351,7 @@
 
   <!-- 설계 원칙 -->
   <section>
-    <div class="eyebrow">04 · 설계 원칙</div>
+    <div class="eyebrow">05 · 설계 원칙</div>
     <h2 class="section-title">HR 관리자를 위한 설계 원칙</h2>
     <p class="section-sub">예쁜 화면보다, 안전하게 반복 업무를 하는 구조가 목표였습니다.</p>
     <div class="principle-grid">
@@ -291,7 +362,7 @@
       </div>
       <div class="principle-card">
         <div class="p-num">02</div>
-        <h3>마스터데이터 무결성을 지킨다</h3>
+        <h3>기준정보를 함부로 변경하지 못하도록 설계</h3>
         <p>구성원과 연결된 값·필수 항목은 비활성화 불가</p>
       </div>
       <div class="principle-card">
@@ -309,7 +380,7 @@
 
   <!-- 핵심 업무 흐름 -->
   <section>
-    <div class="eyebrow">05 · 핵심 업무 흐름</div>
+    <div class="eyebrow">06 · 핵심 업무 흐름</div>
     <h2 class="section-title">인사정보 등록 → 기준정보 연결 → 권한 적용</h2>
     <p class="section-sub">입사 등록부터 권한 적용까지, 3단계 흐름으로 확인하세요.</p>
     <div class="flow-wrap">
@@ -330,7 +401,7 @@
       <a class="demo-card" href="./hr-permission.html">
         <div class="demo-num">STEP 3</div>
         <h3>권한관리</h3>
-        <p>필드 단위 접근 권한 자동 적용</p>
+        <p>역할에 맞는 권한 자동 적용</p>
         <div class="demo-link">화면 열기 →</div>
       </a>
     </div>
@@ -338,7 +409,7 @@
 
   <!-- 사용자 접근 범위 -->
   <section>
-    <div class="eyebrow">05-1 · 사용자 접근 범위</div>
+    <div class="eyebrow">06-1 · 사용자 접근 범위</div>
     <h2 class="section-title">누가, 어디까지 쓰는 시스템인가</h2>
     <p class="section-sub">관리자 도구로 시작해 전 구성원 시스템으로 확장됩니다.</p>
     <svg width="90%" viewBox="0 0 680 380" style="display:block;margin:0 auto;">
@@ -366,108 +437,29 @@
 
   <!-- 현재 개발 현황 -->
   <section>
-    <div class="eyebrow">06 · 현재 개발 현황</div>
+    <div class="eyebrow">07 · 현재 개발 현황</div>
     <h2 class="section-title">모듈별 진행률</h2>
-    <p class="section-sub">숫자로 보는 현재 개발 진척도입니다.</p>
+    <p class="section-sub">모듈별 개발 상태를 한눈에 보여줍니다.</p>
 
     <div class="progress-row">
-      <div class="progress-top"><span class="progress-name">인사정보관리</span><span class="progress-pct">90%</span></div>
+      <div class="progress-top"><span class="progress-name">인사정보관리</span><span class="progress-pct">완료</span></div>
       <div class="progress-track"><div class="progress-fill" style="width:90%;"></div></div>
       <div class="progress-note">v30+ · 등록/수정/조회, 재직상태 관리 반영</div>
     </div>
     <div class="progress-row">
-      <div class="progress-top"><span class="progress-name">기준정보관리</span><span class="progress-pct">70%</span></div>
+      <div class="progress-top"><span class="progress-name">기준정보관리</span><span class="progress-pct active">진행 중</span></div>
       <div class="progress-track"><div class="progress-fill" style="width:70%;"></div></div>
       <div class="progress-note">조직관리 UI(토글, 비활성화 확인 모달) 진행 중</div>
     </div>
     <div class="progress-row">
-      <div class="progress-top"><span class="progress-name">권한관리</span><span class="progress-pct">85%</span></div>
+      <div class="progress-top"><span class="progress-name">권한관리</span><span class="progress-pct">완료</span></div>
       <div class="progress-track"><div class="progress-fill" style="width:85%;"></div></div>
       <div class="progress-note">정책 확정(v2.x) · 필드 단위 권한 프로토타입 반영 중</div>
     </div>
     <div class="progress-row">
-      <div class="progress-top"><span class="progress-name">전자계약</span><span class="progress-pct">30%</span></div>
+      <div class="progress-top"><span class="progress-name">전자계약</span><span class="progress-pct plan">설계 중</span></div>
       <div class="progress-track"><div class="progress-fill" style="width:30%;"></div></div>
       <div class="progress-note">초기 스코핑 완료 · 외부 전자서명 연동 방식으로 진행</div>
-    </div>
-  </section>
-
-  <!-- 로드맵 -->
-  <section>
-    <div class="eyebrow">07 · 로드맵</div>
-    <h2 class="section-title">HR 그룹웨어 개발 로드맵</h2>
-    <p class="section-sub">1.5차 완료 시 HR 핵심 기능이 완성됩니다.</p>
-
-    <div class="stepper">
-      <div class="step done">1차 · HR 코어</div>
-      <div class="step-arrow">→</div>
-      <div class="step current">● Current</div>
-      <div class="step-arrow">→</div>
-      <div class="step">1.5차 · HR 고도화</div>
-      <div class="step-arrow">→</div>
-      <div class="step">2차 · 확장</div>
-    </div>
-
-    <div class="roadmap-grid">
-      <div class="rm-col">
-        <div class="rm-head"><div class="rm-circle">1차</div><div class="rm-title">HR 코어</div></div>
-        <div class="rm-status">● 진행 중 · 확정</div>
-        <div class="rm-card"><div class="rm-card-title">임직원 정보 통합 관리</div><div class="rm-card-body">등록·수정·조회 · 재직상태 관리</div></div>
-        <div class="rm-card"><div class="rm-card-title">조직·직책·직무 기준정보</div><div class="rm-card-body">조직·직위·직책·직무·채용채널 코드</div></div>
-        <div class="rm-card"><div class="rm-card-title">HR 담당자 권한 관리</div><div class="rm-card-body">개인·직책별 접근 권한 설정</div></div>
-        <div class="rm-card moved"><div class="rm-card-title">인사현황표 <span style="font-size:9.5px;font-weight:400;color:var(--accent-dark)">(1.5차→이동)</span></div><div class="rm-card-body">통계 대시보드 · 엑셀 다운로드</div></div>
-      </div>
-      <div class="rm-col">
-        <div class="rm-head"><div class="rm-circle">1.5</div><div class="rm-title">HR 고도화</div></div>
-        <div class="rm-status">● 예정 · 확정</div>
-        <div class="rm-card"><div class="rm-card-title">발령 관리</div><div class="rm-card-body">발령 9종 · 인사기록부 타임라인</div></div>
-        <div class="rm-card"><div class="rm-card-title">조직도</div><div class="rm-card-body">조직 트리 + 팀원 카드</div></div>
-        <div class="rm-card new"><div class="rm-card-title">전자계약 <span class="tag-new">NEW</span></div><div class="rm-card-body">계약 작성·발송 · 전자서명 연동</div></div>
-        <div class="rm-foot">1.5차 완료 시 HR 핵심 기능 완성</div>
-      </div>
-      <div class="rm-col">
-        <div class="rm-head"><div class="rm-circle amber">2차</div><div class="rm-title">확장</div></div>
-        <div class="rm-status amber">● 범위 협의 중</div>
-        <div class="rm-card warn"><div class="rm-card-title">근태 관리<span class="tag-alert">협의 필요</span></div><div class="rm-card-body">그룹웨어 구축 vs Wanted Space 유지</div></div>
-        <div class="rm-card neutral"><div class="rm-card-title">프로젝트 공수 관리</div><div class="rm-card-body">프로젝트별 공수 입력·집계</div></div>
-        <div class="rm-card neutral"><div class="rm-card-title">자산 관리</div><div class="rm-card-body">관리자용 자산 시스템</div></div>
-        <div class="rm-card neutral"><div class="rm-card-title">외부 연동</div><div class="rm-card-body">Slack · Wanted Space · Google Calendar</div></div>
-      </div>
-    </div>
-    <div class="rm-legend">
-      <span>— 확정</span><span>┄ 협의 중</span><span>출퇴근·휴가 → 현재 Wanted Space 사용 중</span><span>결재·승인·예산 → E-count ERP 유지</span>
-    </div>
-  </section>
-
-  <!-- 전체 일정 -->
-  <section>
-    <div class="eyebrow">07-1 · 전체 일정</div>
-    <h2 class="section-title">언제까지, 무엇을</h2>
-    <p class="section-sub">1.5차·2차는 정책·범위 확정을 전제로 한 목표 일정입니다.</p>
-    <div class="scope-grid" style="grid-template-columns:1fr 1fr 1fr;">
-      <div class="scope-card active">
-        <span class="scope-status active">개발 중</span>
-        <h3>1차 · 8월</h3>
-        <ul class="scope-list">
-          <li class="done">인사정보관리·기준정보관리·권한관리·인사현황표</li>
-        </ul>
-      </div>
-      <div class="scope-card">
-        <span class="scope-status plan" style="background:var(--amber-light);color:var(--amber-dark);">목표</span>
-        <h3>1.5차 · 9~10월</h3>
-        <ul class="scope-list">
-          <li class="dot">발령·조직도·전자계약</li>
-          <li class="dot" style="color:var(--amber-dark);">전제: 발령 정책·전자서명 벤더 8월 내 확정</li>
-        </ul>
-      </div>
-      <div class="scope-card">
-        <span class="scope-status plan" style="background:var(--amber-light);color:var(--amber-dark);">목표</span>
-        <h3>2차 · 12월</h3>
-        <ul class="scope-list">
-          <li class="dot">근태·자산·프로젝트·공수 관리</li>
-          <li class="dot" style="color:var(--amber-dark);">전제: 범위 협의(특히 근태) 8월 내 완료</li>
-        </ul>
-      </div>
     </div>
   </section>
 
