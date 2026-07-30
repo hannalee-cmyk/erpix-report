@@ -38,13 +38,6 @@
 
   .vision-line{font-size:19px;font-weight:700;color:var(--accent-darker);background:var(--accent-light);border-radius:12px;padding:20px 24px;margin-bottom:26px;line-height:1.5;}
 
-  .story-block{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px;}
-  .story-block .p-num{flex-shrink:0;}
-  .story-title{font-size:15.5px;font-weight:700;margin:0 0 8px;color:var(--ink);}
-  .story-body{font-size:13.5px;color:var(--ink-sub);line-height:1.7;margin:0;max-width:640px;}
-  .story-arrow{text-align:center;font-size:18px;color:var(--ink-mute);padding:6px 0 18px;}
-
-
   .ai-box{margin-top:20px;background:var(--accent-light);border-radius:12px;padding:16px 20px;font-size:13.5px;color:var(--accent-dark);line-height:1.7;}
   .ai-box b{color:var(--accent-darker);}
 
@@ -130,103 +123,124 @@
   <div class="hero">
     <div class="brand">● TELEPIX · SW Development Team</div>
     <h1>ERPIX — ERP for TelePIX</h1>
-    <div class="lead">TelePIX 사내 업무를 하나로 통합하는 자체 개발 ERP, 개발 중간점검 보고</div>
-    <div class="hero-summary">흩어진 HR 업무를 하나의 시스템으로 통합하고,<br>향후 자산·프로젝트 관리까지 확장하는 TelePIX ERP</div>
+    <div class="lead">연구개발 조직 TelePIX를 위한 자체 ERP 구축, 중간 점검 보고</div>
+    <div class="hero-summary">연구개발 조직 TelePIX에는, 부서마다 흩어진 SaaS가 아니라<br>하나로 연결된 내부 ERP 플랫폼이 필요합니다.</div>
   </div>
 
-  <!-- 왜 ERPIX인가 -->
+  <!-- 문제 제기 -->
   <section>
-    <div class="eyebrow">00 · 왜 ERPIX인가</div>
-    <h2 class="section-title">HR이 아니라, 연구개발 조직의 운영 플랫폼</h2>
-
-    <div class="story-block">
-      <div class="p-num">①</div>
-      <div>
-        <h3 class="story-title">왜 자체 ERP가 필요한가</h3>
-        <p class="story-body">TelePIX는 연구개발 중심 조직으로, HR 데이터가 연구인력 관리·프로젝트 운영·정부 R&amp;D 과제 대응의 기준 데이터가 됩니다.<br>SaaS는 HR 기능은 제공하지만, 연구개발 조직의 업무 전체를 하나의 데이터로 연결하기엔 한계가 있습니다.</p>
+    <div class="eyebrow">00 · 문제 제기</div>
+    <h2 class="section-title">연구개발 조직의 성장 속도를, HR 데이터가 따라가지 못합니다</h2>
+    <p class="section-sub">부서마다 흩어진 정보가, 회사의 대응 속도를 늦추고 있습니다.</p>
+    <div class="principle-grid">
+      <div class="principle-card">
+        <div class="p-num">!</div>
+        <h3>정보 파편화</h3>
+        <p>구성원 정보가 부서별 엑셀·메신저로 흩어져 있음</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">!</div>
+        <h3>불명확한 권한 기준</h3>
+        <p>정보 접근 권한이 담당자 재량에 맡겨져 있음</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">!</div>
+        <h3>수기로 반영되는 조직변경</h3>
+        <p>발령·조직변경이 수기 반영되어 누락 위험 존재</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">!</div>
+        <h3>끊어진 계약 프로세스</h3>
+        <p>계약이 종이 또는 개별 프로세스로 진행됨</p>
       </div>
     </div>
-
-    <div class="story-arrow">↓</div>
-
-    <div class="story-block">
-      <div class="p-num">②</div>
-      <div style="flex:1;">
-        <h3 class="story-title">HR Master Data 중심 구조</h3>
-        <svg width="100%" viewBox="0 0 680 460" style="display:block;margin:8px auto 0;">
-          <line x1="340" y1="230" x2="340" y2="60" stroke="var(--line)" stroke-width="1.5"/>
-          <line x1="340" y1="230" x2="487" y2="145" stroke="var(--line)" stroke-width="1.5"/>
-          <line x1="340" y1="230" x2="487" y2="315" stroke="var(--line)" stroke-width="1.5"/>
-          <line x1="340" y1="230" x2="340" y2="400" stroke="var(--line)" stroke-width="1.5"/>
-          <line x1="340" y1="230" x2="193" y2="315" stroke="var(--line)" stroke-width="1.5"/>
-          <line x1="340" y1="230" x2="193" y2="145" stroke="var(--line)" stroke-width="1.5"/>
-
-          <rect x="265" y="35" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-          <text x="340" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">프로젝트 관리</text>
-
-          <rect x="412" y="120" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-          <text x="487" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">공수 관리</text>
-
-          <rect x="412" y="290" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-          <text x="487" y="320" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">정부과제</text>
-
-          <rect x="265" y="375" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-          <text x="340" y="405" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">전자계약</text>
-
-          <rect x="118" y="290" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-          <text x="193" y="320" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">발령·Slack</text>
-
-          <rect x="118" y="120" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
-          <text x="193" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">자산관리</text>
-
-          <circle cx="340" cy="230" r="72" fill="var(--accent-darker)"/>
-          <text x="340" y="222" text-anchor="middle" font-size="13.5" font-weight="700" fill="#fff">HR</text>
-          <text x="340" y="240" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">Master Data</text>
-        </svg>
-        <p class="flow-caption">HR Master Data를 중심으로 회사 업무가 연결되는 구조</p>
-      </div>
-    </div>
-
-    <div class="story-arrow">↓</div>
-
-    <div class="story-block">
-      <div class="p-num">③</div>
-      <div style="flex:1;">
-        <h3 class="story-title">핵심 메시지</h3>
-        <div class="vision-line">ERPIX는 HR 시스템 구축 프로젝트가 아니라,<br>TelePIX 연구개발 조직의 업무를 연결하는 ERP 플랫폼 구축 프로젝트입니다.</div>
-      </div>
-    </div>
-
-    <div class="principle-grid" style="margin-top:28px;">
-      <div class="principle-card"><div class="p-num">✓</div><h3>연구개발 업무에 맞춘 프로세스</h3></div>
-      <div class="principle-card"><div class="p-num">✓</div><h3>HR 데이터를 중심으로 업무 통합</h3></div>
-      <div class="principle-card"><div class="p-num">✓</div><h3>회사 정책에 맞춘 기능 확장</h3></div>
-      <div class="principle-card"><div class="p-num">✓</div><h3>SaaS 제약 없이 지속적인 개선</h3></div>
-    </div>
-
-    <div class="ai-box">
-      <b>AI 활용</b> — AI를 활용해 기획 생산성을 높이고, 개인정보·권한 정책은 PM이 직접 검증합니다.
-    </div>
+    <div class="vision-line" style="margin-top:26px;margin-bottom:0;">데이터가 흩어질수록, 연구개발 조직의 대응 속도는 느려집니다.</div>
   </section>
 
-  <!-- 비전 -->
+  <!-- SaaS의 한계 -->
   <section>
-    <div class="eyebrow">01 · 우리가 만드는 것</div>
-    <h2 class="section-title">ERPIX가 지향하는 시스템</h2>
-    <p class="section-sub">구성원의 모든 HR 여정을 ERPIX 하나로.</p>
-    <div class="vision-line">"구성원의 모든 HR 여정을, 하나의 시스템 ERPIX에서"</div>
+    <div class="eyebrow">01 · 왜 SaaS로는 부족한가</div>
+    <h2 class="section-title">SaaS는 기능을 제공할 뿐, 데이터를 연결하지 못합니다</h2>
+    <p class="section-sub">Flex 같은 HR SaaS는 인사관리 기능은 제공하지만, 연구개발 조직의 업무 전체를 연결하지는 못합니다.</p>
     <table class="compare">
-      <tr><th>구분</th><th>현재 (Before)</th><th>ERPIX (After)</th></tr>
-      <tr><td>정보</td><td class="before">부서별 엑셀·메신저로 파편화</td><td class="after">인사정보관리로 일원화</td></tr>
-      <tr><td>권한</td><td class="before">담당자 재량, 기준 불명확</td><td class="after">필드 단위 권한 체계로 통제</td></tr>
-      <tr><td>조직변경</td><td class="before">수기 반영, 누락 위험</td><td class="after">기준정보관리로 이력 추적 관리</td></tr>
-      <tr><td>계약</td><td class="before">종이 또는 개별 진행</td><td class="after">전자계약(서명 연동)으로 통합 예정</td></tr>
+      <tr><th>구분</th><th>SaaS (외부 도구)</th><th>ERPIX (내부 플랫폼)</th></tr>
+      <tr><td>데이터</td><td class="before">부서·서비스별로 분리</td><td class="after">프로젝트·공수·정부과제까지 하나로 연결</td></tr>
+      <tr><td>확장</td><td class="before">정해진 기능만 사용 가능</td><td class="after">회사 프로세스에 맞춰 계속 확장</td></tr>
+      <tr><td>대응 속도</td><td class="before">외부 벤더 일정에 종속</td><td class="after">회사 필요에 맞춰 즉시 개선</td></tr>
     </table>
+  </section>
+
+  <!-- 왜 자체 ERP인가 -->
+  <section>
+    <div class="eyebrow">02 · 왜 자체 ERP인가</div>
+    <h2 class="section-title">HR Master Data를 중심으로, 회사의 업무를 연결합니다</h2>
+    <p class="section-sub">HR 데이터는 인사관리를 넘어, 프로젝트·공수·정부과제·계약·자산까지 연결되는 회사의 기준 데이터입니다.</p>
+    <svg width="100%" viewBox="0 0 680 460" style="display:block;margin:8px auto 0;">
+      <line x1="340" y1="230" x2="340" y2="60" stroke="var(--line)" stroke-width="1.5"/>
+      <line x1="340" y1="230" x2="487" y2="145" stroke="var(--line)" stroke-width="1.5"/>
+      <line x1="340" y1="230" x2="487" y2="315" stroke="var(--line)" stroke-width="1.5"/>
+      <line x1="340" y1="230" x2="340" y2="400" stroke="var(--line)" stroke-width="1.5"/>
+      <line x1="340" y1="230" x2="193" y2="315" stroke="var(--line)" stroke-width="1.5"/>
+      <line x1="340" y1="230" x2="193" y2="145" stroke="var(--line)" stroke-width="1.5"/>
+
+      <rect x="265" y="35" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
+      <text x="340" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">프로젝트 관리</text>
+
+      <rect x="412" y="120" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
+      <text x="487" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">공수 관리</text>
+
+      <rect x="412" y="290" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
+      <text x="487" y="320" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">정부과제</text>
+
+      <rect x="265" y="375" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
+      <text x="340" y="405" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">전자계약</text>
+
+      <rect x="118" y="290" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
+      <text x="193" y="320" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">발령·Slack</text>
+
+      <rect x="118" y="120" width="150" height="50" rx="12" fill="var(--card)" stroke="var(--accent)" stroke-width="1"/>
+      <text x="193" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">자산관리</text>
+
+      <circle cx="340" cy="230" r="72" fill="var(--accent-darker)"/>
+      <text x="340" y="222" text-anchor="middle" font-size="13.5" font-weight="700" fill="#fff">HR</text>
+      <text x="340" y="240" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">Master Data</text>
+    </svg>
+    <p class="flow-caption">HR Master Data를 중심으로 회사 업무가 연결되는 구조</p>
+    <div class="vision-line" style="margin-top:22px;margin-bottom:0;">ERPIX는 HR 시스템 구축 프로젝트가 아니라,<br>TelePIX 연구개발 조직의 업무를 연결하는 ERP 플랫폼 구축 프로젝트입니다.</div>
+  </section>
+
+  <!-- 기대 효과 -->
+  <section>
+    <div class="eyebrow">03 · 기대 효과</div>
+    <h2 class="section-title">그래서, TelePIX는 무엇을 얻는가</h2>
+    <p class="section-sub">HR을 중심으로 회사 업무를 연결하면, 아래 4가지가 달라집니다.</p>
+    <div class="principle-grid">
+      <div class="principle-card">
+        <div class="p-num">✓</div>
+        <h3>정부과제 대응 속도 향상</h3>
+        <p>연구원 학력·전공 조건을 즉시 조회</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">✓</div>
+        <h3>프로젝트·공수 데이터 연결</h3>
+        <p>HR 정보를 기준으로 연구인력 공수 관리</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">✓</div>
+        <h3>회사 정책에 맞춘 확장</h3>
+        <p>정책이 바뀌어도 기능을 즉시 조정</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">✓</div>
+        <h3>SaaS 종속에서의 자유</h3>
+        <p>외부 벤더 가격·정책 변화에 좌우되지 않음</p>
+      </div>
+    </div>
   </section>
 
   <!-- 설계 원칙 -->
   <section>
-    <div class="eyebrow">01-1 · 설계 원칙</div>
+    <div class="eyebrow">04 · 설계 원칙</div>
     <h2 class="section-title">HR 관리자를 위한 설계 원칙</h2>
     <p class="section-sub">예쁜 화면보다, 안전하게 반복 업무를 하는 구조가 목표였습니다.</p>
     <div class="principle-grid">
@@ -251,11 +265,14 @@
         <p>권한관리 진입 즉시 구성원 선택 모달</p>
       </div>
     </div>
+    <div class="ai-box">
+      <b>AI 활용</b> — AI를 활용해 기획 생산성을 높이고, 개인정보·권한 정책은 PM이 직접 검증합니다.
+    </div>
   </section>
 
   <!-- 핵심 업무 흐름 -->
   <section>
-    <div class="eyebrow">02 · 핵심 업무 흐름</div>
+    <div class="eyebrow">05 · 핵심 업무 흐름</div>
     <h2 class="section-title">인사정보 등록 → 기준정보 연결 → 권한 적용</h2>
     <p class="section-sub">입사 등록부터 권한 적용까지, 3단계 흐름으로 확인하세요.</p>
     <div class="flow-wrap">
@@ -284,7 +301,7 @@
 
   <!-- 사용자 접근 범위 -->
   <section>
-    <div class="eyebrow">02-1 · 사용자 접근 범위</div>
+    <div class="eyebrow">05-1 · 사용자 접근 범위</div>
     <h2 class="section-title">누가, 어디까지 쓰는 시스템인가</h2>
     <p class="section-sub">관리자 도구로 시작해 전 구성원 시스템으로 확장됩니다.</p>
     <svg width="100%" viewBox="0 0 680 380" style="display:block;margin:0 auto;">
@@ -312,7 +329,7 @@
 
   <!-- 전체 구조 · 진행 범위 -->
   <section>
-    <div class="eyebrow">03 · 전체 구조 · 진행 범위</div>
+    <div class="eyebrow">06 · 전체 구조 · 진행 범위</div>
     <h2 class="section-title">ERPIX가 다루는 영역</h2>
     <p class="section-sub">HR부터 시작해 자산·프로젝트·공수 영역으로 확장합니다.</p>
     <div class="scope-grid">
@@ -356,7 +373,7 @@
 
   <!-- 현재 개발 현황 -->
   <section>
-    <div class="eyebrow">04 · 현재 개발 현황</div>
+    <div class="eyebrow">07 · 현재 개발 현황</div>
     <h2 class="section-title">모듈별 진행률</h2>
     <p class="section-sub">숫자로 보는 현재 개발 진척도입니다.</p>
 
@@ -384,7 +401,7 @@
 
   <!-- 로드맵 -->
   <section>
-    <div class="eyebrow">05 · 로드맵</div>
+    <div class="eyebrow">08 · 로드맵</div>
     <h2 class="section-title">HR 그룹웨어 개발 로드맵</h2>
     <p class="section-sub">1.5차 완료 시 HR 핵심 기능이 완성됩니다.</p>
 
@@ -431,7 +448,7 @@
 
   <!-- 전체 일정 -->
   <section>
-    <div class="eyebrow">05-1 · 전체 일정</div>
+    <div class="eyebrow">08-1 · 전체 일정</div>
     <h2 class="section-title">언제까지, 무엇을</h2>
     <p class="section-sub">1.5차·2차는 정책·범위 확정을 전제로 한 목표 일정입니다.</p>
     <div class="scope-grid" style="grid-template-columns:1fr 1fr 1fr;">
@@ -463,7 +480,7 @@
 
   <!-- 의사결정 사항 -->
   <section>
-    <div class="eyebrow">06 · 의사결정 사항</div>
+    <div class="eyebrow">09 · 의사결정 사항</div>
     <h2 class="section-title">오늘 결정이 필요한 것</h2>
     <p class="section-sub">진행 상황 공유와 함께, 아래 3가지에 대한 의사결정을 요청드립니다.</p>
     <ul class="ask-list">
