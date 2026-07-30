@@ -5,33 +5,48 @@
 <title>ERPIX — ERP for TelePIX</title>
 <style>
   :root{
-    --accent:#1D9E75;
-    --accent-dark:#0F6E56;
-    --accent-darker:#085041;
-    --accent-light:#E1F5EE;
-    --amber:#BA7517;
-    --amber-dark:#854F0B;
-    --amber-light:#FAEEDA;
-    --ink:#1F2421;
-    --ink-sub:#5C645F;
-    --ink-mute:#8B928D;
-    --line:#E4E7E3;
-    --bg:#FBFAF7;
-    --card:#FFFFFF;
+    --accent:#1D9E75; --accent-dark:#0F6E56; --accent-darker:#085041; --accent-light:#E1F5EE;
+    --teal-mid:#9FE1CB; --teal-mid2:#5DCAA5;
+    --amber:#BA7517; --amber-dark:#854F0B; --amber-light:#FAEEDA;
+    --ink:#1F2421; --ink-sub:#5C645F; --ink-mute:#8B928D;
+    --line:#E4E7E3; --bg:#FBFAF7; --card:#FFFFFF;
   }
   *{box-sizing:border-box;}
   body{margin:0;font-family:'Malgun Gothic','맑은 고딕',-apple-system,sans-serif;background:var(--bg);color:var(--ink);}
   .wrap{max-width:1080px;margin:0 auto;padding:64px 40px 80px;}
+  section{padding:56px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
 
-  .hero{padding:40px 0 48px;border-bottom:1px solid var(--line);margin-bottom:48px;}
+  .hero{padding:40px 0 48px;}
   .brand{font-size:13px;color:var(--accent-dark);font-weight:700;letter-spacing:.08em;margin-bottom:16px;}
   .hero h1{font-size:38px;font-weight:700;margin:0 0 10px;}
   .hero .lead{font-size:16px;color:var(--ink-sub);max-width:640px;line-height:1.6;}
 
-  h2.section-title{font-size:20px;font-weight:700;margin:0 0 6px;}
-  .section-sub{font-size:13.5px;color:var(--ink-sub);margin:0 0 24px;}
+  .eyebrow{font-size:12.5px;color:var(--accent-dark);font-weight:700;letter-spacing:.04em;margin-bottom:12px;}
+  h2.section-title{font-size:24px;font-weight:700;margin:0 0 6px;}
+  .section-sub{font-size:14px;color:var(--ink-sub);margin:0 0 28px;max-width:720px;line-height:1.6;}
 
-  .scope-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:56px;}
+  table.compare{width:100%;border-collapse:collapse;font-size:13.5px;}
+  table.compare th{text-align:left;padding:11px 14px;background:var(--ink);color:#fff;font-weight:700;font-size:12.5px;}
+  table.compare th:first-child{border-radius:8px 0 0 0;width:110px;}
+  table.compare th:last-child{border-radius:0 8px 0 0;}
+  table.compare td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.compare tr td:first-child{font-weight:700;color:var(--ink);width:110px;}
+  table.compare td.before{color:var(--ink-mute);}
+  table.compare td.after{color:var(--accent-darker);font-weight:500;background:var(--accent-light);}
+
+  .vision-line{font-size:19px;font-weight:700;color:var(--accent-darker);background:var(--accent-light);border-radius:12px;padding:20px 24px;margin-bottom:26px;line-height:1.5;}
+
+  .ai-box{margin-top:20px;background:var(--accent-light);border-radius:12px;padding:16px 20px;font-size:13.5px;color:var(--accent-dark);line-height:1.7;}
+  .ai-box b{color:var(--accent-darker);}
+
+  .principle-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .principle-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;}
+  .p-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--accent-light);color:var(--accent-darker);font-size:12.5px;font-weight:700;margin-bottom:12px;}
+  .principle-card h3{font-size:15.5px;margin:0 0 8px;font-weight:700;}
+  .principle-card p{font-size:12.5px;color:var(--ink-sub);line-height:1.6;margin:0;}
+
+  .scope-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
   .scope-card{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--card);}
   .scope-card.active{border-color:var(--accent);background:var(--accent-light);}
   .scope-status{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:12px;}
@@ -44,17 +59,54 @@
   .scope-list li.done::before{content:"● ";color:var(--accent);}
 
   .demo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  .demo-card{
-    display:block;border:1px solid var(--line);border-radius:16px;padding:26px;background:var(--card);
-    text-decoration:none;color:inherit;transition:border-color .15s, transform .15s;
-  }
+  .demo-card{display:block;border:1px solid var(--line);border-radius:16px;padding:26px;background:var(--card);text-decoration:none;color:inherit;transition:border-color .15s, transform .15s;}
   .demo-card:hover{border-color:var(--accent);transform:translateY(-2px);}
   .demo-num{font-size:12px;font-weight:700;color:var(--accent-dark);margin-bottom:14px;}
   .demo-card h3{font-size:17px;margin:0 0 8px;font-weight:700;color:var(--ink);}
   .demo-card p{font-size:13px;color:var(--ink-sub);line-height:1.6;margin:0 0 18px;}
   .demo-link{font-size:13px;font-weight:700;color:var(--accent-dark);}
 
-  .footer-note{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-mute);}
+  .flow-caption{text-align:center;font-size:13px;color:var(--ink-sub);margin-top:14px;}
+
+  table.progress{width:100%;border-collapse:collapse;font-size:13.5px;}
+  table.progress th{text-align:left;padding:11px 14px;border-bottom:2px solid var(--ink);font-size:12.5px;color:var(--ink-mute);font-weight:700;}
+  table.progress td{padding:14px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.progress td.mod{font-weight:700;color:var(--ink);width:170px;}
+  .badge{display:inline-block;font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:20px;white-space:nowrap;}
+  .badge.done{background:var(--accent-light);color:var(--accent-darker);}
+  .badge.progress{background:#FDF3E4;color:var(--amber-dark);}
+  .badge.plan{background:#F1EFE8;color:var(--ink-sub);}
+  td.note{color:var(--ink-sub);font-size:12.5px;}
+
+  .roadmap-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  .rm-col{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--card);}
+  .rm-head{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+  .rm-circle{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--accent-dark);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:var(--accent-darker);flex-shrink:0;}
+  .rm-circle.amber{border-color:var(--amber);color:var(--amber-dark);}
+  .rm-title{font-size:14.5px;font-weight:700;color:var(--ink);}
+  .rm-status{font-size:11.5px;color:var(--accent-dark);margin:2px 0 14px 36px;}
+  .rm-status.amber{color:var(--amber);}
+  .rm-card{background:var(--accent-light);border-radius:10px;padding:10px 12px;margin-bottom:9px;}
+  .rm-card.new{border:1px solid #5DCAA5;}
+  .rm-card.moved{border:1px dashed #5DCAA5;}
+  .rm-card.neutral{background:var(--bg);border:1px solid var(--line);}
+  .rm-card.warn{background:var(--amber-light);}
+  .rm-card-title{font-size:12.5px;font-weight:700;color:var(--accent-darker);margin-bottom:4px;}
+  .rm-card.neutral .rm-card-title{color:var(--ink);}
+  .rm-card.warn .rm-card-title{color:var(--amber-dark);}
+  .rm-card-body{font-size:11.5px;color:var(--accent-dark);line-height:1.6;}
+  .rm-card.neutral .rm-card-body{color:var(--ink-sub);}
+  .rm-card.warn .rm-card-body{color:var(--amber-dark);}
+  .tag-new{font-size:9px;background:#5DCAA5;color:var(--accent-darker);padding:1px 6px;border-radius:8px;margin-left:6px;font-weight:700;}
+  .tag-alert{font-size:9px;background:#F0997B;color:#4A1B0C;padding:1px 6px;border-radius:8px;font-weight:700;float:right;}
+  .rm-foot{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--ink-sub);}
+  .rm-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-sub);}
+
+  .ask-list{list-style:none;padding:0;margin:0;}
+  .ask-list li{padding:15px 18px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;font-size:14px;line-height:1.6;display:flex;gap:14px;background:var(--card);}
+  .ask-num{font-weight:700;color:var(--accent-dark);flex-shrink:0;}
+
+  .footer-note{padding:32px 0 0;font-size:12px;color:var(--ink-mute);}
 </style>
 </head>
 <body>
@@ -66,70 +118,281 @@
     <div class="lead">흩어진 사내 업무를 하나의 시스템으로. ERPIX는 HR을 시작으로 자산·프로젝트·공수 관리까지 단계적으로 통합하는 것을 목표로 합니다.</div>
   </div>
 
-  <h2 class="section-title">전체 구조 · 진행 범위</h2>
-  <p class="section-sub">HR 영역부터 우선 개발 중이며, 이후 자산·프로젝트·공수 영역으로 확장할 예정입니다.</p>
+  <!-- 왜 자체 개발인가 -->
+  <section>
+    <div class="eyebrow">00 · 왜 자체 개발인가</div>
+    <h2 class="section-title">Flex에서 못했던 것을, ERPIX에서</h2>
+    <p class="section-sub">기존 HR 툴(Flex)로 운영하며 실제로 부딪혔던 한계가, ERPIX를 자체 구축하는 이유입니다.</p>
+    <table class="compare">
+      <tr><th>구분</th><th>Flex (기존)</th><th>ERPIX (자체 구축)</th></tr>
+      <tr>
+        <td>인사현황표</td>
+        <td class="before">학력 등 세부 항목 기준 필터 불가 — 전체 목록만 조회 가능</td>
+        <td class="after">학력정보 등 항목별 필터링 지원, 원하는 조건으로 즉시 현황 확인</td>
+      </tr>
+      <tr>
+        <td>권한관리</td>
+        <td class="before">역할 단위로만 권한 부여, 정보 유형별 세분화 불가</td>
+        <td class="after">정보 유형별로 묶어 필드 단위로 촘촘하게 권한 설정</td>
+      </tr>
+    </table>
+    <div class="ai-box">
+      <b>AI 활용 현황</b> — 프로토타입·정책서·화면정의서 작성에 Claude를 적극 활용해 속도는 이미 끌어올린 상태입니다. 다만 주민번호·연봉 마스킹, 필드 단위 권한, 감사로그처럼 개인정보를 다루는 로직은 AI가 만든 초안을 그대로 쓰지 않고, 정책과의 일치 여부를 사람이 직접 검증하는 데 남은 시간을 쓰고 있습니다.
+    </div>
+  </section>
 
-  <div class="scope-grid">
-    <div class="scope-card active">
-      <span class="scope-status active">개발 중</span>
-      <h3>HR</h3>
-      <ul class="scope-list">
-        <li class="done">인사정보관리</li>
-        <li class="done">기준정보관리</li>
-        <li class="done">권한관리</li>
-        <li class="dot">조직도 (1.5차)</li>
-        <li class="dot">전자계약 (1.5차)</li>
-      </ul>
-    </div>
-    <div class="scope-card">
-      <span class="scope-status plan">예정</span>
-      <h3>자산관리</h3>
-      <ul class="scope-list">
-        <li class="dot">관리자용 자산 시스템</li>
-        <li class="dot">운영정책 수립 후 착수</li>
-      </ul>
-    </div>
-    <div class="scope-card">
-      <span class="scope-status plan">예정</span>
-      <h3>프로젝트관리</h3>
-      <ul class="scope-list">
-        <li class="dot">프로젝트 단위 관리</li>
-        <li class="dot">범위 협의 중</li>
-      </ul>
-    </div>
-    <div class="scope-card">
-      <span class="scope-status plan">예정</span>
-      <h3>공수관리</h3>
-      <ul class="scope-list">
-        <li class="dot">프로젝트별 공수 입력·집계</li>
-        <li class="dot">범위 협의 중</li>
-      </ul>
-    </div>
-  </div>
+  <!-- 비전 -->
+  <section>
+    <div class="eyebrow">01 · 우리가 만드는 것</div>
+    <h2 class="section-title">ERPIX가 지향하는 시스템</h2>
+    <p class="section-sub">흩어진 HR 업무를 하나의 시스템으로 — 구성원의 모든 HR 여정을 ERPIX에서.</p>
+    <div class="vision-line">"구성원의 모든 HR 여정을, 하나의 시스템 ERPIX에서"</div>
+    <table class="compare">
+      <tr><th>구분</th><th>현재 (Before)</th><th>ERPIX (After)</th></tr>
+      <tr><td>정보</td><td class="before">부서별 엑셀·메신저로 파편화</td><td class="after">인사정보관리로 일원화</td></tr>
+      <tr><td>권한</td><td class="before">담당자 재량, 기준 불명확</td><td class="after">필드 단위 권한 체계로 통제</td></tr>
+      <tr><td>조직변경</td><td class="before">수기 반영, 누락 위험</td><td class="after">기준정보관리로 이력 추적 관리</td></tr>
+      <tr><td>계약</td><td class="before">종이 또는 개별 진행</td><td class="after">전자계약(서명 연동)으로 통합 예정</td></tr>
+    </table>
+  </section>
 
-  <h2 class="section-title">지금 체험해보기 — HR 영역</h2>
-  <p class="section-sub">입사 시 기준정보를 등록하고, 권한을 연결하면, 실제 사용 권한이 자동 적용되는 흐름으로 확인해보세요.</p>
+  <!-- 기획 원칙 -->
+  <section>
+    <div class="eyebrow">01-1 · 기획 원칙</div>
+    <h2 class="section-title">HR 관리자를 위해 무엇을 지켰나</h2>
+    <p class="section-sub">예쁜 화면이 아니라, 관리자가 안전하게 반복 업무를 할 수 있는 구조를 만드는 것이 목표였습니다.</p>
+    <div class="principle-grid">
+      <div class="principle-card">
+        <div class="p-num">01</div>
+        <h3>실수를 시스템이 막아준다</h3>
+        <p>저장 안 한 변경사항을 두고 나가려 하면 이탈 방지 모달. 필수값 미입력·날짜 순서 오류 시 저장 버튼 자체가 비활성화됩니다.</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">02</div>
+        <h3>마스터데이터 무결성을 지킨다</h3>
+        <p>구성원이 연결된 사이트·직무·채용채널은 비활성화 불가. 필수 근무유형은 아예 비활성화가 막혀 있습니다.</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">03</div>
+        <h3>민감정보는 기본값이 "가려짐"</h3>
+        <p>급여·학자금은 기본 마스킹, 섹션 단위 일괄 보기로만 열람. 권한이 있어도 기본은 가려둡니다.</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">04</div>
+        <h3>반복 업무는 클릭을 줄인다</h3>
+        <p>권한관리는 진입 즉시 구성원 선택 모달이 열려 불필요한 단계를 생략합니다.</p>
+      </div>
+    </div>
+  </section>
 
-  <div class="demo-grid">
-    <a class="demo-card" href="./hr-employee.html">
-      <div class="demo-num">STEP 1</div>
-      <h3>인사정보관리</h3>
-      <p>구성원 등록·수정·조회, 재직상태 관리. 신규입사자를 최소 필드로 즉시 등록합니다.</p>
-      <div class="demo-link">화면 열기 →</div>
-    </a>
-    <a class="demo-card" href="./hr-master-data.html">
-      <div class="demo-num">STEP 2</div>
-      <h3>기준정보관리</h3>
-      <p>조직·직위·직책·직무 등 HR 마스터데이터 관리. 구성원과 연결된 값은 임의로 삭제되지 않도록 보호합니다.</p>
-      <div class="demo-link">화면 열기 →</div>
-    </a>
-    <a class="demo-card" href="./hr-permission.html">
-      <div class="demo-num">STEP 3</div>
-      <h3>권한관리</h3>
-      <p>등록된 구성원에게 정보 유형별로 필드 단위 접근 권한을 부여합니다.</p>
-      <div class="demo-link">화면 열기 →</div>
-    </a>
-  </div>
+  <!-- 지금 체험해보기 -->
+  <section>
+    <div class="eyebrow">02 · 실제 화면</div>
+    <h2 class="section-title">지금 체험해보기 — HR 영역</h2>
+    <p class="section-sub">입사 시 기준정보를 등록하고, 권한을 연결하면, 실제 사용 권한이 자동 적용되는 흐름으로 확인해보세요.</p>
+    <div class="demo-grid">
+      <a class="demo-card" href="./hr-employee.html">
+        <div class="demo-num">STEP 1</div>
+        <h3>인사정보관리</h3>
+        <p>구성원 등록·수정·조회, 재직상태 관리. 신규입사자를 최소 필드로 즉시 등록합니다.</p>
+        <div class="demo-link">화면 열기 →</div>
+      </a>
+      <a class="demo-card" href="./hr-master-data.html">
+        <div class="demo-num">STEP 2</div>
+        <h3>기준정보관리</h3>
+        <p>조직·직위·직책·직무 등 HR 마스터데이터 관리. 구성원과 연결된 값은 임의로 삭제되지 않도록 보호합니다.</p>
+        <div class="demo-link">화면 열기 →</div>
+      </a>
+      <a class="demo-card" href="./hr-permission.html">
+        <div class="demo-num">STEP 3</div>
+        <h3>권한관리</h3>
+        <p>등록된 구성원에게 정보 유형별로 필드 단위 접근 권한을 부여합니다.</p>
+        <div class="demo-link">화면 열기 →</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 사용자 접근 범위 -->
+  <section>
+    <div class="eyebrow">02-1 · 사용자 접근 범위</div>
+    <h2 class="section-title">누가, 어디까지 쓰는 시스템인가</h2>
+    <p class="section-sub">관리자 도구로 시작하지만, 결과적으로 전 구성원이 체감하는 시스템으로 확장됩니다.</p>
+    <svg width="100%" viewBox="0 0 680 380" style="display:block;margin:0 auto;">
+      <rect x="40" y="40" width="600" height="300" rx="24" fill="var(--accent-light)" stroke="var(--accent-dark)" stroke-width="0.5"/>
+      <text x="64" y="72" font-size="14" font-weight="700" fill="var(--accent-darker)">전체 구성원</text>
+      <text x="64" y="92" font-size="12" fill="var(--accent-dark)">조직도 열람 · 전자계약 서명</text>
+      <rect x="530" y="52" width="90" height="24" rx="12" fill="var(--amber-light)" stroke="var(--amber)" stroke-width="0.5"/>
+      <text x="575" y="66" text-anchor="middle" font-size="11" font-weight="700" fill="var(--amber-dark)">1.5차 배포</text>
+
+      <rect x="100" y="110" width="480" height="200" rx="16" fill="var(--teal-mid)" stroke="var(--accent-dark)" stroke-width="0.5"/>
+      <text x="124" y="138" font-size="14" font-weight="700" fill="var(--accent-darker)">권한 받은 구성원</text>
+      <text x="124" y="158" font-size="12" fill="var(--accent-dark)">HR 오퍼레이터 · 조직장 등</text>
+      <text x="124" y="176" font-size="12" fill="var(--accent-dark)">인사정보데이터 조회 및 기능 사용</text>
+      <rect x="470" y="120" width="90" height="24" rx="12" fill="#fff" stroke="var(--accent-dark)" stroke-width="0.5"/>
+      <text x="515" y="134" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent-darker)">1차 배포</text>
+
+      <rect x="170" y="200" width="340" height="98" rx="12" fill="var(--teal-mid2)" stroke="var(--accent-darker)" stroke-width="0.5"/>
+      <text x="340" y="238" text-anchor="middle" font-size="14" font-weight="700" fill="#04342C">HR 최고관리자</text>
+      <text x="340" y="258" text-anchor="middle" font-size="12" fill="var(--accent-darker)">권한 부여 · 발령 처리</text>
+      <rect x="405" y="204" width="90" height="20" rx="10" fill="#fff" stroke="var(--accent-darker)" stroke-width="0.5"/>
+      <text x="450" y="217" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent-darker)">1차 배포</text>
+    </svg>
+    <p class="flow-caption">1차: 권한 받은 구성원~HR 최고관리자 · 1.5차: 전체 구성원까지 확장</p>
+  </section>
+
+  <!-- 전체 구조 · 진행 범위 -->
+  <section>
+    <div class="eyebrow">03 · 전체 구조 · 진행 범위</div>
+    <h2 class="section-title">ERPIX가 다루는 영역</h2>
+    <p class="section-sub">HR 영역부터 우선 개발 중이며, 이후 자산·프로젝트·공수 영역으로 확장할 예정입니다.</p>
+    <div class="scope-grid">
+      <div class="scope-card active">
+        <span class="scope-status active">개발 중</span>
+        <h3>HR</h3>
+        <ul class="scope-list">
+          <li class="done">인사정보관리</li>
+          <li class="done">기준정보관리</li>
+          <li class="done">권한관리</li>
+          <li class="dot">조직도 (1.5차)</li>
+          <li class="dot">전자계약 (1.5차)</li>
+        </ul>
+      </div>
+      <div class="scope-card">
+        <span class="scope-status plan">예정</span>
+        <h3>자산관리</h3>
+        <ul class="scope-list">
+          <li class="dot">관리자용 자산 시스템</li>
+          <li class="dot">운영정책 수립 후 착수</li>
+        </ul>
+      </div>
+      <div class="scope-card">
+        <span class="scope-status plan">예정</span>
+        <h3>프로젝트관리</h3>
+        <ul class="scope-list">
+          <li class="dot">프로젝트 단위 관리</li>
+          <li class="dot">범위 협의 중</li>
+        </ul>
+      </div>
+      <div class="scope-card">
+        <span class="scope-status plan">예정</span>
+        <h3>공수관리</h3>
+        <ul class="scope-list">
+          <li class="dot">프로젝트별 공수 입력·집계</li>
+          <li class="dot">범위 협의 중</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 진행 현황 -->
+  <section>
+    <div class="eyebrow">04 · 진행 현황</div>
+    <h2 class="section-title">모듈별 진행 상태</h2>
+    <p class="section-sub">기획 산출물(프로토타입·정책)과 실제 개발 착수 여부를 구분해서 정리했습니다.</p>
+    <table class="progress">
+      <tr><th>모듈</th><th>상태</th><th>비고</th></tr>
+      <tr>
+        <td class="mod">인사정보관리</td>
+        <td><span class="badge done">프로토타입 검증 완료 수준</span></td>
+        <td class="note">v30+ · 등록/수정/조회, 재직상태 관리 반영</td>
+      </tr>
+      <tr>
+        <td class="mod">기준정보관리</td>
+        <td><span class="badge progress">설계·프로토타입 진행 중</span></td>
+        <td class="note">조직관리 UI(토글, 비활성화 확인 모달) 최근 작업</td>
+      </tr>
+      <tr>
+        <td class="mod">권한관리</td>
+        <td><span class="badge done">정책 확정 (v2.x)</span></td>
+        <td class="note">필드 단위 권한, 양방향 커플링 로직 프로토타입 반영 중</td>
+      </tr>
+      <tr>
+        <td class="mod">전자계약</td>
+        <td><span class="badge plan">초기 스코핑 완료</span></td>
+        <td class="note">GNB 배치 확정 · 외부 전자서명 서비스 연동 방식으로 진행</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 로드맵 -->
+  <section>
+    <div class="eyebrow">05 · 로드맵</div>
+    <h2 class="section-title">HR 그룹웨어 개발 로드맵</h2>
+    <p class="section-sub">HR 마스터데이터 중심 · 2026 — 1.5차 완료 시 HR 핵심 기능이 완성됩니다.</p>
+    <div class="roadmap-grid">
+      <div class="rm-col">
+        <div class="rm-head"><div class="rm-circle">1차</div><div class="rm-title">HR 코어</div></div>
+        <div class="rm-status">● 진행 중 · 확정</div>
+        <div class="rm-card"><div class="rm-card-title">임직원 정보 통합 관리</div><div class="rm-card-body">· 임직원 등록·수정·조회<br>· 퇴사자 관리<br>· 재직상태 관리</div></div>
+        <div class="rm-card"><div class="rm-card-title">조직·직책·직무 기준정보</div><div class="rm-card-body">· 조직·직위·직책·직무 코드<br>· 채용채널·엔지니어링레벨</div></div>
+        <div class="rm-card"><div class="rm-card-title">HR 담당자 권한 관리</div><div class="rm-card-body">· 개인별·직책별 접근 권한 설정</div></div>
+        <div class="rm-card moved"><div class="rm-card-title">인사현황표 <span style="font-size:9.5px;font-weight:400;color:var(--accent-dark)">(1.5차→이동)</span></div><div class="rm-card-body">· 통계 대시보드<br>· 엑셀 다운로드</div></div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-head"><div class="rm-circle">1.5</div><div class="rm-title">HR 고도화</div></div>
+        <div class="rm-status">● 예정 · 확정</div>
+        <div class="rm-card"><div class="rm-card-title">발령 관리</div><div class="rm-card-body">· 발령 9종 (전배·직위변경 등)<br>· 인사기록부 타임라인</div></div>
+        <div class="rm-card"><div class="rm-card-title">조직도</div><div class="rm-card-body">· 조직 트리 + 팀원 카드<br>· 임직원 상세 조회</div></div>
+        <div class="rm-card new"><div class="rm-card-title">전자계약 <span class="tag-new">NEW</span></div><div class="rm-card-body">· 계약서 작성·발송<br>· 외부 전자서명 서비스 연동</div></div>
+        <div class="rm-foot">1.5차 완료 시 HR 핵심 기능 완성</div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-head"><div class="rm-circle amber">2차</div><div class="rm-title">확장</div></div>
+        <div class="rm-status amber">● 범위 협의 중</div>
+        <div class="rm-card warn"><div class="rm-card-title">근태 관리<span class="tag-alert">협의 필요</span></div><div class="rm-card-body">· 그룹웨어 구축 vs Wanted Space 유지</div></div>
+        <div class="rm-card neutral"><div class="rm-card-title">프로젝트 공수 관리</div><div class="rm-card-body">· 프로젝트별 공수 입력·집계</div></div>
+        <div class="rm-card neutral"><div class="rm-card-title">자산 관리</div><div class="rm-card-body">· 관리자용 자산 시스템<br>· 운영정책 확정 후 착수</div></div>
+        <div class="rm-card neutral"><div class="rm-card-title">외부 연동</div><div class="rm-card-body">· Slack · Wanted Space<br>· Google Calendar</div></div>
+      </div>
+    </div>
+    <div class="rm-legend">
+      <span>— 확정</span><span>┄ 협의 중</span><span>출퇴근·휴가 → 현재 Wanted Space 사용 중</span><span>결재·승인·예산 → E-count ERP 유지</span>
+    </div>
+  </section>
+
+  <!-- 전체 일정 -->
+  <section>
+    <div class="eyebrow">05-1 · 전체 일정</div>
+    <h2 class="section-title">언제까지, 무엇을</h2>
+    <p class="section-sub">1.5차·2차는 정책·범위 확정을 전제로 한 목표 일정입니다.</p>
+    <div class="scope-grid" style="grid-template-columns:1fr 1fr 1fr;">
+      <div class="scope-card active">
+        <span class="scope-status active">개발 중</span>
+        <h3>1차 · ~8월</h3>
+        <ul class="scope-list">
+          <li class="done">인사정보관리·기준정보관리·권한관리·인사현황표</li>
+        </ul>
+      </div>
+      <div class="scope-card">
+        <span class="scope-status plan" style="background:var(--amber-light);color:var(--amber-dark);">목표</span>
+        <h3>1.5차 · 9월</h3>
+        <ul class="scope-list">
+          <li class="dot">발령·조직도·전자계약</li>
+          <li class="dot" style="color:var(--amber-dark);">전제: 발령 정책 확정 · 전자서명 벤더 계약 8월 내 완료</li>
+        </ul>
+      </div>
+      <div class="scope-card">
+        <span class="scope-status plan" style="background:var(--amber-light);color:var(--amber-dark);">목표</span>
+        <h3>2차 · 12월</h3>
+        <ul class="scope-list">
+          <li class="dot">근태·자산·프로젝트·공수 관리</li>
+          <li class="dot" style="color:var(--amber-dark);">전제: 범위 협의(특히 근태) 8월 내 완료</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 남은 일정 및 요청 -->
+  <section>
+    <div class="eyebrow">06 · 남은 일정 및 요청</div>
+    <h2 class="section-title">앞으로의 계획</h2>
+    <p class="section-sub">진행 상황 공유와 함께, 의사결정이 필요한 부분을 정리했습니다.</p>
+    <ul class="ask-list">
+      <li><span class="ask-num">1</span> 1차(HR 코어) 개발 착수 시점 및 백엔드 리소스 배정 확인 필요</li>
+      <li><span class="ask-num">2</span> 전자계약 외부 전자서명 서비스 선정(모두싸인 등) — 예산·계약 검토 요청</li>
+      <li><span class="ask-num">3</span> 2차(근태 관리) 그룹웨어 자체 구축 여부 — 범위 협의 필요</li>
+    </ul>
+  </section>
 
   <div class="footer-note">ERPIX 개발 중간점검 · TelePIX SW Development Team</div>
 </div>
