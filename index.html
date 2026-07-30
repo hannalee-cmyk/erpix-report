@@ -37,13 +37,19 @@
 
   .vision-line{font-size:19px;font-weight:700;color:var(--accent-darker);background:var(--accent-light);border-radius:12px;padding:20px 24px;margin-bottom:26px;line-height:1.5;}
 
-  .lifecycle-step{border:1px solid var(--line);border-radius:14px;padding:16px 20px;background:var(--card);}
-  .lifecycle-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:6px;}
-  .lifecycle-title{font-size:14.5px;font-weight:700;color:var(--ink);}
-  .lifecycle-sys{font-size:11px;font-weight:700;color:var(--amber-dark);background:var(--amber-light);padding:3px 10px;border-radius:20px;white-space:nowrap;}
+  .lifecycle-step{border:1px solid var(--line);border-radius:14px;padding:14px 18px;background:var(--card);height:100%;}
+  .lifecycle-sys{display:inline-block;font-size:11px;font-weight:700;color:var(--amber-dark);background:var(--amber-light);padding:3px 10px;border-radius:20px;white-space:nowrap;margin-bottom:8px;}
   .lifecycle-sys.connected{color:var(--accent-darker);background:var(--accent-light);}
   .lifecycle-body{font-size:12.5px;color:var(--ink-sub);line-height:1.6;}
   .lifecycle-arrow{text-align:center;font-size:16px;color:var(--ink-mute);padding:4px 0;}
+
+  .compare-head-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+  .compare-head-cell{text-align:center;font-size:13px;font-weight:700;padding:9px;border-radius:8px;}
+  .compare-head-cell.before{color:var(--amber-dark);background:var(--amber-light);}
+  .compare-head-cell.after{color:var(--accent-darker);background:var(--accent-light);}
+  .stage-block{margin-bottom:6px;}
+  .stage-title{font-size:12.5px;font-weight:700;color:var(--ink-mute);margin-bottom:8px;text-align:center;}
+  .compare-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch;}
 
 
   .principle-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
@@ -158,93 +164,107 @@
     </div>
   </section>
 
-  <!-- ERPIX 정의 -->
+  <!-- Employee Lifecycle: Before / After -->
   <section>
-    <div class="vision-line" style="margin-bottom:0;">ERPIX는 TelePIX 연구개발 조직의 HR Master를 중심으로 프로젝트·자산·권한·공수를 연결하는 운영 플랫폼입니다.</div>
-  </section>
+    <div class="eyebrow">01 · Employee Lifecycle</div>
+    <h2 class="section-title">여러 시스템을 오가던 여정, ERPIX 하나로 연결</h2>
+    <p class="section-sub">한 명의 구성원이 거치는 6단계를, 현재와 ERPIX 적용 후로 나란히 비교합니다.</p>
 
-  <!-- Employee Lifecycle -->
-  <section>
-    <div class="eyebrow">01 · Employee Lifecycle (현재)</div>
-    <h2 class="section-title">입사부터 퇴사까지, 여러 시스템을 오가는 구성원 정보</h2>
-    <p class="section-sub">한 명의 구성원이 거치는 6단계, 그 사이 정보는 계속 여러 시스템을 오갑니다.</p>
-
-    <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">입사 · HR Master 생성</div><div class="lifecycle-sys">개별 시스템 등록</div></div>
-      <div class="lifecycle-body">구성원 정보를 각 시스템에 따로따로 등록</div>
-    </div>
-    <div class="lifecycle-arrow">↓</div>
-    <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">프로젝트 배정</div><div class="lifecycle-sys">개별 시스템 확인</div></div>
-      <div class="lifecycle-body">투입 인력 정보를 다른 시스템에서 다시 확인</div>
-    </div>
-    <div class="lifecycle-arrow">↓</div>
-    <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">자산 지급</div><div class="lifecycle-sys">개별 시스템 기록</div></div>
-      <div class="lifecycle-body">지급 내역을 별도 대장에 다시 기록</div>
-    </div>
-    <div class="lifecycle-arrow">↓</div>
-    <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">정부과제 참여</div><div class="lifecycle-sys">개별 시스템 등록</div></div>
-      <div class="lifecycle-body">연구자 정보를 또 다른 시스템에 다시 등록</div>
-    </div>
-    <div class="lifecycle-arrow">↓</div>
-    <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">조직 변경</div><div class="lifecycle-sys">개별 시스템 수정</div></div>
-      <div class="lifecycle-body">부서·권한·자산을 각 시스템에서 따로 수정</div>
-    </div>
-    <div class="lifecycle-arrow">↓</div>
-    <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">퇴사</div><div class="lifecycle-sys">개별 시스템 처리</div></div>
-      <div class="lifecycle-body">자산·계정·권한을 각 시스템에서 따로 회수</div>
+    <div class="compare-head-row">
+      <div class="compare-head-cell before">현재</div>
+      <div class="compare-head-cell after">ERPIX 적용 후</div>
     </div>
 
-    <div class="vision-line" style="margin-top:26px;margin-bottom:0;white-space:nowrap;">하나의 구성원 정보가 입사부터 퇴사까지, 여러 시스템을 오가며 반복 관리되고 있습니다.</div>
-  </section>
+    <div class="stage-block">
+      <div class="stage-title">입사 · HR Master 생성</div>
+      <div class="compare-row">
+        <div class="lifecycle-step">
+          <div class="lifecycle-sys">개별 시스템 등록</div>
+          <div class="lifecycle-body">구성원 정보를 각 시스템에 따로따로 등록</div>
+        </div>
+        <div class="lifecycle-step">
+          <div class="lifecycle-sys connected">ERPIX</div>
+          <div class="lifecycle-body">Flex 개별 등록 없이, ERPIX에서 한 번에 HR Master 생성</div>
+        </div>
+      </div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="stage-block">
+      <div class="stage-title">프로젝트 배정</div>
+      <div class="compare-row">
+        <div class="lifecycle-step">
+          <div class="lifecycle-sys">개별 시스템 확인</div>
+          <div class="lifecycle-body">투입 인력 정보를 다른 시스템에서 다시 확인</div>
+        </div>
+        <div class="lifecycle-step">
+          <div class="lifecycle-sys connected">ERPIX</div>
+          <div class="lifecycle-body">HR Master 데이터가 프로젝트에 자동 연동</div>
+        </div>
+      </div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="stage-block">
+      <div class="stage-title">자산 지급</div>
+      <div class="compare-row">
+        <div class="lifecycle-step">
+          <div class="lifecycle-sys">개별 시스템 기록</div>
+          <div class="lifecycle-body">지급 내역을 별도 대장에 다시 기록</div>
+        </div>
+        <div class="lifecycle-step">
+          <div class="lifecycle-sys connected">ERPIX</div>
+          <div class="lifecycle-body">자산 정보가 구성원 데이터와 자동 연결</div>
+        </div>
+      </div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="stage-block">
+      <div class="stage-title">정부과제 참여</div>
+      <div class="compare-row">
+        <div class="lifecycle-step">
+          <div class="lifecycle-sys">개별 시스템 등록</div>
+          <div class="lifecycle-body">연구자 정보를 또 다른 시스템에 다시 등록</div>
+        </div>
+        <div class="lifecycle-step">
+          <div class="lifecycle-sys connected">ERPIX</div>
+          <div class="lifecycle-body">연구자 정보를 별도 확인 없이 즉시 조회</div>
+        </div>
+      </div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="stage-block">
+      <div class="stage-title">조직 변경</div>
+      <div class="compare-row">
+        <div class="lifecycle-step">
+          <div class="lifecycle-sys">개별 시스템 수정</div>
+          <div class="lifecycle-body">부서·권한·자산을 각 시스템에서 따로 수정</div>
+        </div>
+        <div class="lifecycle-step">
+          <div class="lifecycle-sys connected">ERPIX</div>
+          <div class="lifecycle-body">부서·권한·자산 변경이 한 번에 자동 반영</div>
+        </div>
+      </div>
+    </div>
+    <div class="lifecycle-arrow">↓</div>
+    <div class="stage-block">
+      <div class="stage-title">퇴사</div>
+      <div class="compare-row">
+        <div class="lifecycle-step">
+          <div class="lifecycle-sys">개별 시스템 처리</div>
+          <div class="lifecycle-body">자산·계정·권한을 각 시스템에서 따로 회수</div>
+        </div>
+        <div class="lifecycle-step">
+          <div class="lifecycle-sys connected">ERPIX</div>
+          <div class="lifecycle-body">자산·계정·권한이 한 번에 자동 회수</div>
+        </div>
+      </div>
+    </div>
 
-  <!-- ERPIX 적용 후 -->
-  <section>
-    <div class="eyebrow">02 · ERPIX 적용 후</div>
-    <h2 class="section-title">하나의 시스템으로 연결되는 구성원 Lifecycle</h2>
-    <p class="section-sub">같은 6단계, 이제는 ERPIX 하나로 연결됩니다.</p>
-    <div class="vision-line" style="white-space:nowrap;">ERPIX 하나에서, 모든 단계가 연결됩니다.</div>
-
-    <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">입사 · HR Master 생성</div><div class="lifecycle-sys connected">ERPIX</div></div>
-      <div class="lifecycle-body">Flex 개별 등록 없이, ERPIX에서 한 번에 HR Master 생성</div>
-    </div>
-    <div class="lifecycle-arrow">↓</div>
-    <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">프로젝트 배정</div><div class="lifecycle-sys connected">ERPIX</div></div>
-      <div class="lifecycle-body">HR Master 데이터가 프로젝트에 자동 연동</div>
-    </div>
-    <div class="lifecycle-arrow">↓</div>
-    <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">자산 지급</div><div class="lifecycle-sys connected">ERPIX</div></div>
-      <div class="lifecycle-body">자산 정보가 구성원 데이터와 자동 연결</div>
-    </div>
-    <div class="lifecycle-arrow">↓</div>
-    <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">정부과제 참여</div><div class="lifecycle-sys connected">ERPIX</div></div>
-      <div class="lifecycle-body">연구자 정보를 별도 확인 없이 즉시 조회</div>
-    </div>
-    <div class="lifecycle-arrow">↓</div>
-    <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">조직 변경</div><div class="lifecycle-sys connected">ERPIX</div></div>
-      <div class="lifecycle-body">부서·권한·자산 변경이 한 번에 자동 반영</div>
-    </div>
-    <div class="lifecycle-arrow">↓</div>
-    <div class="lifecycle-step">
-      <div class="lifecycle-head"><div class="lifecycle-title">퇴사</div><div class="lifecycle-sys connected">ERPIX</div></div>
-      <div class="lifecycle-body">자산·계정·권한이 한 번에 자동 회수</div>
-    </div>
-
-    <div class="vision-line" style="margin-top:26px;margin-bottom:0;white-space:nowrap;">ERPIX는 E-count ERP를 대체하는 시스템이 아니라, HR Master를 중심으로 프로젝트·자산·권한·공수를 연결하는 운영 플랫폼입니다.</div>
+    <div class="vision-line" style="margin-top:26px;margin-bottom:0;">같은 6단계, 현재는 여러 시스템을 오가지만 ERPIX 적용 후에는 하나로 연결됩니다.</div>
   </section>
 
   <!-- 전체 구조 -->
   <section>
-    <div class="eyebrow">03 · 전체 구조</div>
+    <div class="eyebrow">02 · 전체 구조</div>
     <h2 class="section-title">모든 데이터의 출발점, HR Master</h2>
     <p class="section-sub">프로젝트·자산·권한·조직·공수 — 모든 데이터는 HR Master에서 시작됩니다.</p>
     <svg width="90%" viewBox="0 0 680 430" style="display:block;margin:8px auto 0;">
@@ -277,7 +297,7 @@
 
   <!-- 설계 원칙 -->
   <section>
-    <div class="eyebrow">04 · 설계 원칙</div>
+    <div class="eyebrow">03 · 설계 원칙</div>
     <h2 class="section-title">HR 관리자를 위한 설계 원칙</h2>
     <p class="section-sub">예쁜 화면보다, 안전하게 반복 업무를 하는 구조가 목표였습니다.</p>
     <div class="principle-grid">
@@ -306,7 +326,7 @@
 
   <!-- 핵심 업무 흐름 -->
   <section>
-    <div class="eyebrow">05 · 핵심 업무 흐름</div>
+    <div class="eyebrow">04 · 핵심 업무 흐름</div>
     <h2 class="section-title">HR Master 생성부터 권한 연결까지, 3단계</h2>
     <p class="section-sub">HR Master를 생성하고, 기준정보와 권한을 연결하는 3단계 흐름입니다.</p>
     <div class="flow-wrap">
@@ -335,7 +355,7 @@
 
   <!-- 사용자 접근 범위 -->
   <section>
-    <div class="eyebrow">05-1 · 사용자 접근 범위</div>
+    <div class="eyebrow">04-1 · 사용자 접근 범위</div>
     <h2 class="section-title">누가, 어디까지 쓰는 시스템인가</h2>
     <p class="section-sub">관리자 도구로 시작해 전 구성원 시스템으로 확장되는 권한 피라미드입니다.</p>
     <div class="pyramid">
@@ -367,7 +387,7 @@
 
   <!-- 개발 로드맵 -->
   <section>
-    <div class="eyebrow">06 · 개발 로드맵</div>
+    <div class="eyebrow">05 · 개발 로드맵</div>
     <h2 class="section-title">1차 → 1.5차 → 2차, 전체 일정</h2>
     <p class="section-sub">1차(~8월) → 1.5차(9~10월) → 2차(~12월) 순으로 진행합니다.</p>
 
@@ -416,7 +436,7 @@
 
   <!-- 현재 개발 현황 -->
   <section>
-    <div class="eyebrow">07 · 현재 개발 현황</div>
+    <div class="eyebrow">06 · 현재 개발 현황</div>
     <h2 class="section-title">모듈별 진행률</h2>
     <p class="section-sub">숫자로 보는 현재 개발 진척도입니다.</p>
 
